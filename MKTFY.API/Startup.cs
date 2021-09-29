@@ -24,7 +24,13 @@ namespace MKTFY.API
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(  // Connect to the Postgres database
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    builder => {
+                        //project where we want Code-First Migrations to reside
+                        builder.MigrationsAssembly("MKTFY.Repositories");
+                    
+                    })
+                );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
