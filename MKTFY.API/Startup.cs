@@ -6,7 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MKTFY.Repositories;
-
+using MKTFY.Repositories.Repositories;
+using MKTFY.Repositories.Repositories.Interfaces;
+using MKTFY.Services;
+using MKTFY.Services.Interfaces;
 
 namespace MKTFY.API
 {
@@ -18,6 +21,13 @@ namespace MKTFY.API
         }
 
         public IConfiguration Configuration { get; }
+
+        public void ConfigureDependencyInjection(IServiceCollection services)
+        {
+            // Configure Dependency Injection
+            services.AddScoped<IListingService, ListingService>();
+            services.AddScoped<IListingRepository, ListingRepository>();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,6 +42,10 @@ namespace MKTFY.API
                     })
                 );
             services.AddControllers();
+
+          
+            ConfigureDependencyInjection(services);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MKTFY.API", Version = "v1" });
