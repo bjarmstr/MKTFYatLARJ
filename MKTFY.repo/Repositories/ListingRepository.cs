@@ -35,8 +35,8 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<List<Listing>> GetAll()
         {
-            var result = await _context.Listings.ToListAsync();
-            return result;
+            var results = await _context.Listings.ToListAsync();
+            return results;
         }
 
         public async Task<Listing> Update(Listing src)
