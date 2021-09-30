@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MKTFY.Models.ViewModels
+namespace MKTFY.Models.ViewModels.Listing
 {
     public class ListingCreateVM
     {
@@ -14,5 +14,7 @@ namespace MKTFY.Models.ViewModels
 
         [Required]
         public decimal Price { get; set; }
+        [Required]
+        public string Category { get; set; }
     }
 }

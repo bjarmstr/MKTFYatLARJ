@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MKTFY.Models.ViewModels
+namespace MKTFY.Models.ViewModels.Listing
 {
     public class ListingUpdateVM
     {
@@ -16,6 +16,9 @@ namespace MKTFY.Models.ViewModels
 
         [Required]
         public decimal Price { get; set; }
+
+        [Required]
+        public string Category { get; set; }
 
     }
 }

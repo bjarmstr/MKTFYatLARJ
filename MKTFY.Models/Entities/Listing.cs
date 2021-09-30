@@ -1,4 +1,5 @@
 ﻿using MKTFY.Models.ViewModels;
+using MKTFY.Models.ViewModels.Listing;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,6 +17,7 @@ namespace MKTFY.Models.Entities
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
+            Category = src.Category;
 
         }
 
@@ -25,6 +27,7 @@ namespace MKTFY.Models.Entities
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
+            Category = src.Category;
 
         }
 
@@ -39,6 +42,13 @@ namespace MKTFY.Models.Entities
 
         [Required]
         public decimal Price { get; set; }
+
+        [Required]
+        public string Category { get; set; }
+
+
+        [Required]
+        public DateTime DateCreated { get; set; }
 
         [Required]
         public string TransactionStatus { get; set; }
