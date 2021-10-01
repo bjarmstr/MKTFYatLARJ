@@ -26,6 +26,7 @@ namespace MKTFY.API
                     // Perform the migrations
                     context.Database.Migrate();
                 }
+
                 catch (Exception ex)
                 {
                     // Output an error log to the configured logging service
