@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MKTFY.Models\MKTFY.Models.csproj" />
-    <ProjectReference Include="..\MKTFY.repo\MKTFY.Repositories.csproj" />
+    <ProjectReference Include="..\MKTFY.Repositories\MKTFY.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

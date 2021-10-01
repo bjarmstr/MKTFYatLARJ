@@ -25,6 +25,13 @@ namespace MKTFY.Repositories.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Details")
                         .IsRequired()
                         .HasColumnType("text");
