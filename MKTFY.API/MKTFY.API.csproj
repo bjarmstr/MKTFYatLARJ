@@ -22,11 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MKTFY.repo\MKTFY.Repositories.csproj" />
+    <ProjectReference Include="..\MKTFY.Repositories\MKTFY.Repositories.csproj" />
+    <ProjectReference Include="..\MKTFY.Services\MKTFY.Services.csproj" />
   </ItemGroup>
 
 </Project>

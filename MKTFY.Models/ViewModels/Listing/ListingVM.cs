@@ -21,19 +21,20 @@ namespace MKTFY.Models.ViewModels.Listing
 
         }
 
-         
+
         public Guid Id { get; set; }
 
-        
+
         public string Product { get; set; }
 
-        
+
         public string Details { get; set; }
 
-        
+
         public decimal Price { get; set; }
 
-        
+
         public string Category { get; set; }
 
+    }
 }
