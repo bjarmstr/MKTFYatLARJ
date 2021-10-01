@@ -11,7 +11,8 @@ services:
      - "34000:80"
      - "34001:443"
     environment:
-     ConnectionStrings__DefaultConnection: "Server=mtkfy.db;Database=dev;User Id=dev;Password=dev"
+     - ConnectionStrings__DefaultConnection=Server=mktfy.db;Database=dev;User Id=dev;Password=dev
+
     depends_on:
      - mktfy.db
 

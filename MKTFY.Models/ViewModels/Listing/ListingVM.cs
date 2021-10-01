@@ -36,5 +36,7 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Category { get; set; }
 
+        
+
     }
 }

@@ -32,7 +32,7 @@ namespace MKTFY.API.Controllers
             }
             catch (DbUpdateException) {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
-                    new { message = "Unable to contact the database" });
+                    new { message = "Database Error" });
             
             }
             catch (Exception ex)

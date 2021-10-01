@@ -47,6 +47,8 @@ namespace MKTFY.Repositories.Repositories
             result.Details = src.Details;
             result.Price = src.Price;
             result.Category = src.Category;
+            result.DateCreated = src.DateCreated;
+            //result.TransactionStatus = src.TransactionStatus;
 
 
             await _context.SaveChangesAsync();

@@ -20,5 +20,8 @@ namespace MKTFY.Models.ViewModels.Listing
         [Required]
         public string Category { get; set; }
 
+        //[Required]
+        public string TransactionStatus { get; set; }
+
     }
 }

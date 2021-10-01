@@ -18,6 +18,7 @@ namespace MKTFY.Models.Entities
             Details = src.Details;
             Price = src.Price;
             Category = src.Category;
+            TransactionStatus = src.TransactionStatus;
 
         }
 
@@ -28,6 +29,7 @@ namespace MKTFY.Models.Entities
             Details = src.Details;
             Price = src.Price;
             Category = src.Category;
+            TransactionStatus = src.TransactionStatus;
 
         }
 
@@ -50,7 +52,7 @@ namespace MKTFY.Models.Entities
         [Required]
         public DateTime DateCreated { get; set; }
 
-        [Required]
+       // [Required]
         public string TransactionStatus { get; set; }
 
 
