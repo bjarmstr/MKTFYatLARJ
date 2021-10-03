@@ -20,7 +20,6 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<Listing> Create(Listing src)
         {
-            src.DateCreated = DateTime.UtcNow;
             _context.Listings.Add(src);
             await _context.SaveChangesAsync();
             return src;
@@ -47,7 +46,8 @@ namespace MKTFY.Repositories.Repositories
             result.Details = src.Details;
             result.Price = src.Price;
             result.Category = src.Category;
-            result.DateCreated = src.DateCreated;
+           // result.DateCreated = src.DateCreated;
+           //sellerID 
             //result.TransactionStatus = src.TransactionStatus;
 
 

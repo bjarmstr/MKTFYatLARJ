@@ -22,7 +22,7 @@ namespace MKTFY.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ListingVM>> Create([FromBody]ListingCreateVM data)
+        public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
         {
             try
             {
@@ -30,14 +30,44 @@ namespace MKTFY.API.Controllers
                 return Ok(result);
 
             }
-            catch (DbUpdateException) {
-                return StatusCode(StatusCodes.Status500InternalServerError, 
+            catch (DbUpdateException)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     new { message = "Database Error" });
-            
+
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ListingVM>>> GetAll()
+        {
+            try
+            {
+                return (await _listingService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+
+            }
+
+        }
+
+        [HttpGet ("{id}")]
+        public async Task<ActionResult<ListingVM>> Get([FromRoute]Guid id)
+        {
+            try
+            {
+                return await _listingService.Get(id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+
             }
         }
 
