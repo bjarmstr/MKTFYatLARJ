@@ -31,11 +31,23 @@ namespace MKTFY.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Name = "Electronics"
+                            Name = "electronics"
                         },
                         new
                         {
-                            Name = "RealEstate"
+                            Name = "realEstate"
+                        },
+                        new
+                        {
+                            Name = "vehicles"
+                        },
+                        new
+                        {
+                            Name = "furniture"
+                        },
+                        new
+                        {
+                            Name = "deals"
                         });
                 });
 

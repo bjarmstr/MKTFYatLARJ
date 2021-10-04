@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MKTFY.Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211001140953_InitalCreate2")]
-    partial class InitalCreate2
+    [Migration("20211004194436_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,13 +21,45 @@ namespace MKTFY.Repositories.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("MKTFY.Models.Entities.Category", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "electronics"
+                        },
+                        new
+                        {
+                            Name = "realEstate"
+                        },
+                        new
+                        {
+                            Name = "vehicles"
+                        },
+                        new
+                        {
+                            Name = "furniture"
+                        },
+                        new
+                        {
+                            Name = "deals"
+                        });
+                });
+
             modelBuilder.Entity("MKTFY.Models.Entities.Listing", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Category")
+                    b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -51,7 +83,25 @@ namespace MKTFY.Repositories.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryName");
+
                     b.ToTable("Listings");
+                });
+
+            modelBuilder.Entity("MKTFY.Models.Entities.Listing", b =>
+                {
+                    b.HasOne("MKTFY.Models.Entities.Category", "Category")
+                        .WithMany("Listings")
+                        .HasForeignKey("CategoryName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MKTFY.Models.Entities.Category", b =>
+                {
+                    b.Navigation("Listings");
                 });
 #pragma warning restore 612, 618
         }

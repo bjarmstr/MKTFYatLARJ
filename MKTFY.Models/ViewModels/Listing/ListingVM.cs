@@ -17,7 +17,7 @@ namespace MKTFY.Models.ViewModels.Listing
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
-            Category = src.CategoryName;
+            CategoryName = src.CategoryName;
 
         }
 
@@ -34,7 +34,7 @@ namespace MKTFY.Models.ViewModels.Listing
         public decimal Price { get; set; }
 
 
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
 
         
 
