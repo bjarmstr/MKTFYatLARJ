@@ -47,7 +47,7 @@ namespace MKTFY.Models.Entities
         public decimal Price { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
 
 
         [Required]
@@ -55,6 +55,8 @@ namespace MKTFY.Models.Entities
 
         [Required]
         public string TransactionStatus { get; set; }
+
+        public virtual Category Category { get; set; }
 
 
 

@@ -11,6 +11,8 @@ namespace MKTFY.Repositories
 
 
         }
-        public DbSet<Listing> Listings { get; set; }
+        public virtual DbSet<Listing> Listings { get; set; }
+        public virtual DbSet<Category>  Categories { get; set; }
+
     }
 }
