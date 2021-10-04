@@ -5,14 +5,23 @@ namespace MKTFY.Repositories
 {
     public class ApplicationDbContext : DbContext
     {
+
+        public virtual DbSet<Listing> Listings { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
 
 
         }
-        public virtual DbSet<Listing> Listings { get; set; }
-        public virtual DbSet<Category>  Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Name = "Electronics" },
+                new Category { Name = "RealEstate"}
+            ); 
+        }
+        
 
     }
 }
