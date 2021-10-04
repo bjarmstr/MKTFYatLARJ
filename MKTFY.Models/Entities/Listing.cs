@@ -17,7 +17,7 @@ namespace MKTFY.Models.Entities
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
-            Category = src.Category;
+            CategoryName = src.CategoryName;
             
            
 
@@ -29,7 +29,7 @@ namespace MKTFY.Models.Entities
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
-            Category = src.Category;
+            CategoryName = src.CategoryName;
           
 
         }

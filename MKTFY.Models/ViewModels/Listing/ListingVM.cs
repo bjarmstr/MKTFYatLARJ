@@ -17,7 +17,7 @@ namespace MKTFY.Models.ViewModels.Listing
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
-            Category = src.Category;
+            Category = src.CategoryName;
 
         }
 
