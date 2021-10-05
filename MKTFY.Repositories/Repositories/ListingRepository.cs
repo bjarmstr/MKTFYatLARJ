@@ -62,5 +62,13 @@ namespace MKTFY.Repositories.Repositories
             await _context.SaveChangesAsync();
 
         }
+
+        public async Task<string> GetCategoryName(int id)
+        {
+            var result = await _context.Categories.FirstAsync(i => i.Id == id);
+            return result.Name;
+        }
+
+
     }
 }

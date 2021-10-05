@@ -18,6 +18,9 @@ namespace MKTFY.Models.ViewModels.Listing
             Details = src.Details;
             Price = src.Price;
             CategoryId = src.CategoryId;
+            CategoryName = src.CategoryName;
+
+
 
         }
 
@@ -35,6 +38,8 @@ namespace MKTFY.Models.ViewModels.Listing
 
 
         public int CategoryId { get; set; }
+
+        public string CategoryName { get; set; }
 
         
 
