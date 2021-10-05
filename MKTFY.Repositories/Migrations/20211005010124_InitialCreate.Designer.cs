@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MKTFY.Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211004194436_InitialCreate")]
+    [Migration("20211005010124_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,33 +23,43 @@ namespace MKTFY.Repositories.Migrations
 
             modelBuilder.Entity("MKTFY.Models.Entities.Category", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            Name = "electronics"
+                            Id = 1,
+                            Name = "deals"
                         },
                         new
                         {
-                            Name = "realEstate"
-                        },
-                        new
-                        {
+                            Id = 2,
                             Name = "vehicles"
                         },
                         new
                         {
+                            Id = 3,
                             Name = "furniture"
                         },
                         new
                         {
-                            Name = "deals"
+                            Id = 4,
+                            Name = "electronics"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "realEstate"
                         });
                 });
 
@@ -59,8 +69,10 @@ namespace MKTFY.Repositories.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DateCreated")
@@ -83,7 +95,7 @@ namespace MKTFY.Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryName");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Listings");
                 });
@@ -92,7 +104,7 @@ namespace MKTFY.Repositories.Migrations
                 {
                     b.HasOne("MKTFY.Models.Entities.Category", "Category")
                         .WithMany("Listings")
-                        .HasForeignKey("CategoryName")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

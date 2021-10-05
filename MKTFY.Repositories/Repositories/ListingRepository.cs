@@ -45,7 +45,7 @@ namespace MKTFY.Repositories.Repositories
             result.Product = src.Product;
             result.Details = src.Details;
             result.Price = src.Price;
-            result.Category = src.Category;
+            result.CategoryId = src.CategoryId;
            // result.DateCreated = src.DateCreated;
            //sellerID 
             //result.TransactionStatus = src.TransactionStatus;

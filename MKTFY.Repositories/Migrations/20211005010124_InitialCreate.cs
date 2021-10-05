@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MKTFY.Repositories.Migrations
 {
@@ -11,11 +12,13 @@ namespace MKTFY.Repositories.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Name);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,7 +29,8 @@ namespace MKTFY.Repositories.Migrations
                     Product = table.Column<string>(type: "text", nullable: false),
                     Details = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    CategoryName = table.Column<string>(type: "text", nullable: false),
+                    CategoryId = table.Column<int>(type: "integer", nullable: false),
+                    CategoryName = table.Column<string>(type: "text", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TransactionStatus = table.Column<string>(type: "text", nullable: false)
                 },
@@ -34,29 +38,29 @@ namespace MKTFY.Repositories.Migrations
                 {
                     table.PrimaryKey("PK_Listings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Listings_Categories_CategoryName",
-                        column: x => x.CategoryName,
+                        name: "FK_Listings_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Name",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                column: "Name",
-                values: new object[]
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
                 {
-                    "electronics",
-                    "realEstate",
-                    "vehicles",
-                    "furniture",
-                    "deals"
+                    { 1, "deals" },
+                    { 2, "vehicles" },
+                    { 3, "furniture" },
+                    { 4, "electronics" },
+                    { 5, "realEstate" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Listings_CategoryName",
+                name: "IX_Listings_CategoryId",
                 table: "Listings",
-                column: "CategoryName");
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

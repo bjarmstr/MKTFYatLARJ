@@ -15,17 +15,18 @@ namespace MKTFY.Repositories
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Category>().HasData(
-                new Category { Name = "electronics" },
-                new Category { Name = "realEstate"},
-                new Category { Name = "vehicles" },
-                new Category { Name = "furniture" },
-                new Category { Name ="deals"}
+                new Category { Id = 1, Name = "deals" },
+                new Category { Id = 2, Name = "vehicles" },
+                new Category { Id = 3, Name = "furniture" },
+                new Category { Id = 4, Name = "electronics" },
+                new Category { Id = 5, Name = "realEstate" }
 
-            ); 
+            );
         }
-        
+
 
     }
 }

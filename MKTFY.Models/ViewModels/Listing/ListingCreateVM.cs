@@ -15,7 +15,7 @@ namespace MKTFY.Models.ViewModels.Listing
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public string CategoryName { get; set; }
+        public int CategoryId{ get; set; }
 
     }
 }

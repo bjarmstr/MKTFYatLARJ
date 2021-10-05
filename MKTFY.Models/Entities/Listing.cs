@@ -17,9 +17,7 @@ namespace MKTFY.Models.Entities
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
-            CategoryName = src.CategoryName;
-            
-           
+            CategoryId = src.CategoryId;
 
         }
 
@@ -29,8 +27,7 @@ namespace MKTFY.Models.Entities
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
-            CategoryName = src.CategoryName;
-          
+            CategoryId = src.CategoryId;
 
         }
 
@@ -47,6 +44,8 @@ namespace MKTFY.Models.Entities
         public decimal Price { get; set; }
 
         [Required]
+        public int CategoryId { get; set; }
+
         public string CategoryName { get; set; }
 
 
