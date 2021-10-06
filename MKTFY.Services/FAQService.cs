@@ -10,7 +10,7 @@ using MKTFY.Repositories.Repositories.Interfaces;
 
 namespace MKTFY.Services
 {
-    public class FAQService: IFAQService
+    public class FAQService : IFAQService
     {
         private readonly IFAQRepository _faqRepository;
 
@@ -53,3 +53,4 @@ namespace MKTFY.Services
 
         }
     }
+}
