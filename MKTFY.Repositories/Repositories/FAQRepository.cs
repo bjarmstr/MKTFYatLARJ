@@ -21,21 +21,21 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<FAQ> Create(FAQ src)
         {
-            _context.FAQ.Add(src);
+            _context.FAQs.Add(src);
             await _context.SaveChangesAsync();
             return src;
         }
 
         public async Task<FAQ> Get(Guid id)
         {
-            var result = await _context.FAQ.FirstOrDefaultAsync(i => i.Id == id);
+            var result = await _context.FAQs.FirstOrDefaultAsync(i => i.Id == id);
 
             if (result == null) throw new NotFoundException("The requested listing could not be found");
             return result;
         }
         public async Task<List<FAQ>> GetAll()
         {
-            var result = await _context.FAQ.ToListAsync();
+            var result = await _context.FAQs.ToListAsync();
 
             return result;
         }
@@ -43,7 +43,7 @@ namespace MKTFY.Repositories.Repositories
 
     public async Task<FAQ> Update(FAQ src)
     {
-            var result = await _context.FAQ.FirstOrDefaultAsync(i => i.Id == src.Id);
+            var result = await _context.FAQs.FirstOrDefaultAsync(i => i.Id == src.Id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
             result.Id = src.Id;
             result.Question = src.Question;

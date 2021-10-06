@@ -9,7 +9,7 @@ namespace MKTFY.Repositories
         public virtual DbSet<Listing> Listings { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
 
-        public virtual DbSet<FAQ> FAQ{ get; set; }
+        public virtual DbSet<FAQ> FAQs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 

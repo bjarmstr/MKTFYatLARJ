@@ -28,6 +28,8 @@ namespace MKTFY.API
             // Configure Dependency Injection
             services.AddScoped<IListingService, ListingService>();
             services.AddScoped<IListingRepository, ListingRepository>();
+            services.AddScoped<IFAQService, FAQService>();
+            services.AddScoped<IFAQRepository, FAQRepository>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

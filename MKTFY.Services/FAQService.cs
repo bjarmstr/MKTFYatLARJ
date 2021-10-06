@@ -14,9 +14,9 @@ namespace MKTFY.Services
     {
         private readonly IFAQRepository _faqRepository;
 
-        public FAQService(IFAQRepository FAQRepository)
+        public FAQService(IFAQRepository faqRepository)
         {
-            _faqRepository = FAQRepository;
+            _faqRepository = faqRepository;
         }
         public async Task<FAQVM> Create(FAQCreateVM src)
         {
