@@ -30,7 +30,6 @@ namespace MKTFY.Repositories.Repositories
         public async Task<Listing> Get(Guid id)
         {
             var result = await _context.Listings
-                .Include(i => i.Category)
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             if (result == null) throw new NotFoundException("The requested listing could not be found");
@@ -40,7 +39,6 @@ namespace MKTFY.Repositories.Repositories
         public async Task<List<Listing>> GetAll()
         {
             var results = await _context.Listings
-                .Include(i => i.Category)
                 .ToListAsync();
             return results;
         }
@@ -54,9 +52,6 @@ namespace MKTFY.Repositories.Repositories
             result.Details = src.Details;
             result.Price = src.Price;
             result.CategoryId = src.CategoryId;
-           // result.DateCreated = src.DateCreated;
-           //sellerID 
-            //result.TransactionStatus = src.TransactionStatus;
 
 
             await _context.SaveChangesAsync();

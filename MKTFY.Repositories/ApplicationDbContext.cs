@@ -20,11 +20,11 @@ namespace MKTFY.Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "deals" },
-                new Category { Id = 2, Name = "vehicles" },
-                new Category { Id = 3, Name = "furniture" },
-                new Category { Id = 4, Name = "electronics" },
-                new Category { Id = 5, Name = "realEstate" }
+                new Category { Id = 1, Name = "Deals" },
+                new Category { Id = 2, Name = "Cars & Vehicles" },
+                new Category { Id = 3, Name = "Furniture" },
+                new Category { Id = 4, Name = "Electronics" },
+                new Category { Id = 5, Name = "Real Estate" }
 
             );
         }

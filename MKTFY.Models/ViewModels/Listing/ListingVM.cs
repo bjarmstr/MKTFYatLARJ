@@ -18,7 +18,8 @@ namespace MKTFY.Models.ViewModels.Listing
             Details = src.Details;
             Price = src.Price;
             CategoryId = src.CategoryId;
-            CategoryName = src.Category?.Name;
+            //CategoryName only needed in admin panel
+            //CategoryName = src.Category?.Name;
         }
 
 
