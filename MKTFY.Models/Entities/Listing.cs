@@ -45,8 +45,7 @@ namespace MKTFY.Models.Entities
 
         [Required]
         public int CategoryId { get; set; }
-
-        public string CategoryName { get; set; }
+        public Category Category { get; set; }
 
 
         [Required]
@@ -55,7 +54,7 @@ namespace MKTFY.Models.Entities
         [Required]
         public string TransactionStatus { get; set; }
 
-        public virtual Category Category { get; set; }
+        
 
 
 

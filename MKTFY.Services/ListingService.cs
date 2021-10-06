@@ -24,7 +24,6 @@ namespace MKTFY.Services
             //check category
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
-            newEntity.CategoryName = await _listingRepository.GetCategoryName(newEntity.CategoryId);
             var result = await _listingRepository.Create(newEntity);
             var model = new ListingVM(result);
             return model;

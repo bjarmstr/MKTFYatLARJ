@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MKTFY.API.Middleware;
 using MKTFY.Repositories;
 using MKTFY.Repositories.Repositories;
 using MKTFY.Repositories.Repositories.Interfaces;
@@ -65,6 +66,8 @@ namespace MKTFY.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseAuthorization();
 

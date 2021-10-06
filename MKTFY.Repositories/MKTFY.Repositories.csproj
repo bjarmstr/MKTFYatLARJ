@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MKTFY.Shared\MKTFY.Shared.csproj" />
     <ProjectReference Include="..\MKTFY.Models\MKTFY.Models.csproj" />
   </ItemGroup>
 

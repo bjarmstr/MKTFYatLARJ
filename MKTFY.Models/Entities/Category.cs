@@ -14,8 +14,5 @@ namespace MKTFY.Models.Entities
         public string Name { get; set; }
 
 
-        public virtual ICollection<Listing> Listings { get; set; }
-
-
     }
 }

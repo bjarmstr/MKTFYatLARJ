@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MKTFY.Models.Entities;
 using MKTFY.Repositories.Repositories.Interfaces;
+using MKTFY.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,11 @@ namespace MKTFY.Repositories.Repositories
        
         public async Task<Listing> Get(Guid id)
         {
-            var result = await _context.Listings.FirstAsync(i => i.Id == id);
+            var result = await _context.Listings
+                .Include(i => i.Category)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (result == null) throw new NotFoundException("The requested listing could not be found");
             return result;
         }
 
@@ -40,7 +45,8 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<Listing> Update(Listing src)
         {
-            var result = await _context.Listings.FirstAsync(i => i.Id == src.Id);
+            var result = await _context.Listings.FirstOrDefaultAsync(i => i.Id == src.Id);
+            if (result == null) throw new NotFoundException("The requested listing could not be found");
             result.Id = src.Id;
             result.Product = src.Product;
             result.Details = src.Details;
@@ -57,17 +63,15 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task Delete(Guid id)
         {
-            var result = await _context.Listings.FirstAsync(i => i.Id == id);
+            var result = await _context.Listings.FirstOrDefaultAsync(i => i.Id == id);
+
+            if (result == null) throw new NotFoundException("The requested listing could not be found");
+
             _context.Remove(result);
             await _context.SaveChangesAsync();
 
         }
 
-        public async Task<string> GetCategoryName(int id)
-        {
-            var result = await _context.Categories.FirstAsync(i => i.Id == id);
-            return result.Name;
-        }
 
 
     }

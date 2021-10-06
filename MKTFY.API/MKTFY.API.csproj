@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MKTFY.Shared\MKTFY.Shared.csproj" />
     <ProjectReference Include="..\MKTFY.Repositories\MKTFY.Repositories.csproj" />
     <ProjectReference Include="..\MKTFY.Services\MKTFY.Services.csproj" />
   </ItemGroup>
