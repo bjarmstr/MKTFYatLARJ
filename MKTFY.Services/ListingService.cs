@@ -58,5 +58,12 @@ namespace MKTFY.Services
         {
             await _listingRepository.Delete(id);
         }
+
+        public async Task<List<ListingVM>> GetByCategory(int categoryId)
+        {
+            var results = await _listingRepository.GetByCategory(categoryId);
+            var models = results.Select(listing => new ListingVM(listing)).ToList();
+            return models;
+        }
     }
 }

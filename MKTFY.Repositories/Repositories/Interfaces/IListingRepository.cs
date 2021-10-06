@@ -19,6 +19,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task Delete(Guid id);  //Delete a Listing
 
+        Task<List<Listing>> GetByCategory(int categoryId);
+
 
     }
 }

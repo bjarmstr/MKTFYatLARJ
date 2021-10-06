@@ -61,5 +61,16 @@ namespace MKTFY.API.Controllers
             return Ok();
 
         }
+
+        [HttpGet("category/{categoryId}")]
+        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute]int categoryId)
+        {
+
+            var result = await _listingService.GetByCategory(categoryId);
+            return Ok(result);
+
+        }
+
+
     }
 }
