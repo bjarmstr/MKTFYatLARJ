@@ -30,7 +30,6 @@ namespace MKTFY.Repositories.Migrations
                     Details = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CategoryName = table.Column<string>(type: "text", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TransactionStatus = table.Column<string>(type: "text", nullable: false)
                 },

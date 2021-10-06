@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MKTFY.Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211005010124_InitialCreate")]
+    [Migration("20211006132854_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,9 +72,6 @@ namespace MKTFY.Repositories.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
 
@@ -103,17 +100,12 @@ namespace MKTFY.Repositories.Migrations
             modelBuilder.Entity("MKTFY.Models.Entities.Listing", b =>
                 {
                     b.HasOne("MKTFY.Models.Entities.Category", "Category")
-                        .WithMany("Listings")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("MKTFY.Models.Entities.Category", b =>
-                {
-                    b.Navigation("Listings");
                 });
 #pragma warning restore 612, 618
         }
