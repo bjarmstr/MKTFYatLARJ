@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MKTFY.Services", "MKTFY.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MKTFY.Repositories", "MKTFY.Repositories\MKTFY.Repositories.csproj", "{9741164C-75F6-4A48-A72B-E2241BE56BCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKTFY.Shared", "..\MKTFY.Shared\MKTFY.Shared.csproj", "{A1AA4755-3511-4B9B-85CA-7931A91163E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MKTFY.Shared", "..\MKTFY.Shared\MKTFY.Shared.csproj", "{A1AA4755-3511-4B9B-85CA-7931A91163E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA88EF81-D3FB-4F84-835A-62179323D82A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

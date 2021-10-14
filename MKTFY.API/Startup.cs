@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MKTFY.API.Middleware;
 using MKTFY.Repositories;
@@ -30,6 +32,7 @@ namespace MKTFY.API
             services.AddScoped<IListingRepository, ListingRepository>();
             services.AddScoped<IFAQService, FAQService>();
             services.AddScoped<IFAQRepository, FAQRepository>();
+            services.AddScoped<IAuthService,AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -46,7 +49,23 @@ namespace MKTFY.API
                 );
             services.AddControllers();
 
-          
+            // Setup authentication
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = Configuration.GetSection("Auth0").GetValue<string>("Domain");
+                    options.Audience = Configuration.GetSection("Auth0").GetValue<string>("Audience");
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        RoleClaimType = "http://schemas.mktfy.com/roles"
+                    };
+                });
+
+
             ConfigureDependencyInjection(services);
 
             services.AddSwaggerGen(c =>
@@ -71,6 +90,7 @@ namespace MKTFY.API
 
             app.UseMiddleware<GlobalExceptionHandler>();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
