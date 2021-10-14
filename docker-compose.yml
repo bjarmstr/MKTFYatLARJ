@@ -11,7 +11,10 @@ services:
      - "34000:80"
      - "34001:443"
     environment:
-     - ConnectionStrings__DefaultConnection=Server=mktfy.db;Database=dev;User Id=dev;Password=dev
+      - ConnectionStrings__DefaultConnection=Server=mktfy.db;Database=dev;User Id=dev;Password=dev 
+      - Auth0__Domain=https://dev-4bf106fk.us.auth0.com
+      - Auth0__Audience=http://localhost/MKTFY/Backend/API
+      - Auth0__TokenRedirectUrl=http://localhost/redirect
 
     depends_on:
      - mktfy.db
