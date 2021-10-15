@@ -71,6 +71,7 @@ namespace MKTFY.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MKTFY.API", Version = "v1" });
+
             });
         }
 
