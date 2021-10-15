@@ -6,8 +6,10 @@ namespace MKTFY.Repositories
     public class ApplicationDbContext : DbContext
     {
 
-        public virtual DbSet<Listing> Listings { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
+        public DbSet<Listing> Listings { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         public virtual DbSet<FAQ> FAQs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
