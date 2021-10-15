@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MKTFY.Models.Entities;
+using MKTFY.Models.ViewModels.User;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services.Interfaces;
 using System;
@@ -26,7 +27,7 @@ namespace MKTFY.Services
             _httpClient = new HttpClient();
         }
 
-
+    
         public async Task<string> CreateOrUpdate(string accessToken)
         //return a string so it can hold error message or null for success
         //another alternative is to create a custom exception handler and catch the exception in the controller

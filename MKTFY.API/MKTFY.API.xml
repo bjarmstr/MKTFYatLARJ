@@ -19,5 +19,10 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetAll" -->
+        <member name="M:MKTFY.API.Controllers.UserController.ProfileUpdate">
+            <summary>
+            Update Or Create a user profile
+            </summary>  
+        </member>
     </members>
 </doc>
