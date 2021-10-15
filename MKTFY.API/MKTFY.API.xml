@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MKTFY.API</name>
+    </assembly>
+    <members>
+        <member name="M:MKTFY.API.Controllers.AuthController.Token(System.String)">
+            <summary>
+            Exchange an Auth Code for an Access Token
+            </summary>
+            <param name="authCode"></param>   
+            
+        </member>
+        <member name="M:MKTFY.API.Controllers.ListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM)">
+            <summary>
+            Add a new Listing
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetAll" -->
+    </members>
+</doc>

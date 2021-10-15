@@ -8,11 +8,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MKTFY.API.Middleware;
+using MKTFY.API.Swashbuckle;
 using MKTFY.Repositories;
 using MKTFY.Repositories.Repositories;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services;
 using MKTFY.Services.Interfaces;
+using System.IO;
 
 namespace MKTFY.API
 {
@@ -71,6 +73,19 @@ namespace MKTFY.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MKTFY.API", Version = "v1" });
+                var apiPath = Path.Combine(System.AppContext.BaseDirectory, "MKTFY.API.xml");
+                var modelsPath = Path.Combine(System.AppContext.BaseDirectory, "MKTFY.Models.xml");
+                c.IncludeXmlComments(apiPath);
+                c.IncludeXmlComments(modelsPath);
+
+                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer"
+                });
+                c.OperationFilter<AuthHeaderOperationFilter>();
 
             });
         }
@@ -81,8 +96,10 @@ namespace MKTFY.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MKTFY.API v1"));
+               
             }
 
             app.UseHttpsRedirection();

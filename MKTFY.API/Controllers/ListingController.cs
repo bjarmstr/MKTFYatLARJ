@@ -13,7 +13,7 @@ namespace MKTFY.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    [Authorize]
     public class ListingController : ControllerBase
     {
         private readonly IListingService _listingService;

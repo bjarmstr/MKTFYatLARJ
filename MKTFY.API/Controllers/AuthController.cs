@@ -22,7 +22,11 @@ namespace MKTFY.API.Controllers
             _authService = authService;
         }
 
-        // Exchange an Auth Code for an Access Token
+        /// <summary>
+        /// Exchange an Auth Code for an Access Token
+        /// </summary>
+        /// <param name="authCode"></param>   
+        /// 
         [HttpPost("token")]
         public async Task<ActionResult<AuthResponseVM>> Token([FromQuery] string authCode)
         {
