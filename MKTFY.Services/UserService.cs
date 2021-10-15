@@ -27,58 +27,37 @@ namespace MKTFY.Services
             _httpClient = new HttpClient();
         }
 
-    
-        public async Task<string> CreateOrUpdate(string accessToken)
-        //return a string so it can hold error message or null for success
-        //another alternative is to create a custom exception handler and catch the exception in the controller
+        public async Task<UserVM> Create(UserCreateVM src, string accessToken )
         {
-            var result = await ProfileRequest(accessToken);
-            if (result == null)
-                return "Unable to update the user profile";
+            var newEntity = new User(src);
+            
+            newEntity.DateCreated = DateTime.UtcNow;
 
-            // Get the existing user
-            var user = await _userRepository.GetById(result.sub);
+            var authData = await ProfileRequest(accessToken);
+            //if (result == null)
+            //**Create a custom exception handler@@@@@@@@@
+            //return "Unable to update the user profile";
+            newEntity.Id = authData.sub;
+            newEntity.Email = authData.email;
+            //check if authData.sub already exists in database@@@@
+            //error that user already exists if found
+            var result = await _userRepository.Create(newEntity);
+            var model = new UserVM(result);
+            return model;
 
-            //map Auth0 metadata fields <UserInfoResponseMeta> to <User>
-            var userData = new User
-            {
-                Id = result.sub,
-                Email = result.email,
-                FirstName = result.user_metadata?.firstName,
-                LastName = result.user_metadata?.lastName,
-                Phone = result.user_metadata?.phone,
-               StreetAddress = result.user_metadata?.address,
-               City = result.user_metadata?.city,
-               //province not included in metadata
-              //Province = result.user_metadata?.province,
-              Province = null,
-              Country = result.user_metadata?.country
-      
-        };
-
-
-            if (user == null)
-            {
-                userData.DateCreated = DateTime.UtcNow;
-                await _userRepository.Create(userData);
-            }
-            else
-                await _userRepository.Update(userData);
-
-            return null;
         }
+
+  
         // Get the user's profile information from Auth0
         private async Task<UserInfoResponse> ProfileRequest(string accessToken)
         {
+            
             var authUrl = _configuration.GetSection("Auth0").GetValue<string>("Domain");
 
             // Build the request
             var req = new HttpRequestMessage(HttpMethod.Get, authUrl + "/userInfo");
             req.Headers.Add("Authorization", "Bearer " + accessToken);
             var res = await _httpClient.SendAsync(req);
-
-            if (!res.IsSuccessStatusCode)
-                return null;
 
             var result = await res.Content.ReadFromJsonAsync<UserInfoResponse>();
             return result;
@@ -89,23 +68,9 @@ namespace MKTFY.Services
 
             public string email { get; set; }
 
-            [JsonPropertyName("http://schemas.mktfy.com/user_metadata")]
-            public UserInfoResponseMeta user_metadata { get; set; }
+   
         }
 
-        public class UserInfoResponseMeta
-        {
-            public string firstName { get; set; }
-
-            public string lastName { get; set; }
-
-            public string phone { get; set; }
-
-            public string country { get; set; }
-
-            public string city { get; set; }
-
-            public string address { get; set; }
-        }
+    
     }
 }

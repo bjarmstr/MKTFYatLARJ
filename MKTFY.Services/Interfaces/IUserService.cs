@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MKTFY.Models.ViewModels.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MKTFY.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<string> CreateOrUpdate(string accessToken);
+        Task<UserVM> Create(UserCreateVM data, string accessToken);
     }
 }

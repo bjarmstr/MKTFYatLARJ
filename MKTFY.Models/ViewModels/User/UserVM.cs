@@ -8,6 +8,22 @@ namespace MKTFY.Models.ViewModels.User
 {
     public class UserVM
     {
+        public UserVM()
+        {
+
+        }
+        public UserVM(Entities.User src)
+        {
+            Id = src.Id;
+            Email = src.Email;
+            FirstName = src.FirstName;
+            LastName = src.LastName;
+            Phone = src.Phone;
+            StreetAddress = src.StreetAddress;
+            City = src.City;
+            Province = src.Province;
+            Country = src.Country;
+        }
 
         public string Id { get; set; }
 

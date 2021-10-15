@@ -19,9 +19,9 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetAll" -->
-        <member name="M:MKTFY.API.Controllers.UserController.ProfileUpdate">
+        <member name="M:MKTFY.API.Controllers.UserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM)">
             <summary>
-            Update Or Create a user profile
+            Create a user profile, user must already exist in Auth0
             </summary>  
         </member>
     </members>
