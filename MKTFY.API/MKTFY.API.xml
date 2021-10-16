@@ -24,5 +24,12 @@
             Create a user profile, user must already exist in Auth0
             </summary>  
         </member>
+        <member name="M:MKTFY.API.Controllers.UserController.Get(System.String)">
+            <summary>
+            Get a User's profile info
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

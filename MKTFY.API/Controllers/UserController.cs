@@ -31,16 +31,24 @@ namespace MKTFY.API.Controllers
         public async Task<ActionResult<UserVM>> Create([FromBody] UserCreateVM data)
         {
           
-            // Get the Auth Token from the header
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-
+            
             // Perform the update
-            var result = await _userService.Create(data, accessToken);
-            //an error message is returned or if all is good then null is returned
-            if (result != null)
-                return BadRequest(new { message = "Unable to update the user profile" });
+            var result = await _userService.Create(data);
+           
+            return Ok(result);
+        }
 
-            return Ok();
+
+        /// <summary>
+        /// Get a User's profile info
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserVM>> Get([FromRoute] String id)
+        {
+            return Ok(await _userService.Get(id));
+
         }
     }
 }

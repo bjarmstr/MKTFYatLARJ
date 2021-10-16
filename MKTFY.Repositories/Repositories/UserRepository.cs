@@ -26,7 +26,7 @@ namespace MKTFY.Repositories.Repositories
             return src;
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<User> Get(string id)
         {
             var result = await _context.Users
             .FirstOrDefaultAsync(i => i.Id == id);
@@ -36,7 +36,7 @@ namespace MKTFY.Repositories.Repositories
         public async Task<User> Update(User src)
         {
             var result = await _context.Users.FirstOrDefaultAsync(i => i.Id == src.Id);
-            if (result == null) throw new NotFoundException("The requested listing could not be found");
+            if (result == null) throw new NotFoundException("The requested user could not be found");
             //we want to update some of the user fields but not all --DateCreated
             result.Id = src.Id;
             result.FirstName = src.FirstName;

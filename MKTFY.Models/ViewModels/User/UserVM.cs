@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.ViewModels.User
 {
+    /// <summary>
+    /// View All User Profile Data
+    /// </summary>
     public class UserVM
     {
         public UserVM()

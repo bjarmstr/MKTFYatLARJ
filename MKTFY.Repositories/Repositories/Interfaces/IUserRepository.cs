@@ -10,7 +10,7 @@ namespace MKTFY.Repositories.Repositories.Interfaces
     public interface IUserRepository
     {
         Task<User> Create(User src);
-        Task<User> GetById(string id);
+        Task<User> Get(string id);
         Task<User> Update(User src);
     }
 }

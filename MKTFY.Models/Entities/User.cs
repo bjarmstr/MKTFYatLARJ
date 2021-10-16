@@ -17,6 +17,9 @@ namespace MKTFY.Models.Entities
 
         public User(UserCreateVM src)
         {
+
+            Id = src.Id;
+            Email = src.Email;
             FirstName = src.FirstName;
             LastName = src.LastName;
             Phone = src.Phone;

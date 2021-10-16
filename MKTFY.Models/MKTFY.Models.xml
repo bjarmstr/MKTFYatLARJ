@@ -4,5 +4,20 @@
         <name>MKTFY.Models</name>
     </assembly>
     <members>
+        <member name="T:MKTFY.Models.ViewModels.User.UserCreateVM">
+            <summary>
+            UserCreateVM with the properties to create a new user
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.ViewModels.User.UserCreateVM.Id">
+            <summary>
+            Auth0 Id
+            </summary>
+        </member>
+        <member name="T:MKTFY.Models.ViewModels.User.UserVM">
+            <summary>
+            View All User Profile Data
+            </summary>
+        </member>
     </members>
 </doc>
