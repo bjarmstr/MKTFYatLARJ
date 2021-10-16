@@ -4,6 +4,11 @@
         <name>MKTFY.Models</name>
     </assembly>
     <members>
+        <member name="P:MKTFY.Models.Entities.Listing.UserId">
+            <summary>
+            User who created the listing
+            </summary>
+        </member>
         <member name="T:MKTFY.Models.ViewModels.User.UserCreateVM">
             <summary>
             UserCreateVM with the properties to create a new user
