@@ -18,6 +18,7 @@ namespace MKTFY.Models.ViewModels.Listing
             Details = src.Details;
             Price = src.Price;
             CategoryId = src.CategoryId;
+            UserId = src.UserId;
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
         }
@@ -37,9 +38,8 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public int CategoryId { get; set; }
 
-        
-
-        
+        public string UserId { get; set; }
+       
 
     }
 }

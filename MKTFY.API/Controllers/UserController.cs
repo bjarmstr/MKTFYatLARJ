@@ -29,9 +29,7 @@ namespace MKTFY.API.Controllers
         /// </summary>  
         [HttpPost]
         public async Task<ActionResult<UserVM>> Create([FromBody] UserCreateVM data)
-        {
-          
-            
+        {         
             // Perform the update
             var result = await _userService.Create(data);
            

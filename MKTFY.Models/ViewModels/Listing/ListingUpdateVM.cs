@@ -18,7 +18,7 @@ namespace MKTFY.Models.ViewModels.Listing
         public decimal Price { get; set; }
 
         [Required]
-        //make sure this is a real category
+        //make sure this is a real category@@
         public int CategoryId { get; set; }
 
        

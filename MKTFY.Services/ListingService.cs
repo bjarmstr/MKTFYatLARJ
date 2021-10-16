@@ -18,10 +18,11 @@ namespace MKTFY.Services
         {
             _listingRepository = listingRepository;
         }
-        public async Task<ListingVM> Create(ListingCreateVM src)
+        public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
-            var newEntity = new Listing(src);
+            var newEntity = new Listing(src, userId);
             //check category
+
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
             var result = await _listingRepository.Create(newEntity);

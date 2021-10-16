@@ -17,7 +17,6 @@ namespace MKTFY.Models.Entities
 
         public User(UserCreateVM src)
         {
-
             Id = src.Id;
             Email = src.Email;
             FirstName = src.FirstName;
@@ -28,7 +27,6 @@ namespace MKTFY.Models.Entities
             Province = src.Province;
             Country = src.Country;
             
-
         }
 
 
@@ -63,6 +61,10 @@ namespace MKTFY.Models.Entities
 
         [Required]
         public DateTime DateCreated { get; set; }
+
+        public ICollection<Listing>Listings { get; set; }
+
+       
 
     }
 }

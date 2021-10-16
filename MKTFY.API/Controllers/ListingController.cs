@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MKTFY.API.Helpers;
 using MKTFY.Models.ViewModels.Listing;
 using MKTFY.Services.Interfaces;
 using System;
@@ -32,7 +33,8 @@ namespace MKTFY.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
         {
-            var result = await _listingService.Create(data);
+            var userId = User.GetId();
+            var result = await _listingService.Create(data, userId);
             return Ok(result);
 
         }
