@@ -9,6 +9,11 @@
             User who created the listing
             </summary>
         </member>
+        <member name="P:MKTFY.Models.ViewModels.Listing.ListingCreateVM.CategoryId">
+            <summary>
+            Category Id , Deals - Category 1, Real Estate - Category 5
+            </summary>
+        </member>
         <member name="T:MKTFY.Models.ViewModels.User.UserCreateVM">
             <summary>
             UserCreateVM with the properties to create a new user

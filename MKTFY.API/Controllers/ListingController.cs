@@ -28,7 +28,7 @@ namespace MKTFY.API.Controllers
         /// Add a new Listing
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
+        /// <remarks> Category  Id 1 = Deals, Id 2 = Cars & Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
 
         [HttpPost]
         public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
@@ -43,9 +43,7 @@ namespace MKTFY.API.Controllers
         /// Get all Listings
         /// </summary>
         /// <returns></returns>
-        /// <remarks> Category  Id 1 = Deals, Id 2 = Cars & Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
-
-        [HttpGet]
+       [HttpGet]
         public async Task<ActionResult<List<ListingVM>>> GetAll()
         {
 
@@ -78,6 +76,11 @@ namespace MKTFY.API.Controllers
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <remarks> Category Id's 2-5 are valid => Category  Id 2 = Cars & Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
         [HttpGet("category/{categoryId}")]
         public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute]int categoryId)
         {
@@ -86,6 +89,16 @@ namespace MKTFY.API.Controllers
             return Ok(result);
 
         }
+
+        [HttpPost("search")]
+        public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm)
+        {
+            var userId = User.GetId();
+            var result = await _listingService.GetBySearchTerm(searchTerm, userId);
+            return Ok(result);
+        }
+
+
 
 
     }

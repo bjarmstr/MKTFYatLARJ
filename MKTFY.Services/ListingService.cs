@@ -62,9 +62,19 @@ namespace MKTFY.Services
 
         public async Task<List<ListingVM>> GetByCategory(int categoryId)
         {
+            //if category is 1 - Deals@@@jma
             var results = await _listingRepository.GetByCategory(categoryId);
             var models = results.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }
+
+        public async Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string userId)
+        {
+            //save searchTerm for Deals Category@@@jma
+            var results = await _listingRepository.GetBySearchTerm(searchTerm);
+            var models = results.Select(listing => new ListingVM(listing)).ToList();
+            return models;
+        }
+
     }
 }

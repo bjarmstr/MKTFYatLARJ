@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MKTFY.API.Helpers;
 using MKTFY.Models.ViewModels.User;
 using MKTFY.Services.Interfaces;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MKTFY.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/profile")]
     [ApiController]
     [Authorize]
 
@@ -29,9 +30,10 @@ namespace MKTFY.API.Controllers
         /// </summary>  
         [HttpPost]
         public async Task<ActionResult<UserVM>> Create([FromBody] UserCreateVM data)
-        {         
+        {
             // Perform the update
-            var result = await _userService.Create(data);
+            var userId = User.GetId();
+            var result = await _userService.Create(data,userId);
            
             return Ok(result);
         }

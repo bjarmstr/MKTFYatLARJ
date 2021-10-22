@@ -9,7 +9,7 @@ namespace MKTFY.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserVM> Create(UserCreateVM data);
+        Task<UserVM> Create(UserCreateVM data, string userId);
 
         Task<UserVM> Get(string id);
     }

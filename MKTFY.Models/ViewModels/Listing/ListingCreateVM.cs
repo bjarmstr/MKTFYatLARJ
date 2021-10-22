@@ -14,6 +14,10 @@ namespace MKTFY.Models.ViewModels.Listing
 
         [Required]
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Category Id , Deals - Category 1, Real Estate - Category 5
+        /// </summary>
         [Required]
         public int CategoryId{ get; set; }
 

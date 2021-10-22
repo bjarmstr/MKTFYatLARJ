@@ -3,6 +3,7 @@ using MKTFY.Models.Entities;
 using MKTFY.Models.ViewModels.User;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services.Interfaces;
+using MKTFY.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,11 @@ namespace MKTFY.Services
 
         }
 
-        public async Task<UserVM> Create(UserCreateVM src)
+        public async Task<UserVM> Create(UserCreateVM src, string userId)
         {
             var newEntity = new User(src);
-
+            //write a simple inline exception
+            if (newEntity.Id != userId) throw new NotFoundException("not a notfoundException, userId mismatch");
             newEntity.DateCreated = DateTime.UtcNow;
             var result = await _userRepository.Create(newEntity);
             var model = new UserVM(result);

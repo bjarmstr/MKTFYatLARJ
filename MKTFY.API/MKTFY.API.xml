@@ -11,14 +11,14 @@
             <param name="authCode"></param>   
             
         </member>
-        <member name="M:MKTFY.API.Controllers.ListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM)">
+        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM)" -->
+        <member name="M:MKTFY.API.Controllers.ListingController.GetAll">
             <summary>
-            Add a new Listing
+            Get all Listings
             </summary>
-            <param name="data"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetAll" -->
+        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetByCategory(System.Int32)" -->
         <member name="M:MKTFY.API.Controllers.UserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM)">
             <summary>
             Create a user profile, user must already exist in Auth0

@@ -71,9 +71,18 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<List<Listing>> GetByCategory(int categoryId)
         {
-            //**need to take region into account
+            //**need to take region into account@@@jma
             var results = await _context.Listings
                 .Where(listing => listing.CategoryId == categoryId)
+                .ToListAsync();
+            return results;
+        }
+
+        public async Task<List<Listing>> GetBySearchTerm(string searchTerm)
+        {
+            //**need to take region into account@@@jma
+            var results = await _context.Listings
+                .Where(listing => listing.Details.ToLower().Contains(searchTerm) || listing.Product.ToLower().Contains(searchTerm))
                 .ToListAsync();
             return results;
         }
