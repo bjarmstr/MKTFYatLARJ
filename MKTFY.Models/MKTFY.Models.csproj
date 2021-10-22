@@ -8,4 +8,8 @@
     <DocumentationFile>C:\Users\bjarm\git\MKTFYatLARJ\MKTFY.Models\MKTFY.Models.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\bjarm\git\MKTFYatLARJ\MKTFY.Models\MKTFY.Models.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
