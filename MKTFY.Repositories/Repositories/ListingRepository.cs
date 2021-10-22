@@ -80,7 +80,7 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<List<Listing>> GetBySearchTerm(string searchTerm)
         {
-            //**need to take region into account@@@jma
+            //*need to take region into account@@@jma
             var results = await _context.Listings
                 .Where(listing => listing.Details.ToLower().Contains(searchTerm) || listing.Product.ToLower().Contains(searchTerm))
                 .ToListAsync();
