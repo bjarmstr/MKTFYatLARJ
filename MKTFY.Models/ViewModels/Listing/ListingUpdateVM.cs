@@ -21,6 +21,8 @@ namespace MKTFY.Models.ViewModels.Listing
         //make sure this is a real category@@jma
         public int CategoryId { get; set; }
 
+        public string Condition { get; set; }
+
        
 
     }
