@@ -37,11 +37,10 @@ namespace MKTFY.Repositories.Repositories
         {
             var result = await _context.Users.FirstOrDefaultAsync(i => i.Id == src.Id);
             if (result == null) throw new NotFoundException("The requested user could not be found");
-            //we want to update some of the user fields but not all --DateCreated
+            //update some of the user fields but not all --DateCreated & Email
             result.Id = src.Id;
             result.FirstName = src.FirstName;
             result.LastName = src.LastName;
-            result.Email = src.Email;
             result.Phone = src.Phone;
             result.StreetAddress = src.StreetAddress;
             result.City = src.City;

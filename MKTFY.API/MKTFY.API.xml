@@ -11,7 +11,13 @@
             <param name="authCode"></param>   
             
         </member>
-        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM)" -->
+        <member name="M:MKTFY.API.Controllers.ListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM)">
+            <summary>
+            Add a new Listing
+            </summary>
+            <param name="data"></param>
+            <remarks> Category  Id 1 = Deals, Id 2 = Cars and Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
+        </member>
         <member name="M:MKTFY.API.Controllers.ListingController.GetAll">
             <summary>
             Get all Listings

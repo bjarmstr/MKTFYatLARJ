@@ -29,6 +29,19 @@ namespace MKTFY.Models.Entities
             
         }
 
+        public User(UserUpdateVM src)
+        {
+            Id = src.Id;
+            FirstName = src.FirstName;
+            LastName = src.LastName;
+            Phone = src.Phone;
+            StreetAddress = src.StreetAddress;
+            City = src.City;
+            Province = src.Province;
+            Country = src.Country;
+
+        }
+
 
         [Key]
         public string Id { get; set; }

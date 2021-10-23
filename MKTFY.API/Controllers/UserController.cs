@@ -34,8 +34,19 @@ namespace MKTFY.API.Controllers
             // Perform the update
             var userId = User.GetId();
             var result = await _userService.Create(data,userId);
-           
             return Ok(result);
+        }
+
+        
+        
+        [HttpPut]
+        public async Task<ActionResult<UserVM>> Update([FromBody] UserUpdateVM data)
+        {
+            //get user id from header
+            var userId = User.GetId();
+            var result = await _userService.Update(data,userId);
+            return Ok(result);
+
         }
 
 
