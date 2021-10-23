@@ -52,8 +52,7 @@ namespace MKTFY.Repositories.Repositories
             result.Details = src.Details;
             result.Price = src.Price;
             result.CategoryId = src.CategoryId;
-
-
+            result.Condition = src.Condition;
             await _context.SaveChangesAsync();
             return result;
         }

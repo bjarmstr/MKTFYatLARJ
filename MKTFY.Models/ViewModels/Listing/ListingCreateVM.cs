@@ -21,5 +21,7 @@ namespace MKTFY.Models.ViewModels.Listing
         [Required]
         public int CategoryId{ get; set; }
 
+        public string Condition;
+
     }
 }

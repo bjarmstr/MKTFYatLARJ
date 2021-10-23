@@ -18,7 +18,9 @@ namespace MKTFY.Models.Entities
             Details = src.Details;
             Price = src.Price;
             CategoryId = src.CategoryId;
+            Condition = src.Condition;
             UserId = userId;
+            
         }
 
         public Listing(ListingUpdateVM src)
@@ -28,7 +30,9 @@ namespace MKTFY.Models.Entities
             Details = src.Details;
             Price = src.Price;
             CategoryId = src.CategoryId;
-            
+            Condition = src.Condition;
+
+
         }
 
         [Key]
@@ -54,10 +58,11 @@ namespace MKTFY.Models.Entities
         [Required]
         public string TransactionStatus { get; set; }
 
+        public string Condition { get; set; }
+
         /// <summary>
         /// User who created the listing
         /// </summary>
-
         [Required]
         public string UserId { get; set; }
         //User User is a navigation property, which allows access to User details
