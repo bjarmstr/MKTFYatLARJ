@@ -60,10 +60,10 @@ namespace MKTFY.Services
             await _listingRepository.Delete(id);
         }
 
-        public async Task<List<ListingVM>> GetByCategory(int categoryId)
+        public async Task<List<ListingVM>> GetByCategory(int categoryId, string region)
         {
             //if category is 1 - Deals@@@jma
-            var results = await _listingRepository.GetByCategory(categoryId);
+            var results = await _listingRepository.GetByCategory(categoryId, region);
             var models = results.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }

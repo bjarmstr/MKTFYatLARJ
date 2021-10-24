@@ -19,7 +19,7 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task Delete(Guid id);  //Delete a Listing
 
-        Task<List<Listing>> GetByCategory(int categoryId);
+        Task<List<Listing>> GetByCategory(int categoryId, string region );
 
         Task<List<Listing>> GetBySearchTerm(string searchTerm);
 

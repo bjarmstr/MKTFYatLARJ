@@ -23,7 +23,8 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Condition { get; set; }
 
-       
+        public string Region { get; set; }
 
+       
     }
 }

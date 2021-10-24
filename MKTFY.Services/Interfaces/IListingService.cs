@@ -18,7 +18,7 @@ namespace MKTFY.Services.Interfaces
 
         Task Delete(Guid id);  //Delete a Listing
 
-        Task<List<ListingVM>> GetByCategory(int categoryId);
+        Task<List<ListingVM>> GetByCategory(int categoryId, string region);
 
         Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string userId);
 

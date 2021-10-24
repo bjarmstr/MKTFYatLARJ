@@ -19,7 +19,9 @@ namespace MKTFY.Models.Entities
             Price = src.Price;
             CategoryId = src.CategoryId;
             Condition = src.Condition;
+            Region = src.Region;
             UserId = userId;
+         
             
         }
 
@@ -31,8 +33,7 @@ namespace MKTFY.Models.Entities
             Price = src.Price;
             CategoryId = src.CategoryId;
             Condition = src.Condition;
-
-
+            Region = src.Region;
         }
 
         [Key]
@@ -59,6 +60,9 @@ namespace MKTFY.Models.Entities
         public string TransactionStatus { get; set; }
 
         public string Condition { get; set; }
+
+        [Required]
+        public string Region { get; set; }
 
         /// <summary>
         /// User who created the listing

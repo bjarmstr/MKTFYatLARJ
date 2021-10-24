@@ -53,6 +53,7 @@ namespace MKTFY.Repositories.Repositories
             result.Price = src.Price;
             result.CategoryId = src.CategoryId;
             result.Condition = src.Condition;
+            result.Region = src.Region;
             await _context.SaveChangesAsync();
             return result;
         }
@@ -68,11 +69,10 @@ namespace MKTFY.Repositories.Repositories
 
         }
 
-        public async Task<List<Listing>> GetByCategory(int categoryId)
+        public async Task<List<Listing>> GetByCategory(int categoryId, string region)
         {
-            //**need to take region into account@@@jma
             var results = await _context.Listings
-                .Where(listing => listing.CategoryId == categoryId)
+                .Where(listing => listing.CategoryId == categoryId && listing.Region == region)
                 .ToListAsync();
             return results;
         }

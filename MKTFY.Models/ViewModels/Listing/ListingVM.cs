@@ -20,6 +20,7 @@ namespace MKTFY.Models.ViewModels.Listing
             CategoryId = src.CategoryId;
             UserId = src.UserId;
             Condition = src.Condition;
+            Region = src.Region;
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
         }
@@ -40,6 +41,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public int CategoryId { get; set; }
 
         public string Condition { get; set; }
+
+        public string Region { get; set; }
 
         public string UserId { get; set; }
        
