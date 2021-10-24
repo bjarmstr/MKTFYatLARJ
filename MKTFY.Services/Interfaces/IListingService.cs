@@ -20,7 +20,7 @@ namespace MKTFY.Services.Interfaces
 
         Task<List<ListingVM>> GetByCategory(int categoryId, string region);
 
-        Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string userId);
+        Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string region, string userId);
 
     }
 }

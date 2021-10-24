@@ -21,7 +21,7 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<List<Listing>> GetByCategory(int categoryId, string region );
 
-        Task<List<Listing>> GetBySearchTerm(string searchTerm);
+        Task<List<Listing>> GetBySearchTerm(string searchTerm, string region);
 
 
     }

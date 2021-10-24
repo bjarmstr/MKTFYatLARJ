@@ -86,10 +86,11 @@ namespace MKTFY.API.Controllers
         }
 
         [HttpPost("search")]
-        public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm)
+        public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm , string region)
         {
             var userId = User.GetId();
-            var result = await _listingService.GetBySearchTerm(searchTerm, userId);
+            string searchTermLowerCase = searchTerm.ToLower();
+            var result = await _listingService.GetBySearchTerm(searchTermLowerCase, region, userId);
             return Ok(result);
         }
 

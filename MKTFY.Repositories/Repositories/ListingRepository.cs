@@ -77,11 +77,14 @@ namespace MKTFY.Repositories.Repositories
             return results;
         }
 
-        public async Task<List<Listing>> GetBySearchTerm(string searchTerm)
+        public async Task<List<Listing>> GetBySearchTerm(string searchTermLowerCase, string region)
         {
             //*need to take region into account@@@jma
             var results = await _context.Listings
-                .Where(listing => listing.Details.ToLower().Contains(searchTerm) || listing.Product.ToLower().Contains(searchTerm))
+                .Where(listing => 
+                    listing.Details.ToLower().Contains(searchTermLowerCase) 
+                    || listing.Product.ToLower().Contains(searchTermLowerCase))
+                .Where(listing => listing.Region == region)
                 .ToListAsync();
             return results;
         }

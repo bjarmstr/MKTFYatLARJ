@@ -68,10 +68,10 @@ namespace MKTFY.Services
             return models;
         }
 
-        public async Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string userId)
+        public async Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string region, string userId)
         {
             //save searchTerm for Deals Category@@@jma
-            var results = await _listingRepository.GetBySearchTerm(searchTerm);
+            var results = await _listingRepository.GetBySearchTerm(searchTerm, region);
             var models = results.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }

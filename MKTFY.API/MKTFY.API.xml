@@ -24,7 +24,13 @@
             </summary>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetByCategory(System.Int32)" -->
+        <member name="M:MKTFY.API.Controllers.ListingController.Update(MKTFY.Models.ViewModels.Listing.ListingUpdateVM)">
+            <summary>
+            Update Listing
+            </summary>
+            <param name="data"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetByCategory(System.Int32,System.String)" -->
         <member name="M:MKTFY.API.Controllers.UserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM)">
             <summary>
             Create a user profile, user must already exist in Auth0
