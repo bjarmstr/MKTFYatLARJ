@@ -31,7 +31,7 @@ namespace MKTFY.Repositories.Repositories
         {
             var results = await _context.SearchHistories
                .Where(x => x.UserId == userId)
-               .OrderBy(x => x.DateCreated)
+               .OrderByDescending(x => x.DateCreated)
                .Take(3)
                .ToListAsync();
             return results;

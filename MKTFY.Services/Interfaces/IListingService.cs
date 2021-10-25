@@ -21,6 +21,8 @@ namespace MKTFY.Services.Interfaces
 
         Task<List<ListingVM>> GetByCategory(int categoryId, string region);
 
+        Task<List<ListingVM>> GetDeals(string userId, string region);
+
         Task<List<ListingVM>> GetBySearchTerm(SearchCreateVM src, string userId);
 
     }

@@ -65,6 +65,13 @@
             <param name="data"></param>
         </member>
         <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetByCategory(System.Int32,System.String)" -->
+        <member name="M:MKTFY.API.Controllers.ListingController.GetDeals(System.String)">
+            <summary>
+            Get Listings based on search history - Deals for you
+            </summary>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
         <member name="M:MKTFY.API.Controllers.UserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM)">
             <summary>
             Create a user profile, user must already exist in Auth0

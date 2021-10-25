@@ -74,7 +74,7 @@ namespace MKTFY.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Listings from a given category
         /// </summary>
         /// <param name="categoryId"></param>
         /// <remarks> Category Id's 2-5 are valid => Category  Id 2 = Cars & Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
@@ -84,6 +84,20 @@ namespace MKTFY.API.Controllers
             var result = await _listingService.GetByCategory(categoryId, region);
             return Ok(result);
         }
+        
+        /// <summary>
+        /// Get Listings based on search history - Deals for you
+        /// </summary>
+        /// <param name="region"></param>
+        /// <returns></returns>
+        [HttpGet("category/deals")]
+        public async Task<ActionResult<List<ListingVM>>> GetDeals(string region)
+        {
+            string userId = User.GetId();
+            var result = await _listingService.GetDeals(userId, region);
+            return Ok(result);
+        }
+
 
         [HttpPost("search")]
         public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm , string region)
