@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MKTFY.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,12 +10,18 @@ namespace MKTFY.Models.Entities
 {
     public class SearchHistory
     {
+        public SearchHistory() { }
+        public SearchHistory(SearchCreateVM src)
+        {
+            SearchTerm = src.SearchTerm;
+            UserId = src.UserId;
+        }
 
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public string Product { get; set; }
+        public string SearchTerm { get; set; }
 
         [Required]
         public DateTime DateCreated { get; set; }

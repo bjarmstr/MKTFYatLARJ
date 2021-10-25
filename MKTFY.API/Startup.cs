@@ -34,9 +34,10 @@ namespace MKTFY.API
             services.AddScoped<IListingRepository, ListingRepository>();
             services.AddScoped<IFAQService, FAQService>();
             services.AddScoped<IFAQRepository, FAQRepository>();
-            services.AddScoped<IAuthService,AuthService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISearchRepository, SearchRepository>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

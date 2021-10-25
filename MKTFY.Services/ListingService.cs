@@ -1,4 +1,5 @@
 ﻿using MKTFY.Models.Entities;
+using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.Listing;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services.Interfaces;
@@ -13,10 +14,12 @@ namespace MKTFY.Services
     public class ListingService : IListingService
     {
         private readonly IListingRepository _listingRepository;
+        private readonly ISearchRepository _searchRepository;
 
-        public ListingService(IListingRepository listingRepository)
+        public ListingService(IListingRepository listingRepository, ISearchRepository searchRepository)
         {
             _listingRepository = listingRepository;
+            _searchRepository = searchRepository;
         }
         public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
@@ -61,16 +64,39 @@ namespace MKTFY.Services
 
         public async Task<List<ListingVM>> GetByCategory(int categoryId, string region)
         {
-            //if category is 1 - Deals@@@jma
-            var results = await _listingRepository.GetByCategory(categoryId, region);
-            var models = results.Select(listing => new ListingVM(listing)).ToList();
+
+            //Find listings for last 3 searches if category is 1 - Deals
+           // if (categoryId == 1)
+           // {
+               /// @@@jma move to its own method and pass in userId
+               string  userId = "auth0|61687d2206721e00690e04f8";
+                var searchHistory = await _searchRepository.GetLatestSearches(userId);
+                var dealListings = new List<Listing>();
+                foreach (SearchHistory search in searchHistory)
+                {
+                    var dealResults = await _listingRepository.GetBySearchTerm(search.SearchTerm, region);
+                   dealListings.AddRange(dealResults);
+                }
+            //}
+
+            var distinctListings = dealListings.Distinct();
+            //var results = await _listingRepository.GetByCategory(categoryId, region);
+           
+            var models = distinctListings.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }
 
-        public async Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string region, string userId)
+       
+        
+        public async Task<List<ListingVM>> GetBySearchTerm(SearchCreateVM src, string region)
         {
-            //save searchTerm for Deals Category@@@jma
-            var results = await _listingRepository.GetBySearchTerm(searchTerm, region);
+            //save search term to SearchHistory Table
+            var newSearchEntity = new SearchHistory(src);
+            newSearchEntity.DateCreated = DateTime.UtcNow;
+            await _searchRepository.Save(newSearchEntity);
+
+            //get search
+            var results = await _listingRepository.GetBySearchTerm(src.SearchTerm, region);
             var models = results.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }

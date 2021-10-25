@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MKTFY.API.Helpers;
+using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.Listing;
 using MKTFY.Services.Interfaces;
 using System;
@@ -87,9 +88,10 @@ namespace MKTFY.API.Controllers
         [HttpPost("search")]
         public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm , string region)
         {
-            var userId = User.GetId();
-            string searchTermLowerCase = searchTerm.ToLower();
-            var result = await _listingService.GetBySearchTerm(searchTermLowerCase, region, userId);
+            var search = new SearchCreateVM();
+            search.UserId = User.GetId();
+            search.SearchTerm = searchTerm.ToLower();
+            var result = await _listingService.GetBySearchTerm(search, region);
             return Ok(result);
         }
 

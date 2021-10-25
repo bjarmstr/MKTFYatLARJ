@@ -1,4 +1,5 @@
-﻿using MKTFY.Models.ViewModels.Listing;
+﻿using MKTFY.Models.ViewModels;
+using MKTFY.Models.ViewModels.Listing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MKTFY.Services.Interfaces
 
         Task<List<ListingVM>> GetByCategory(int categoryId, string region);
 
-        Task<List<ListingVM>> GetBySearchTerm(string searchTerm, string region, string userId);
+        Task<List<ListingVM>> GetBySearchTerm(SearchCreateVM src, string userId);
 
     }
 }

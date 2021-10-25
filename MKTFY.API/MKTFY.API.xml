@@ -19,7 +19,7 @@
         </member>
         <member name="M:MKTFY.API.Controllers.FAQController.GetAll">
             <summary>
-            List All FAQs
+            List All active FAQs
             </summary>
         </member>
         <member name="M:MKTFY.API.Controllers.FAQController.Get(System.Guid)">
