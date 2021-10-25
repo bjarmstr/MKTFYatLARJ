@@ -51,7 +51,6 @@ namespace MKTFY.Services
             var result = await _listingRepository.Update(updateData);
             var model = new ListingVM(result);
             return model;
-            
         }
 
 

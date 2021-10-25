@@ -11,6 +11,40 @@
             <param name="authCode"></param>   
             
         </member>
+        <member name="M:MKTFY.API.Controllers.FAQController.Create(MKTFY.Models.ViewModels.FAQ.FAQCreateVM)">
+            <summary>
+            Create a FAQ
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:MKTFY.API.Controllers.FAQController.GetAll">
+            <summary>
+            List All FAQs
+            </summary>
+        </member>
+        <member name="M:MKTFY.API.Controllers.FAQController.Get(System.Guid)">
+            <summary>
+            Get a FAQ by its Id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:MKTFY.API.Controllers.FAQController.Update(MKTFY.Models.ViewModels.FAQ.FAQUpdateVM)">
+            <summary>
+            Update a FAQ
+            </summary>
+        </member>
+        <member name="M:MKTFY.API.Controllers.FAQController.SoftDelete(System.Guid)">
+            <summary>
+            Soft Delete -retrievable
+            </summary>
+            <param name="id"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:MKTFY.API.Controllers.FAQController.GetAllSoftDelete">
+            <summary>
+            View All Previously Deleted FAQ
+            </summary>
+        </member>
         <member name="M:MKTFY.API.Controllers.ListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM)">
             <summary>
             Add a new Listing

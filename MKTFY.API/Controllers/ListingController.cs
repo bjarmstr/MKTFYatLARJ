@@ -58,7 +58,6 @@ namespace MKTFY.API.Controllers
         /// </summary>
         /// <param name="data"></param>
         [HttpPut]
-
         public async Task<ActionResult<ListingVM>> Update([FromBody] ListingUpdateVM data)
         {
             var result = await _listingService.Update(data);

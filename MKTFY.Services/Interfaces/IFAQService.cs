@@ -12,9 +12,11 @@ namespace MKTFY.Services.Interfaces
         Task<FAQVM> Create(FAQCreateVM src);
         Task<FAQVM> Get(Guid id);
 
-        Task<List<FAQVM>> GetAll(); 
+        Task<List<FAQVM>> GetAll(bool isDeleted); 
 
-        Task<FAQVM> Update(FAQUpdateVM src); 
+        Task<FAQVM> Update(FAQUpdateVM src);
+
+        Task SoftDelete(Guid id);
 
     }
 }

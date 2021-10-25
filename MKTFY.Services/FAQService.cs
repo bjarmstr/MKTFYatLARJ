@@ -36,9 +36,9 @@ namespace MKTFY.Services
             return model;
         }
 
-        public async Task<List<FAQVM>> GetAll()
+        public async Task<List<FAQVM>> GetAll(bool isDeleted)
         {
-            var results = await _faqRepository.GetAll();
+            var results = await _faqRepository.GetAll(isDeleted);
             var models = results.Select(FAQ => new FAQVM(FAQ)).ToList();
             return models;
         }
@@ -49,8 +49,12 @@ namespace MKTFY.Services
             var result = await _faqRepository.Update(updateData);
             var model = new FAQVM(result);
             return model;
+        }
 
-
+        public async Task SoftDelete(Guid id)
+        {
+            bool isDeleted = true;
+            await _faqRepository.SoftDelete(id, isDeleted);
         }
     }
 }

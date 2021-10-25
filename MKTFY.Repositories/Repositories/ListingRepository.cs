@@ -79,7 +79,6 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<List<Listing>> GetBySearchTerm(string searchTermLowerCase, string region)
         {
-            //*need to take region into account@@@jma
             var results = await _context.Listings
                 .Where(listing => 
                     listing.Details.ToLower().Contains(searchTermLowerCase) 

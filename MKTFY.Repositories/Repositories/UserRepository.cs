@@ -50,5 +50,6 @@ namespace MKTFY.Repositories.Repositories
             await _context.SaveChangesAsync();
             return result;
         }
+
     }
 }

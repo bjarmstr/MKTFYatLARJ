@@ -13,8 +13,10 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<FAQ> Get(Guid id); 
 
-        Task<List<FAQ>> GetAll();
+        Task<List<FAQ>> GetAll(bool isDeleted);
 
-        Task<FAQ> Update(FAQ src); 
+        Task<FAQ> Update(FAQ src);
+
+        Task SoftDelete(Guid id, bool isDeleted);
     }
 }

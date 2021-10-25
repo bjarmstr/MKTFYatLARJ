@@ -19,6 +19,7 @@ namespace MKTFY.Models.Entities
         {
             Question = src.Question;
             Answer = src.Answer;
+            IsDeleted = false;
            
 
         }
@@ -28,6 +29,7 @@ namespace MKTFY.Models.Entities
             Id = src.Id;
             Question = src.Question;
             Answer = src.Answer;
+            IsDeleted = false;
 
         }
 
@@ -40,7 +42,8 @@ namespace MKTFY.Models.Entities
         [Required]
         public string Answer { get; set; }
 
-        
+        public bool IsDeleted { get; set; }
+
         public DateTime DateCreated { get; set; }
 
 
