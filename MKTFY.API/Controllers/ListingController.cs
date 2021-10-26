@@ -99,7 +99,7 @@ namespace MKTFY.API.Controllers
         }
 
 
-        [HttpPost("search")]
+        [HttpGet("search")]
         public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm , string region)
         {
             var search = new SearchCreateVM();

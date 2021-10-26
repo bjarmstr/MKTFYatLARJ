@@ -80,10 +80,9 @@ namespace MKTFY.Repositories.Repositories
         public async Task<List<Listing>> GetBySearchTerm(string searchTermLowerCase, string region)
         {
             var results = await _context.Listings
-                .Where(listing => 
-                    listing.Details.ToLower().Contains(searchTermLowerCase) 
-                    || listing.Product.ToLower().Contains(searchTermLowerCase))
-                .Where(listing => listing.Region == region)
+                .Where(listing => listing.Region == region &&
+                   (listing.Details.ToLower().Contains(searchTermLowerCase) ||
+                    listing.Product.ToLower().Contains(searchTermLowerCase)))
                 .ToListAsync();
             return results;
         }
