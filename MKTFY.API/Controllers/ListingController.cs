@@ -29,7 +29,7 @@ namespace MKTFY.API.Controllers
         /// Add a new Listing
         /// </summary>
         /// <param name="data"></param>
-        /// <remarks> Category  Id 1 = Deals, Id 2 = Cars and Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
+        /// <remarks> Category Id 1 = Cars and Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
         [HttpPost]
         public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
         {

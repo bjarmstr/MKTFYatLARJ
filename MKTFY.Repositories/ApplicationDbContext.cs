@@ -17,18 +17,15 @@ namespace MKTFY.Repositories
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
-
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Deals" },
-                new Category { Id = 2, Name = "Cars & Vehicles" },
-                new Category { Id = 3, Name = "Furniture" },
-                new Category { Id = 4, Name = "Electronics" },
-                new Category { Id = 5, Name = "Real Estate" }
+                new Category { Id = 1, Name = "Cars & Vehicles" },
+                new Category { Id = 2, Name = "Furniture" },
+                new Category { Id = 3, Name = "Electronics" },
+                new Category { Id = 4, Name = "Real Estate" }
 
             );
         }

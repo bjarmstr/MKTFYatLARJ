@@ -82,7 +82,8 @@ namespace MKTFY.Repositories.Repositories
             var results = await _context.Listings
                 .Where(listing => listing.Region == region &&
                    (listing.Details.ToLower().Contains(searchTermLowerCase) ||
-                    listing.Product.ToLower().Contains(searchTermLowerCase)))
+                    listing.Product.ToLower().Contains(searchTermLowerCase) ||
+                    (listing.Category.Name.ToLower().Contains(searchTermLowerCase))))
                 .ToListAsync();
             return results;
         }

@@ -37,26 +37,21 @@ namespace MKTFY.Repositories.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Deals"
-                        },
-                        new
-                        {
-                            Id = 2,
                             Name = "Cars & Vehicles"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             Name = "Furniture"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Name = "Electronics"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             Name = "Real Estate"
                         });
                 });

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MKTFY.Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211025001812_FAQisDeleted")]
-    partial class FAQisDeleted
+    [Migration("20211026162101_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,26 +39,21 @@ namespace MKTFY.Repositories.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Deals"
-                        },
-                        new
-                        {
-                            Id = 2,
                             Name = "Cars & Vehicles"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             Name = "Furniture"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Name = "Electronics"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             Name = "Real Estate"
                         });
                 });
@@ -144,7 +139,7 @@ namespace MKTFY.Repositories.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Product")
+                    b.Property<string>("SearchTerm")
                         .IsRequired()
                         .HasColumnType("text");
 
