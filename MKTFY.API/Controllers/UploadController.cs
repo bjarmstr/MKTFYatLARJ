@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MKTFY.Models.ViewModels.Upload;
+using MKTFY.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,12 @@ namespace MKTFY.API.Controllers
     [ApiController]
     public class UploadController : ControllerBase
     {
-        //private readonly IUploadService _uploadService;
+        private readonly IUploadService _uploadService;
 
-        //public UploadController(IUploadService uploadService)
-        //{
-        //    _uploadService = uploadService;
-        //}
+        public UploadController(IUploadService uploadService)
+        {
+            _uploadService = uploadService;
+        }
 
         /// <summary>
         /// Upload 1 or more files
@@ -41,18 +42,8 @@ namespace MKTFY.API.Controllers
             if (exceedsFileSize)
                 return BadRequest(new { message = $"At least one uploaded file exceeds the max file size of {maxAllowedFileSize/1000} KB " });
 
-            var results = new List<UploadResultVM>();
-            foreach (var file in Request.Form.Files)
-            {
-                results.Add(new UploadResultVM
-                {
-                    FileName = file.FileName
-                });
-
-            }
-
-                //var results = await _uploadService.UploadFiles(Request.Form.Files.ToList());
-                return Ok(results);
+            var results = await _uploadService.UploadFiles(Request.Form.Files.ToList());
+            return Ok(results);
             
         }
 

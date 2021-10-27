@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.ViewModels.Upload
 {
+    /// <summary>
+    /// Reference Id to get Url
+    /// </summary>
     public class UploadResultVM
     {
-        public string FileName { get; set; }
+        public Guid Id { get; set; }
     }
 }
