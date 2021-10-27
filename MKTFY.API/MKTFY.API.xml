@@ -50,7 +50,7 @@
             Add a new Listing
             </summary>
             <param name="data"></param>
-            <remarks> Category  Id 1 = Deals, Id 2 = Cars and Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
+            <remarks> Category Id 1 = Cars and Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
         </member>
         <member name="M:MKTFY.API.Controllers.ListingController.GetAll">
             <summary>
@@ -70,6 +70,12 @@
             Get Listings based on search history - Deals for you
             </summary>
             <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MKTFY.API.Controllers.UploadController.UploadImage">
+            <summary>
+            Upload 1 or more files
+            </summary>
             <returns></returns>
         </member>
         <member name="M:MKTFY.API.Controllers.UserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM)">

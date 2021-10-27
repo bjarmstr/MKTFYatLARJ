@@ -77,7 +77,7 @@ namespace MKTFY.API.Controllers
         /// Get Listings from a given category
         /// </summary>
         /// <param name="categoryId"></param>
-        /// <remarks> Category Id's 2-5 are valid => Category  Id 2 = Cars & Vehicles, Id 3 = Furniture, Id 4 = Electronics, Id 5 = Real Estate</remarks>
+        /// <remarks> Category 1 = Cars & Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
         [HttpGet("category/{categoryId}")]
         public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute]int categoryId, string region)
         {

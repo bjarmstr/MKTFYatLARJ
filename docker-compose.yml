@@ -15,7 +15,8 @@ services:
       - Auth0__Domain=https://dev-4bf106fk.us.auth0.com
       - Auth0__Audience=http://localhost/MKTFY/Backend/API
       - Auth0__TokenRedirectUrl=http://localhost/redirect
-
+    volumes:
+      - .aws:/root/.aws
     depends_on:
      - mktfy.db
 
