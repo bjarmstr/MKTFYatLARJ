@@ -13,6 +13,8 @@ namespace MKTFY.Repositories
 
         public DbSet<SearchHistory> SearchHistories { get; set; }
 
+        public DbSet<Upload> Uploads { get; set; }
+
         public virtual DbSet<FAQ> FAQs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

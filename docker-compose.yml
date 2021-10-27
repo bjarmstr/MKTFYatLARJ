@@ -15,6 +15,8 @@ services:
       - Auth0__Domain=https://dev-4bf106fk.us.auth0.com
       - Auth0__Audience=http://localhost/MKTFY/Backend/API
       - Auth0__TokenRedirectUrl=http://localhost/redirect
+      - AWS__ImageBucket=s3-mktfy
+      - AWS__Region=ca-central-1
     volumes:
       - .aws:/root/.aws
     depends_on:
