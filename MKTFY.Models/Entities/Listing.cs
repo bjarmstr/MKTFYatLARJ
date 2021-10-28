@@ -1,6 +1,8 @@
 ﻿using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.Listing;
+using MKTFY.Models.ViewModels.Upload;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MKTFY.Models.Entities
@@ -20,6 +22,7 @@ namespace MKTFY.Models.Entities
             CategoryId = src.CategoryId;
             Condition = src.Condition;
             Region = src.Region;
+            Url = src.Url;
             UserId = userId;
          
             
@@ -34,6 +37,7 @@ namespace MKTFY.Models.Entities
             CategoryId = src.CategoryId;
             Condition = src.Condition;
             Region = src.Region;
+            Url = src.Url;
         }
 
         [Key]
@@ -63,6 +67,9 @@ namespace MKTFY.Models.Entities
 
         [Required]
         public string Region { get; set; }
+
+        //navigation property 
+        public ICollection<UploadResultVM> Url { get; set; }
 
         /// <summary>
         /// User who created the listing

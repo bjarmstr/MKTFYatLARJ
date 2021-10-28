@@ -12,8 +12,11 @@ namespace MKTFY.Models.Entities
         [Key]
         public Guid Id { get; set; }
 
-     //not saving file name, just its location
+        //not saving file name, just its location
         [Required]
         public string Url { get; set; }
+
+        //navigation property
+        public string ListingId { get; set; }
     }
 }

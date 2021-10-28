@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MKTFY.Models.ViewModels.Upload;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace MKTFY.Models.ViewModels.Listing
             UserId = src.UserId;
             Condition = src.Condition;
             Region = src.Region;
+            Url = src.Url;
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
         }
@@ -43,6 +45,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public string Condition { get; set; }
 
         public string Region { get; set; }
+
+        public ICollection<UploadResultVM> Url { get; set; }
 
         public string UserId { get; set; }
        

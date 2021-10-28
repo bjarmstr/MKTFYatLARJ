@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MKTFY.Models.ViewModels.Upload;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MKTFY.Models.ViewModels.Listing
@@ -25,6 +27,8 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-       
+        public ICollection<UploadResultVM> Url { get; set; }
+
+
     }
 }

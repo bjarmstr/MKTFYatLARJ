@@ -54,6 +54,7 @@ namespace MKTFY.Repositories.Repositories
             result.CategoryId = src.CategoryId;
             result.Condition = src.Condition;
             result.Region = src.Region;
+            result.Url = src.Url;
             await _context.SaveChangesAsync();
             return result;
         }
