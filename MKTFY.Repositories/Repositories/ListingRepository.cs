@@ -30,8 +30,9 @@ namespace MKTFY.Repositories.Repositories
         public async Task<Listing> Get(Guid id)
         {
             var result = await _context.Listings
+                .Include(e => e.ListingUploads)
                 .FirstOrDefaultAsync(i => i.Id == id);
-            // .Include(e => e.Upload.Id);
+              
 
             if (result == null) throw new NotFoundException("The requested listing could not be found");
             return result;

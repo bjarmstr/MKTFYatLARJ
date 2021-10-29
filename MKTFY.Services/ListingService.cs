@@ -16,11 +16,16 @@ namespace MKTFY.Services
     {
         private readonly IListingRepository _listingRepository;
         private readonly ISearchRepository _searchRepository;
+        private readonly IUploadRepository _uploadRepository;
 
-        public ListingService(IListingRepository listingRepository, ISearchRepository searchRepository)
+        public ListingService(
+            IListingRepository listingRepository, 
+            ISearchRepository searchRepository,
+            IUploadRepository uploadRepository)
         {
             _listingRepository = listingRepository;
             _searchRepository = searchRepository;
+            _uploadRepository = uploadRepository;
         }
         public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
@@ -29,15 +34,22 @@ namespace MKTFY.Services
             newEntity.TransactionStatus = "listed";
             var result = await _listingRepository.Create(newEntity);
             var model = new ListingVM(result);
-            //get url collection
             return model;
         }
 
 
         public async Task<ListingVM> Get(Guid id)
         {
-            var result = await _listingRepository.Get(id);
+            var result = await _listingRepository.Get(id);            
             var model = new ListingVM(result);
+            //get the Upload Id
+            var uploadIds = result.ListingUploads.Select(i => i.UploadId).ToList();
+            //get the Upload Url
+           foreach (Guid uploadId in uploadIds) {
+                var upload= await _uploadRepository.Get(uploadId);
+                model.UploadUrls.Add(upload.Url);
+            }
+            model.UploadIds = uploadIds;
             return model;
         }
 

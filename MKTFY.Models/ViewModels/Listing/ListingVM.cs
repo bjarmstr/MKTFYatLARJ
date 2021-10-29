@@ -22,9 +22,8 @@ namespace MKTFY.Models.ViewModels.Listing
             UserId = src.UserId;
             Condition = src.Condition;
             Region = src.Region;
-            //UploadIds = src.UploadIds;
-            
-            
+            UploadUrls = new List<string>();
+
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
         }
@@ -48,7 +47,9 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-        //public ICollection<Upload> UploadIds{ get; set; }
+        public List<Guid> UploadIds{ get; set; }
+
+        public List<string>  UploadUrls { get; set; }
 
 
         public string UserId { get; set; }
