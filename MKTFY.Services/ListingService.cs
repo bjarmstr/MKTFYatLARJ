@@ -29,6 +29,7 @@ namespace MKTFY.Services
         }
         public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
+
             var newEntity = new Listing(src, userId);
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
@@ -40,16 +41,8 @@ namespace MKTFY.Services
 
         public async Task<ListingVM> Get(Guid id)
         {
-            var result = await _listingRepository.Get(id);            
-            var model = new ListingVM(result);
-            //get the Upload Id
-            var uploadIds = result.ListingUploads.Select(i => i.UploadId).ToList();
-            //get the Upload Url
-           foreach (Guid uploadId in uploadIds) {
-                var upload= await _uploadRepository.Get(uploadId);
-                model.UploadUrls.Add(upload.Url);
-            }
-            model.UploadIds = uploadIds;
+            var result = await _listingRepository.Get(id);
+           var model= await AddUploadDetails(result);
             return model;
         }
 
@@ -57,6 +50,7 @@ namespace MKTFY.Services
         {
             var results = await _listingRepository.GetAll();
             var models = results.Select(listing => new ListingVM(listing)).ToList();
+            
             return models;
         }
 
@@ -109,6 +103,22 @@ namespace MKTFY.Services
             var results = await _listingRepository.GetBySearchTerm(src.SearchTerm, region);
             var models = results.Select(listing => new ListingVM(listing)).ToList();
             return models;
+        }
+
+        public async Task<ListingVM >AddUploadDetails (Listing result)
+        {
+            var model = new ListingVM(result);
+            //get the Upload Id
+            var uploadIds = result.ListingUploads.Select(i => i.UploadId).ToList();
+            //get the Upload Url
+            foreach (Guid uploadId in uploadIds)
+            {
+                var upload = await _uploadRepository.Get(uploadId);
+                model.UploadUrls.Add(upload.Url);
+            }
+            model.UploadIds = uploadIds;
+
+            return model;
         }
 
     }
