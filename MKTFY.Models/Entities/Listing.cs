@@ -4,6 +4,7 @@ using MKTFY.Models.ViewModels.Upload;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace MKTFY.Models.Entities
 {
@@ -22,10 +23,9 @@ namespace MKTFY.Models.Entities
             CategoryId = src.CategoryId;
             Condition = src.Condition;
             Region = src.Region;
-            Url = src.Url;
             UserId = userId;
-         
-            
+            ListingUploads = src.UploadIds.Select(id => new ListingUpload { UploadId = id }).ToList();
+    
         }
 
         public Listing(ListingUpdateVM src)
@@ -37,7 +37,7 @@ namespace MKTFY.Models.Entities
             CategoryId = src.CategoryId;
             Condition = src.Condition;
             Region = src.Region;
-            Url = src.Url;
+            //UploadIds = src.UploadIds;
         }
 
         [Key]
@@ -69,7 +69,9 @@ namespace MKTFY.Models.Entities
         public string Region { get; set; }
 
         //navigation property 
-        public ICollection<UploadResultVM> Url { get; set; }
+        public ICollection<ListingUpload> ListingUploads { get; set; }
+
+
 
         /// <summary>
         /// User who created the listing

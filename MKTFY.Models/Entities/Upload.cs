@@ -16,7 +16,8 @@ namespace MKTFY.Models.Entities
         [Required]
         public string Url { get; set; }
 
-        //navigation property
-        public string ListingId { get; set; }
+        ICollection<ListingUpload> ListingUploads { get; set; }
+
+
     }
 }

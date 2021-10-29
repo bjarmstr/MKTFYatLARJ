@@ -1,4 +1,6 @@
-﻿using MKTFY.Models.ViewModels.Upload;
+﻿using MKTFY.Models.Entities;
+using MKTFY.Models.ViewModels.Upload;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -27,7 +29,8 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-        public ICollection<UploadResultVM> Url { get; set; }
+        public List<Guid> UploadIds { get; set; }
+
 
     }
 }

@@ -15,6 +15,8 @@ namespace MKTFY.Repositories
 
         public DbSet<Upload> Uploads { get; set; }
 
+        public DbSet<ListingUpload> ListingUploads { get; set; }
+
         public virtual DbSet<FAQ> FAQs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -23,6 +25,10 @@ namespace MKTFY.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<ListingUpload>()
+               .HasKey(e => new { e.ListingId, e.UploadId });
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Cars & Vehicles" },
                 new Category { Id = 2, Name = "Furniture" },

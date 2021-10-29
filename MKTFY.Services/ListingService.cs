@@ -1,6 +1,7 @@
 ﻿using MKTFY.Models.Entities;
 using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.Listing;
+using MKTFY.Models.ViewModels.Upload;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services.Interfaces;
 using System;
@@ -24,12 +25,11 @@ namespace MKTFY.Services
         public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
             var newEntity = new Listing(src, userId);
-            //check category
-
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
             var result = await _listingRepository.Create(newEntity);
             var model = new ListingVM(result);
+            //get url collection
             return model;
         }
 

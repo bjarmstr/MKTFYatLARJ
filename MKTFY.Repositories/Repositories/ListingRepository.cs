@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Repositories.Repositories
 {
-    public class ListingRepository: IListingRepository
+    public class ListingRepository : IListingRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -21,16 +21,17 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<Listing> Create(Listing src)
         {
-            _context.Listings.Add(src);
+            _context.Add(src);
             await _context.SaveChangesAsync();
             return src;
         }
 
-       
+
         public async Task<Listing> Get(Guid id)
         {
             var result = await _context.Listings
                 .FirstOrDefaultAsync(i => i.Id == id);
+            // .Include(e => e.Upload.Id);
 
             if (result == null) throw new NotFoundException("The requested listing could not be found");
             return result;
@@ -54,7 +55,7 @@ namespace MKTFY.Repositories.Repositories
             result.CategoryId = src.CategoryId;
             result.Condition = src.Condition;
             result.Region = src.Region;
-            result.Url = src.Url;
+            //result.UploadId = src.UploadId;
             await _context.SaveChangesAsync();
             return result;
         }

@@ -22,7 +22,9 @@ namespace MKTFY.Models.ViewModels.Listing
             UserId = src.UserId;
             Condition = src.Condition;
             Region = src.Region;
-            Url = src.Url;
+            //UploadIds = src.UploadIds;
+            
+            
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
         }
@@ -46,9 +48,12 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-        public ICollection<UploadResultVM> Url { get; set; }
+        //public ICollection<Upload> UploadIds{ get; set; }
+
 
         public string UserId { get; set; }
+
+       
        
 
     }
