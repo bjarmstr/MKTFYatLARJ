@@ -41,6 +41,7 @@ namespace MKTFY.Repositories.Repositories
         public async Task<List<Listing>> GetAll()
         {
             var results = await _context.Listings
+                .Include(e => e.ListingUploads)
                 .ToListAsync();
             return results;
         }

@@ -29,12 +29,11 @@ namespace MKTFY.Services
         }
         public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
-
             var newEntity = new Listing(src, userId);
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
             var result = await _listingRepository.Create(newEntity);
-            var model = new ListingVM(result);
+            var model = await AddUploadDetails(result);
             return model;
         }
 
@@ -42,15 +41,20 @@ namespace MKTFY.Services
         public async Task<ListingVM> Get(Guid id)
         {
             var result = await _listingRepository.Get(id);
-           var model= await AddUploadDetails(result);
+            var model= await AddUploadDetails(result);
             return model;
         }
 
         public async Task<List<ListingVM>> GetAll()
         {
             var results = await _listingRepository.GetAll();
-            var models = results.Select(listing => new ListingVM(listing)).ToList();
-            
+            //var models = results.Select(listing => new ListingVM(listing)).ToList();
+            List<ListingVM> models = new(); 
+            foreach (Listing result in results)
+            {
+                var model = await AddUploadDetails(result);
+                models.Add(model);
+            }
             return models;
         }
 
@@ -58,7 +62,7 @@ namespace MKTFY.Services
         {
             var updateData = new Listing(src);
             var result = await _listingRepository.Update(updateData);
-            var model = new ListingVM(result);
+            var model = await AddUploadDetails(result);
             return model;
         }
 
@@ -105,7 +109,7 @@ namespace MKTFY.Services
             return models;
         }
 
-        public async Task<ListingVM >AddUploadDetails (Listing result)
+        private async Task<ListingVM >AddUploadDetails (Listing result)
         {
             var model = new ListingVM(result);
             //get the Upload Id
