@@ -33,7 +33,7 @@ namespace MKTFY.Services
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
             var result = await _listingRepository.Create(newEntity);
-            var model = await AddUploadDetails(result);
+            var model = new ListingVM(result);
             return model;
         }
 
@@ -41,28 +41,42 @@ namespace MKTFY.Services
         public async Task<ListingVM> Get(Guid id)
         {
             var result = await _listingRepository.Get(id);
-            var model= await AddUploadDetails(result);
+            var model = new ListingVM(result);
             return model;
         }
 
         public async Task<List<ListingVM>> GetAll()
         {
             var results = await _listingRepository.GetAll();
-            //var models = results.Select(listing => new ListingVM(listing)).ToList();
-            List<ListingVM> models = new(); 
-            foreach (Listing result in results)
-            {
-                var model = await AddUploadDetails(result);
-                models.Add(model);
-            }
+            var models = results.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }
 
         public async Task<ListingVM> Update(ListingUpdateVM src)
         {
+            
+            //get list of uploads associated with a listing
+            var uploadResults = await _uploadRepository.GetListingUploads(src.Id);
+
+            ICollection<ListingUpload> updatedListingUploads = new List<ListingUpload>();
+            //delete upload if no longer part of listing
+            //exception for null image TODO@@@jma 
+            foreach (Guid uploadId in src.UploadIds){
+                foreach (ListingUpload uploadResult in uploadResults) { 
+                    if (uploadId == uploadResult.UploadId) {
+                        break;
+                    }
+                    else
+                    {
+                       await _uploadRepository.Delete(uploadId);
+                        ///TODO jma -does it delete the link table too?
+                    }
+                }
+            }
+            //check what happens when a new UpdateListing is created when an existing one is already there TODO@@@jma
             var updateData = new Listing(src);
             var result = await _listingRepository.Update(updateData);
-            var model = await AddUploadDetails(result);
+            var model = new ListingVM(result);
             return model;
         }
 
@@ -118,9 +132,9 @@ namespace MKTFY.Services
             foreach (Guid uploadId in uploadIds)
             {
                 var upload = await _uploadRepository.Get(uploadId);
-                model.UploadUrls.Add(upload.Url);
+                //model.UploadUrls.Add(upload.Url);
             }
-            model.UploadIds = uploadIds;
+            //model.UploadIds = uploadIds;
 
             return model;
         }

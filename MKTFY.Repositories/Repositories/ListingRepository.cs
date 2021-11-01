@@ -30,10 +30,9 @@ namespace MKTFY.Repositories.Repositories
         public async Task<Listing> Get(Guid id)
         {
             var result = await _context.Listings
-                .Include(e => e.ListingUploads)
+                //.Include("ListingUploads").Include("ListingUploads.Upload")
+                .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .FirstOrDefaultAsync(i => i.Id == id);
-              
-
             if (result == null) throw new NotFoundException("The requested listing could not be found");
             return result;
         }
@@ -41,15 +40,20 @@ namespace MKTFY.Repositories.Repositories
         public async Task<List<Listing>> GetAll()
         {
             var results = await _context.Listings
-                .Include(e => e.ListingUploads)
+                .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .ToListAsync();
             return results;
         }
 
         public async Task<Listing> Update(Listing src)
         {
-            var result = await _context.Listings.FirstOrDefaultAsync(i => i.Id == src.Id);
+            var result = await _context.Listings
+                 .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
+                 .FirstOrDefaultAsync(i => i.Id == src.Id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
+            //delete files required for deletion and link to listing
+            //exception for null image TODO@@@jma 
+ 
             result.Id = src.Id;
             result.Product = src.Product;
             result.Details = src.Details;
@@ -57,26 +61,27 @@ namespace MKTFY.Repositories.Repositories
             result.CategoryId = src.CategoryId;
             result.Condition = src.Condition;
             result.Region = src.Region;
-            //result.UploadId = src.UploadId;
+            result.ListingUploads = src.ListingUploads;
+           
+            //doesn't update DateCreated or TransactionStatus
             await _context.SaveChangesAsync();
             return result;
         }
 
         public async Task Delete(Guid id)
         {
+            //delete images associated with Listing TODO@@@jma
             var result = await _context.Listings.FirstOrDefaultAsync(i => i.Id == id);
-
             if (result == null) throw new NotFoundException("The requested listing could not be found");
-
             _context.Remove(result);
             await _context.SaveChangesAsync();
-
         }
 
         public async Task<List<Listing>> GetByCategory(int categoryId, string region)
         {
             var results = await _context.Listings
                 .Where(listing => listing.CategoryId == categoryId && listing.Region == region)
+                .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .ToListAsync();
             return results;
         }
@@ -88,6 +93,7 @@ namespace MKTFY.Repositories.Repositories
                    (listing.Details.ToLower().Contains(searchTermLowerCase) ||
                     listing.Product.ToLower().Contains(searchTermLowerCase) ||
                     (listing.Category.Name.ToLower().Contains(searchTermLowerCase))))
+                .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .ToListAsync();
             return results;
         }

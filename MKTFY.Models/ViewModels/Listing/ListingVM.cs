@@ -1,4 +1,5 @@
-﻿using MKTFY.Models.ViewModels.Upload;
+﻿using MKTFY.Models.Entities;
+using MKTFY.Models.ViewModels.Upload;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,18 @@ namespace MKTFY.Models.ViewModels.Listing
             UserId = src.UserId;
             Condition = src.Condition;
             Region = src.Region;
-            UploadUrls = new List<string>();
-
+            
+            //The following code was refactored into the one line below
+            //Images = new List<UploadVM>();
+            //foreach (ListingUpload listingUpload in src.ListingUploads)
+            //{
+            //    var imageId = listingUpload.Upload.Id;
+            //    var imageUrl = listingUpload.Upload.Url;
+            //    var image = new UploadVM { Id = imageId, Url = imageUrl };
+            //    Images.Add(image);
+            //}
+            Images = src.ListingUploads.Select(id => new UploadVM { Id = id.Upload.Id, Url = id.Upload.Url }).ToList();
+           
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
         }
@@ -47,15 +58,9 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-        public List<Guid> UploadIds{ get; set; }
-
-        public List<string>  UploadUrls { get; set; }
-
+        public List<UploadVM> Images{ get; set;}
 
         public string UserId { get; set; }
-
-       
-       
 
     }
 }

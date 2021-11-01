@@ -8,10 +8,14 @@ namespace MKTFY.Models.ViewModels.Upload
 {
     public class UploadVM
     {
-       
-        public Guid Id { get; set; }
 
-           
+        public UploadVM() { }
+
+        public UploadVM(Entities.Upload src) {
+            Id = src.Id;
+            Url = src.Url;    
+        }
+        public Guid Id { get; set; }          
         public string Url { get; set; }
     }
 }

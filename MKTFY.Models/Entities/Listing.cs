@@ -37,7 +37,7 @@ namespace MKTFY.Models.Entities
             CategoryId = src.CategoryId;
             Condition = src.Condition;
             Region = src.Region;
-            //UploadIds = src.UploadIds;
+            ListingUploads = src.UploadIds.Select(id => new ListingUpload { UploadId = id }).ToList();
         }
 
         [Key]

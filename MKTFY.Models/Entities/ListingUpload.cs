@@ -10,6 +10,11 @@ namespace MKTFY.Models.Entities
     {
         public Guid ListingId{ get; set; }
         public Guid  UploadId{ get; set; }
+        
+        //navigation properties
+        public Upload Upload { get; set; }
+        public Listing Listing { get; set; }
+
 
     }
 }

@@ -13,5 +13,7 @@ namespace MKTFY.Repositories.Repositories.Interfaces
         Task<Upload> Get(Guid id);        // Get a single existing upload by Id
         Task Delete(Guid id);             // Delete a upload
 
+        Task<List<ListingUpload>> GetListingUploads(Guid id);  //Get a list of ListingUploads for a given Listing Id
+
     }
 }

@@ -28,7 +28,7 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-       // public ICollection<ListingUpload> ListingUploads { get; set; }
+        public List<Guid> UploadIds { get; set; }
 
 
     }
