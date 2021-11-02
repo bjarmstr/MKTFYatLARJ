@@ -17,7 +17,7 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<Listing> Update(Listing src); //Update an existing Listing
 
-        Task Delete(Guid id);  //Delete a Listing
+        Task<ICollection<ListingUpload>>Delete(Guid id);  //Delete a Listing
 
         Task<List<Listing>> GetByCategory(int categoryId, string region );
 

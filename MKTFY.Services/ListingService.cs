@@ -33,7 +33,8 @@ namespace MKTFY.Services
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
             var result = await _listingRepository.Create(newEntity);
-            var model = new ListingVM(result);
+            var resultIncludesUpload = await _listingRepository.Get(result.Id);
+            var model = new ListingVM(resultIncludesUpload);
             return model;
         }
 
@@ -56,24 +57,27 @@ namespace MKTFY.Services
         {
             
             //get list of uploads associated with a listing
-            var uploadResults = await _uploadRepository.GetListingUploads(src.Id);
+            //var uploadResults = await _uploadRepository.GetListingUploads(src.Id);
 
-            ICollection<ListingUpload> updatedListingUploads = new List<ListingUpload>();
+            //ICollection<ListingUpload> updatedListingUploads = new List<ListingUpload>();
             //delete upload if no longer part of listing
             //exception for null image TODO@@@jma 
-            foreach (Guid uploadId in src.UploadIds){
-                foreach (ListingUpload uploadResult in uploadResults) { 
-                    if (uploadId == uploadResult.UploadId) {
-                        break;
-                    }
-                    else
-                    {
-                       await _uploadRepository.Delete(uploadId);
-                        ///TODO jma -does it delete the link table too?
-                    }
-                }
-            }
-            //check what happens when a new UpdateListing is created when an existing one is already there TODO@@@jma
+            //
+            //foreach (ListingUpload uploadResult in uploadResults)
+            //{
+            //    foreach (Guid uploadId in src.UploadIds) { 
+            //        if (uploadId == uploadResult.UploadId) {
+            //            break;
+            //        }
+            //        else
+            //        { 
+            //           await _uploadRepository.Delete(uploadId);
+                       
+            //            ///TODO jma -does it delete the link table too?
+            //        }
+            //    }
+            //}
+            //JASON what happens when a new UpdateListing is created when an existing one is already there TODO@@@jma
             var updateData = new Listing(src);
             var result = await _listingRepository.Update(updateData);
             var model = new ListingVM(result);
@@ -83,7 +87,10 @@ namespace MKTFY.Services
 
         public async Task Delete(Guid id)
         {
-            await _listingRepository.Delete(id);
+            var listingUploads = await _listingRepository.Delete(id);
+            foreach (ListingUpload listingUpload in listingUploads) { 
+                await _uploadRepository.Delete(listingUpload.UploadId);
+            }
         }
 
         public async Task<List<ListingVM>> GetByCategory(int categoryId, string region)

@@ -16,7 +16,7 @@ namespace MKTFY.Models.Entities
         [Required]
         public string Url { get; set; }
 
-        ICollection<ListingUpload> ListingUploads { get; set; }
+        public ICollection<ListingUpload> ListingUploads { get; set; }
 
 
     }

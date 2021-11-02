@@ -37,7 +37,8 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task Delete(Guid id)
         {
-            var result = await _context.Uploads.FirstOrDefaultAsync(i => i.Id == id);
+            var result = await _context.Uploads
+                .FirstOrDefaultAsync(i => i.Id == id);
             if (result == null)
                 throw new NotFoundException("The requested upload could not be found");
             // Remove the entity from the collection in memory
