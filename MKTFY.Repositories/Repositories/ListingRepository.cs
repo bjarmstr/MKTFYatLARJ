@@ -66,18 +66,19 @@ namespace MKTFY.Repositories.Repositories
             {
                 if (resultNotSrc.Contains(upload.UploadId))
                 {
-                    //remove reference in listingUploads table
+                    //remove from listing and listingUpload 
                     result.ListingUploads.Remove(upload);
-                    //remove image from Uploads table
+                    //remove image from Uploads
                     _context.Uploads.Remove(upload.Upload);
                 }
             }
           
-            //add any new images to listingUploads table
+            //add any new images to listingUploads
             foreach(var uploadId in srcNotResult)
             {
                 var listingUpload = src.ListingUploads.First(i => i.UploadId == uploadId);
-                //add to the listing table
+                //refactor to eliminate second call back to repo in service layer TODO @@@jma 
+                //add to the listing 
                 result.ListingUploads.Add(listingUpload);
             }
 
@@ -100,15 +101,17 @@ namespace MKTFY.Repositories.Repositories
                 .Include(e =>e.ListingUploads).ThenInclude(e=>e.Upload)
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
-
-            //delete uploads
-           // var x = await _context.Uploads
-            //    .Include(e=>e.Upload)
-            //    .Where(upload => upload.Id == ListingUploads.UploadId)
-            //    .Where(i => i.ListingId == id);
-
-            //delete
+           
+            //remove from listing and listingUpload
             _context.Remove(result);
+
+            //remove from Upload table
+            foreach (var listingUpload in result.ListingUploads)
+            {
+                var upload = listingUpload.Upload;
+                _context.Remove(upload);
+            }
+
             await _context.SaveChangesAsync();
             
         }
