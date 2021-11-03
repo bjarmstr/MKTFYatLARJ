@@ -47,65 +47,70 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task<Listing> Update(Listing src)
         {
+            //get version of listing saved in db 
             var result = await _context.Listings
                  .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                  .FirstOrDefaultAsync(i => i.Id == src.Id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
-
-            var listingUploadsSrc = await _context.ListingUploads
-                .Include(e=>e.Upload)
-                .Where(e => e.ListingId == src.Id)
-                .ToListAsync();
-
+       
+            //create lists of UploadIds of the old and new versions, compare them for changes
             var listofResultUploadIds = result.ListingUploads.Select(e => e.UploadId).ToList();
-            var listofSrcUploadIds = listingUploadsSrc.Select(e => e.UploadId).ToList();
+            var listofSrcUploadIds = src.ListingUploads.Select(e => e.UploadId).ToList();
             var resultNotSrc = listofResultUploadIds.Except(listofSrcUploadIds).ToList();
-            //var firstNotSecond = list1.Except(list2).ToList();
-            //delete files required for deletion and link to listing
+            var srcNotResult = listofSrcUploadIds.Except(listofResultUploadIds).ToList();
+         
             //exception for null image TODO@@@jma 
 
-            //compare 2 lists & keep values that occur in result & not source
+           //iterate over those that need deleteing
+            foreach(var upload in result.ListingUploads)
+            {
+                if (resultNotSrc.Contains(upload.UploadId))
+                {
+                    //remove reference in listingUploads table
+                    result.ListingUploads.Remove(upload);
+                    //remove image from Uploads table
+                    _context.Uploads.Remove(upload.Upload);
+                }
+            }
+          
+            //add any new images to listingUploads table
+            foreach(var uploadId in srcNotResult)
+            {
+                var listingUpload = src.ListingUploads.First(i => i.UploadId == uploadId);
+                //add to the listing table
+                result.ListingUploads.Add(listingUpload);
+            }
 
-            //delete upload & ListingUpload reference
-            //JASON if I call context again will it replace the other context or add to it?
-            var resultUpload = await _context.Uploads
-                                .FirstOrDefaultAsync(i => i.Id == uploadId);
-                        _context.Remove(resultUpload);
-                        await _context.SaveChangesAsync();
-                        ///TODO jma -does it delete the link table too?
-        
-
-
-            result.Id = src.Id;
+       
             result.Product = src.Product;
             result.Details = src.Details;
             result.Price = src.Price;
             result.CategoryId = src.CategoryId;
             result.Condition = src.Condition;
             result.Region = src.Region;
-            result.ListingUploads = src.ListingUploads;
-           
+           //result.ListingUploads is created above first removing images and then adding any additional images
             //doesn't update DateCreated or TransactionStatus
             await _context.SaveChangesAsync();
             return result;
         }
 
-        public async Task<ICollection<ListingUpload>> Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            //delete images associated with Listing TODO@@@jma
             var result = await _context.Listings
                 .Include(e =>e.ListingUploads).ThenInclude(e=>e.Upload)
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
-            
+
             //delete uploads
-           // var uploadResults = await _context.Uploads
+           // var x = await _context.Uploads
+            //    .Include(e=>e.Upload)
             //    .Where(upload => upload.Id == ListingUploads.UploadId)
+            //    .Where(i => i.ListingId == id);
 
             //delete
             _context.Remove(result);
             await _context.SaveChangesAsync();
-            return result.ListingUploads;
+            
         }
 
         public async Task<List<Listing>> GetByCategory(int categoryId, string region)

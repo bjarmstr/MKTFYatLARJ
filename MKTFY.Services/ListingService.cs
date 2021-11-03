@@ -54,43 +54,19 @@ namespace MKTFY.Services
         }
 
         public async Task<ListingVM> Update(ListingUpdateVM src)
-        {
-            
-            //get list of uploads associated with a listing
-            //var uploadResults = await _uploadRepository.GetListingUploads(src.Id);
-
-            //ICollection<ListingUpload> updatedListingUploads = new List<ListingUpload>();
-            //delete upload if no longer part of listing
-            //exception for null image TODO@@@jma 
-            //
-            //foreach (ListingUpload uploadResult in uploadResults)
-            //{
-            //    foreach (Guid uploadId in src.UploadIds) { 
-            //        if (uploadId == uploadResult.UploadId) {
-            //            break;
-            //        }
-            //        else
-            //        { 
-            //           await _uploadRepository.Delete(uploadId);
-                       
-            //            ///TODO jma -does it delete the link table too?
-            //        }
-            //    }
-            //}
-            //JASON what happens when a new UpdateListing is created when an existing one is already there TODO@@@jma
+        { 
             var updateData = new Listing(src);
             var result = await _listingRepository.Update(updateData);
-            var model = new ListingVM(result);
+            var resultIncludesUpload = await _listingRepository.Get(result.Id);
+            var model = new ListingVM(resultIncludesUpload);
             return model;
         }
 
 
         public async Task Delete(Guid id)
         {
-            var listingUploads = await _listingRepository.Delete(id);
-            foreach (ListingUpload listingUpload in listingUploads) { 
-                await _uploadRepository.Delete(listingUpload.UploadId);
-            }
+            await _listingRepository.Delete(id);
+            
         }
 
         public async Task<List<ListingVM>> GetByCategory(int categoryId, string region)
