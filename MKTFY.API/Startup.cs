@@ -111,7 +111,7 @@ namespace MKTFY.API
 
             app.UseRouting();
 
-            app.UseMiddleware<GlobalExceptionHandler>();
+           // app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseAuthentication();
             app.UseAuthorization();

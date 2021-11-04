@@ -105,7 +105,7 @@ namespace MKTFY.Repositories.Repositories
             //remove from listing and listingUpload
             _context.Remove(result);
 
-            //remove from Upload table
+            //remove from Upload
             foreach (var listingUpload in result.ListingUploads)
             {
                 var upload = listingUpload.Upload;
