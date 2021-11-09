@@ -75,6 +75,16 @@ namespace MKTFY.API
 
             ConfigureDependencyInjection(services);
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                     builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                .Build());
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MKTFY.API", Version = "v1" });
@@ -111,7 +121,9 @@ namespace MKTFY.API
 
             app.UseRouting();
 
-           // app.UseMiddleware<GlobalExceptionHandler>();
+            app.UseMiddleware<GlobalExceptionHandler>();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
