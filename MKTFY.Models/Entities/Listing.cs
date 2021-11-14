@@ -68,6 +68,8 @@ namespace MKTFY.Models.Entities
         [Required]
         public string Region { get; set; }
 
+        public DateTime DateSold { get; set; }
+
         //navigation property 
         public ICollection<ListingUpload> ListingUploads { get; set; }
 

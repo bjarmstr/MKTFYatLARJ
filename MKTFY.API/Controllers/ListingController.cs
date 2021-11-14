@@ -109,6 +109,13 @@ namespace MKTFY.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("pickup")]
+        public async Task<ActionResult<ListingSellerVM>> GetPickupInfo(Guid id)
+        {
+            var result = await _listingService.GetPickupInfo(id);
+            return Ok(result);
+        }
+
 
 
 

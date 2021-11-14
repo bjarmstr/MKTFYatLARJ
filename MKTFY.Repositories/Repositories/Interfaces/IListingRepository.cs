@@ -23,6 +23,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<List<Listing>> GetBySearchTerm(string searchTerm, string region);
 
+        Task<Listing> GetPickupInfo(Guid id);  //Get Seller Info for Listing
+
 
     }
 }

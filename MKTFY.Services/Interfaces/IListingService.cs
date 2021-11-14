@@ -25,5 +25,7 @@ namespace MKTFY.Services.Interfaces
 
         Task<List<ListingVM>> GetBySearchTerm(SearchCreateVM src, string userId);
 
+        Task<ListingSellerVM> GetPickupInfo(Guid id);
+
     }
 }

@@ -106,6 +106,18 @@ namespace MKTFY.Services
             return models;
         }
 
+        public async Task<ListingSellerVM> GetPickupInfo(Guid id)
+        {
+        
+            var result = await _listingRepository.GetPickupInfo(id);
+
+            var model = new ListingSellerVM(result);
+
+            return model;
+
+        }
+
+
         private async Task<ListingVM >AddUploadDetails (Listing result)
         {
             var model = new ListingVM(result);
@@ -121,6 +133,8 @@ namespace MKTFY.Services
 
             return model;
         }
+
+        
 
     }
 }

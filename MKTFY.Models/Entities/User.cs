@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,24 @@ namespace MKTFY.Models.Entities
 
         [Required]
         public DateTime DateCreated { get; set; }
+
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
+        [NotMapped]
+        public string Address 
+        {
+            get {
+                return ($"{StreetAddress}, {City}, {Province}");
+            }
+          
+        }
 
         public ICollection<Listing>Listings { get; set; }
 
