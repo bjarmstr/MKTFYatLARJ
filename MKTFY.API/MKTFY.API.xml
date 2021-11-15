@@ -72,6 +72,11 @@
             <param name="region"></param>
             <returns></returns>
         </member>
+        <member name="M:MKTFY.API.Controllers.ListingController.Pending(System.Guid,System.String)">
+            <summary>
+            Set Listing Status to Pending
+            </summary>
+        </member>
         <member name="M:MKTFY.API.Controllers.UploadController.UploadImage">
             <summary>
             Upload 1 or more files

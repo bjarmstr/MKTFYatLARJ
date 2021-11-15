@@ -27,5 +27,7 @@ namespace MKTFY.Services.Interfaces
 
         Task<ListingSellerVM> GetPickupInfo(Guid id);
 
+        Task Pending(Guid id, string status);
+
     }
 }

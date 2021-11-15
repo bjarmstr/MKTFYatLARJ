@@ -117,6 +117,12 @@ namespace MKTFY.Services
 
         }
 
+        public async Task Pending(Guid id, string status)
+        {
+            await _listingRepository.Pending(id,status);
+
+        }
+
 
         private async Task<ListingVM >AddUploadDetails (Listing result)
         {

@@ -140,10 +140,23 @@ namespace MKTFY.Repositories.Repositories
         public async Task<Listing> GetPickupInfo(Guid id)
         {
             var result = await _context.Listings
+                .FirstOrDefaultAsync(i => i.Id == id);
+            if (result == null) throw new NotFoundException("The requested listing could not be found");
+            
+            
+            return result;
+
+        }
+
+        public async Task Pending(Guid id, string status)
+        {
+            var result = await _context.Listings
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
-            return result;
+
+            result.TransactionStatus = status;
+            await _context.SaveChangesAsync();
 
         }
 
