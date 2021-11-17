@@ -154,8 +154,12 @@ namespace MKTFY.Repositories.Repositories
             var result = await _context.Listings
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(i => i.Id == id);
-            if (result == null) throw new NotFoundException("The requested listing could not be found");         
+            if (result == null) throw new NotFoundException("The requested listing could not be found");     
             result.TransactionStatus = status;
+            if (status == "sold")
+            {
+                result.DateSold = DateTime.UtcNow;
+            }
             await _context.SaveChangesAsync();
         }
 
