@@ -72,7 +72,7 @@
             <param name="region"></param>
             <returns></returns>
         </member>
-        <member name="M:MKTFY.API.Controllers.ListingController.Pending(System.Guid,System.String)">
+        <member name="M:MKTFY.API.Controllers.ListingController.ChangeTransactionStatus(System.Guid,System.String)">
             <summary>
             Set Listing Status to Pending
             </summary>

@@ -119,7 +119,9 @@ namespace MKTFY.Repositories.Repositories
         public async Task<List<Listing>> GetByCategory(int categoryId, string region)
         {
             var results = await _context.Listings
-                .Where(listing => listing.CategoryId == categoryId && listing.Region == region)
+                .Where(listing => listing.CategoryId == categoryId &&
+                    listing.Region == region &&
+                    listing.TransactionStatus== "listed")
                 .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .ToListAsync();
             return results;
@@ -128,7 +130,8 @@ namespace MKTFY.Repositories.Repositories
         public async Task<List<Listing>> GetBySearchTerm(string searchTermLowerCase, string region)
         {
             var results = await _context.Listings
-                .Where(listing => listing.Region == region &&
+                .Where(listing => listing.Region == region 
+                    && listing.TransactionStatus == "listed" &&
                    (listing.Details.ToLower().Contains(searchTermLowerCase) ||
                     listing.Product.ToLower().Contains(searchTermLowerCase) ||
                     (listing.Category.Name.ToLower().Contains(searchTermLowerCase))))
@@ -141,24 +144,22 @@ namespace MKTFY.Repositories.Repositories
         {
             var result = await _context.Listings
                 .FirstOrDefaultAsync(i => i.Id == id);
-            if (result == null) throw new NotFoundException("The requested listing could not be found");
-            
-            
+            if (result == null) throw new NotFoundException("The requested listing could not be found");            
             return result;
 
         }
 
-        public async Task Pending(Guid id, string status)
+        public async Task ChangeTransactionStatus(Guid id, string status)
         {
             var result = await _context.Listings
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(i => i.Id == id);
-            if (result == null) throw new NotFoundException("The requested listing could not be found");
-
+            if (result == null) throw new NotFoundException("The requested listing could not be found");         
             result.TransactionStatus = status;
             await _context.SaveChangesAsync();
-
         }
+
+        
 
 
 

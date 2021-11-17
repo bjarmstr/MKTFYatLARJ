@@ -117,9 +117,9 @@ namespace MKTFY.Services
 
         }
 
-        public async Task Pending(Guid id, string status)
+        public async Task ChangeTransactionStatus(Guid id, string status)
         {
-            await _listingRepository.Pending(id,status);
+            await _listingRepository.ChangeTransactionStatus(id,status);
 
         }
 

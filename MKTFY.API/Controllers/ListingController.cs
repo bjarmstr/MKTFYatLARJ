@@ -121,12 +121,11 @@ namespace MKTFY.API.Controllers
         /// Set Listing Status to Pending
         /// </summary>
         [HttpPut("{id}/{status}")]
-        public async Task<ActionResult> Pending([FromRoute] Guid id, string status)
+        public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
         {
-            await _listingService.Pending(id, status);
+            await _listingService.ChangeTransactionStatus(id, status);
             return Ok();
 
-            //TODO @@@JMA  don't list items in status other than listed
             //add Datesold to sold items 
         }
 
