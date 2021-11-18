@@ -169,7 +169,8 @@ namespace MKTFY.Repositories.Repositories
                 result.BuyerId = "";
                 status = "listed";
             }
-            
+           
+            //TODO @@@jma check for incorrect status changes --should not be able to change sold items
             result.TransactionStatus = status;
 
             //a pending/sold listing needs a buyer in addition to the seller

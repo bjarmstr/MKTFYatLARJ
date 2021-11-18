@@ -143,8 +143,8 @@ namespace MKTFY.API.Controllers
         {
             //get user id from the Http request
             string userId = User.GetId();
-            var result = await _listingService.GetMyPurchases(userId);
-            return Ok();
+            var results = await _listingService.GetMyPurchases(userId);
+            return Ok(results);
         }
     }
 }
