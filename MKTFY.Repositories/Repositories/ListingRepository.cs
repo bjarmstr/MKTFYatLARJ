@@ -149,17 +149,40 @@ namespace MKTFY.Repositories.Repositories
 
         }
 
-        public async Task ChangeTransactionStatus(Guid id, string status)
+        public async Task<List<Listing>> GetMyPurchases(string buyerId)
+        {
+            var results = await _context.Listings
+               .Where(listing => listing.BuyerId == buyerId)
+               .ToListAsync();
+            return results;
+        }
+
+        public async Task ChangeTransactionStatus(Guid id, string status, string buyerId)
         {
             var result = await _context.Listings
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(i => i.Id == id);
-            if (result == null) throw new NotFoundException("The requested listing could not be found");     
+            if (result == null) throw new NotFoundException("The requested listing could not be found");
+
+            if (status == "cancelled")
+            {
+                result.BuyerId = "";
+                status = "listed";
+            }
+            
             result.TransactionStatus = status;
+
+            //a pending/sold listing needs a buyer in addition to the seller
+            if (status == "pending")
+            {
+                result.BuyerId = buyerId;
+            }
+
             if (status == "sold")
             {
                 result.DateSold = DateTime.UtcNow;
             }
+            
             await _context.SaveChangesAsync();
         }
 

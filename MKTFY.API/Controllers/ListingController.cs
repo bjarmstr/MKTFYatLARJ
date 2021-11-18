@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MKTFY.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     [Authorize]
     public class ListingController : ControllerBase
@@ -30,7 +30,7 @@ namespace MKTFY.API.Controllers
         /// </summary>
         /// <param name="data"></param>
         /// <remarks> Category Id 1 = Cars and Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
-        [HttpPost]
+        [HttpPost("listing")]
         public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
         {
             var userId = User.GetId();
@@ -42,13 +42,13 @@ namespace MKTFY.API.Controllers
         /// Get all Listings
         /// </summary>
         /// <returns></returns>
-       [HttpGet]
+        [HttpGet("listing")]
         public async Task<ActionResult<List<ListingVM>>> GetAll()
         {
             return Ok(await _listingService.GetAll());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("listing/{id}")]
         public async Task<ActionResult<ListingVM>> Get([FromRoute] Guid id)
         {
             return Ok(await _listingService.Get(id));
@@ -65,7 +65,7 @@ namespace MKTFY.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("listing/{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
             await _listingService.Delete(id);
@@ -78,19 +78,19 @@ namespace MKTFY.API.Controllers
         /// </summary>
         /// <param name="categoryId"></param>
         /// <remarks> Category 1 = Cars & Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
-        [HttpGet("category/{categoryId}")]
-        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute]int categoryId, string region)
+        [HttpGet("listing/category/{categoryId}")]
+        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute] int categoryId, string region)
         {
             var result = await _listingService.GetByCategory(categoryId, region);
             return Ok(result);
         }
-        
+
         /// <summary>
         /// Get Listings based on search history - Deals for you
         /// </summary>
         /// <param name="region"></param>
         /// <returns></returns>
-        [HttpGet("category/deals")]
+        [HttpGet("listing/category/deals")]
         public async Task<ActionResult<List<ListingVM>>> GetDeals(string region)
         {
             string userId = User.GetId();
@@ -99,8 +99,8 @@ namespace MKTFY.API.Controllers
         }
 
 
-        [HttpGet("search")]
-        public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm , string region)
+        [HttpGet("listing/search")]
+        public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm, string region)
         {
             var search = new SearchCreateVM();
             search.UserId = User.GetId();
@@ -109,7 +109,7 @@ namespace MKTFY.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}/pickup")]
+        [HttpGet("listing/{id}/pickup")]
         public async Task<ActionResult<ListingSellerVM>> GetPickupInfo(Guid id)
         {
             var result = await _listingService.GetPickupInfo(id);
@@ -118,23 +118,33 @@ namespace MKTFY.API.Controllers
 
 
         /// <summary>
-        /// Set Listing Status to Pending
+        /// Set Listing Transaction Status
+        /// valid status pending, cancelled, sold
         /// </summary>
-        [HttpPut("{id}/{status}")]
+        [HttpPut("listing/{id}/{status}")]
         public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
         {
-            await _listingService.ChangeTransactionStatus(id, status);
+            //TODO @@@jma validate status
+            //TODO admin panel will need further logic to override buyerId if using this endpoint to override TransactionStatus
+            string buyerId = "";
+            
+            if (status == "pending")
+            {
+                buyerId = User.GetId();
+            }
+            await _listingService.ChangeTransactionStatus(id, status, buyerId);
             return Ok();
 
-            //add Datesold to sold items 
         }
 
-
-
-
-
-
-
-
+        [HttpGet]
+        [Route("mypurchases")]
+        public async Task<ActionResult<List<ListingPurchaseVM>>> GetMyPurchases()
+        {
+            //get user id from the Http request
+            string userId = User.GetId();
+            var result = await _listingService.GetMyPurchases(userId);
+            return Ok();
+        }
     }
 }

@@ -27,7 +27,9 @@ namespace MKTFY.Services.Interfaces
 
         Task<ListingSellerVM> GetPickupInfo(Guid id);
 
-        Task ChangeTransactionStatus(Guid id, string status);
+        Task ChangeTransactionStatus(Guid id, string status, string buyerId);
+
+        Task<List<ListingPurchaseVM>> GetMyPurchases(string userId);
 
     }
 }

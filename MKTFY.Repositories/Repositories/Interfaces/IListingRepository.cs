@@ -25,7 +25,9 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<Listing> GetPickupInfo(Guid id);  //Get Seller Info for Listing
 
-        Task ChangeTransactionStatus(Guid id, string status); //Change Transaction Status to Pending
+        Task ChangeTransactionStatus(Guid id, string status, string buyerId); //Change Transaction Status to Pending
+        
+        Task<List<Listing>> GetMyPurchases(string buyerId);
 
 
     }

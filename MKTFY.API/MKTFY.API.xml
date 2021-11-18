@@ -74,7 +74,8 @@
         </member>
         <member name="M:MKTFY.API.Controllers.ListingController.ChangeTransactionStatus(System.Guid,System.String)">
             <summary>
-            Set Listing Status to Pending
+            Set Listing Transaction Status
+            valid status pending, cancelled, sold
             </summary>
         </member>
         <member name="M:MKTFY.API.Controllers.UploadController.UploadImage">

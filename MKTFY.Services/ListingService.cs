@@ -117,11 +117,19 @@ namespace MKTFY.Services
 
         }
 
-        public async Task ChangeTransactionStatus(Guid id, string status)
+        public async Task ChangeTransactionStatus(Guid id, string status, string buyerId)
         {
-            await _listingRepository.ChangeTransactionStatus(id,status);
+            await _listingRepository.ChangeTransactionStatus(id,status,buyerId);
 
         }
+
+        public async Task <List<ListingPurchaseVM>> GetMyPurchases(string userId)
+        {
+            var results = await _listingRepository.GetMyPurchases(userId);
+            var models = results.Select(Listing => new ListingPurchaseVM(Listing)).ToList();
+            return models;
+        }
+
 
 
         private async Task<ListingVM >AddUploadDetails (Listing result)
@@ -140,7 +148,9 @@ namespace MKTFY.Services
             return model;
         }
 
-        
+
+
+
 
     }
 }

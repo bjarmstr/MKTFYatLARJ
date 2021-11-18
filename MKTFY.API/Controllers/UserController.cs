@@ -46,7 +46,6 @@ namespace MKTFY.API.Controllers
             var userId = User.GetId();
             var result = await _userService.Update(data,userId);
             return Ok(result);
-
         }
 
 
