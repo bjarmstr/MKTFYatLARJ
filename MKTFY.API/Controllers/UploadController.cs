@@ -36,7 +36,7 @@ namespace MKTFY.API.Controllers
             if (mismatchFound)
                 return BadRequest(new { message = "At least one uploaded file is not a valid image type" });
             // Validate the file size
-            int maxAllowedFileSize = 1500000;
+            int maxAllowedFileSize = 15000000;
             var uploadedFileSizes = Request.Form.Files.Select(i => i.Length);
             var exceedsFileSize = uploadedFileSizes.Any(i => i > maxAllowedFileSize);
             if (exceedsFileSize)
