@@ -31,5 +31,7 @@ namespace MKTFY.Services.Interfaces
 
         Task<List<ListingPurchaseVM>> GetMyPurchases(string userId);
 
+        Task<List<ListingSummaryVM>> GetMyListings(string userId, string status);
+
     }
 }

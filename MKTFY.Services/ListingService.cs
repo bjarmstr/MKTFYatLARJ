@@ -130,6 +130,13 @@ namespace MKTFY.Services
             return models;
         }
 
+        public async Task<List<ListingSummaryVM>> GetMyListings(string userId, string status)
+        {
+            var results = await _listingRepository.GetMyListings(userId, status);
+            var models = results.Select(Listing => new ListingSummaryVM(Listing)).ToList();
+            return models;
+        }
+
 
 
         private async Task<ListingVM >AddUploadDetails (Listing result)

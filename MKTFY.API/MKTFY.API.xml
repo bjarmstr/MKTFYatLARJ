@@ -78,6 +78,13 @@
             valid status pending, cancelled, sold
             </summary>
         </member>
+        <member name="M:MKTFY.API.Controllers.ListingController.GetMyListings(System.String)">
+            <summary>
+            List of User's Listings - listed, pending or sold
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
         <member name="M:MKTFY.API.Controllers.UploadController.UploadImage">
             <summary>
             Upload 1 or more files
@@ -86,7 +93,7 @@
         </member>
         <member name="M:MKTFY.API.Controllers.UserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM)">
             <summary>
-            Create a user profile, user must already exist in Auth0
+            Create a user profile, user must already exist in Auth0, phone number is a 10 digit string
             </summary>  
         </member>
         <member name="M:MKTFY.API.Controllers.UserController.Get(System.String)">

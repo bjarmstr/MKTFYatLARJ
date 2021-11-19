@@ -146,5 +146,21 @@ namespace MKTFY.API.Controllers
             var results = await _listingService.GetMyPurchases(userId);
             return Ok(results);
         }
+
+
+        /// <summary>
+        /// List of User's Listings - listed, pending or sold
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("mylisting/{status}")]
+        public async Task<ActionResult<List<ListingSummaryVM>>> GetMyListings(string status)
+        {
+            //get user id from the Http request
+            string userId = User.GetId();
+            var results = await _listingService.GetMyListings(userId, status);
+            return Ok(results);
+        }
     }
 }

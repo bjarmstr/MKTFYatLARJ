@@ -29,6 +29,11 @@
             Auth0 Id
             </summary>
         </member>
+        <member name="P:MKTFY.Models.ViewModels.User.UserCreateVM.Phone">
+            <summary>
+            Enter Phone number as 10digits
+            </summary>
+        </member>
         <member name="T:MKTFY.Models.ViewModels.User.UserUpdateVM">
             <summary>
             View All User Profile Data

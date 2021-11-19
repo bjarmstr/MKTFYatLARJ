@@ -29,6 +29,9 @@ namespace MKTFY.Repositories.Repositories.Interfaces
         
         Task<List<Listing>> GetMyPurchases(string buyerId);
 
+        Task<List<Listing>> GetMyListings(string userId, string status);
+
+
 
     }
 }

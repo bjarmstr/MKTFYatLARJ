@@ -158,6 +158,15 @@ namespace MKTFY.Repositories.Repositories
             return results;
         }
 
+        public async Task<List<Listing>> GetMyListings(string userId, string status)
+        {
+            var results = await _context.Listings
+               .Where(listing => listing.UserId == userId && listing.TransactionStatus == status)
+               .ToListAsync();
+            return results;
+        }
+
+
         public async Task ChangeTransactionStatus(Guid id, string status, string buyerId)
         {
             var result = await _context.Listings

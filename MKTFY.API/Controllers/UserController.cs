@@ -26,7 +26,7 @@ namespace MKTFY.API.Controllers
         }
 
         /// <summary>
-        /// Create a user profile, user must already exist in Auth0
+        /// Create a user profile, user must already exist in Auth0, phone number is a 10 digit string
         /// </summary>  
         [HttpPost]
         public async Task<ActionResult<UserVM>> Create([FromBody] UserCreateVM data)

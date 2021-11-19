@@ -27,6 +27,9 @@ namespace MKTFY.Models.ViewModels.User
         [Required]
         public string LastName { get; set; }
 
+        /// <summary>
+        /// Enter Phone number as 10digits
+        /// </summary>
         [Required]
         public string Phone { get; set; }
 
