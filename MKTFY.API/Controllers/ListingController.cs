@@ -48,10 +48,22 @@ namespace MKTFY.API.Controllers
             return Ok(await _listingService.GetAll());
         }
 
+        
         [HttpGet("listing/{id}")]
         public async Task<ActionResult<ListingVM>> Get([FromRoute] Guid id)
         {
             return Ok(await _listingService.Get(id));
+        }
+
+        /// <summary>
+        /// A listing with the seller details & number of listings the seller has
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("listing/{id}/seller")]
+        public async Task<ActionResult<ListingWithSellerVM>> GetListingWithSeller([FromRoute] Guid id)
+        {
+            return Ok(await _listingService.GetListingWithSeller(id));
         }
 
         /// <summary>

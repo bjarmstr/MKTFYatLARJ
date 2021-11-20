@@ -12,6 +12,7 @@ namespace MKTFY.Services.Interfaces
     {
         Task<ListingVM> Create(ListingCreateVM src, string userId);  //Create a new listing
         Task<ListingVM> Get(Guid id);
+        Task<ListingWithSellerVM> GetListingWithSeller(Guid id);
 
         Task<List<ListingVM>> GetAll(); // Read all Listings
 

@@ -1,5 +1,4 @@
-﻿using MKTFY.Models.Entities;
-using MKTFY.Models.ViewModels.Upload;
+﻿using MKTFY.Models.ViewModels.Upload;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +7,23 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.ViewModels.Listing
 {
-    public class ListingVM
+    public class ListingWithSellerVM
     {
-        public ListingVM() { }
+        public ListingWithSellerVM() { }
 
         // Constructor for populating a new ListingVM from a Listing entity
-        public ListingVM(Entities.Listing src)
+        public ListingWithSellerVM(Entities.Listing src, int sellerListingCount)
         {
             Id = src.Id;
             Product = src.Product;
             Details = src.Details;
             Price = src.Price;
             CategoryId = src.CategoryId;
-            UserId = src.UserId;
+            SellerId = src.UserId;
             Condition = src.Condition;
-            Region = src.Region;    
+            Region = src.Region;
+            SellerFullName = src.User.FullName;
+
             //The following code was refactored into the one line below
             //Images = new List<UploadVM>();
             //foreach (ListingUpload listingUpload in src.ListingUploads)
@@ -37,7 +38,7 @@ namespace MKTFY.Models.ViewModels.Listing
             //CategoryName only needed in admin panel
             //CategoryName = src.Category?.Name;
 
-        
+            SellerTotalNumListings = sellerListingCount;
         }
 
 
@@ -59,10 +60,13 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Region { get; set; }
 
-        public List<UploadVM> Images{ get; set;}
+        public List<UploadVM> Images { get; set; }
 
-        public string UserId { get; set; }
+        public string SellerId { get; set; }
 
+        public string SellerFullName { get; set; }
+
+        public int SellerTotalNumListings { get; set; }
 
     }
 }

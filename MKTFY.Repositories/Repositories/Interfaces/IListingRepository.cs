@@ -13,6 +13,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<Listing> Get(Guid id); //Read One Listing
 
+        Task<Listing> GetListingWithSeller(Guid id); //One Listing with Full Seller Information
+
         Task<List<Listing>> GetAll(); // Read all Listings
 
         Task<Listing> Update(Listing src); //Update an existing Listing
