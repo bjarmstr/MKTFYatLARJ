@@ -20,7 +20,7 @@ namespace MKTFY.Models.ViewModels.Listing
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Category Id Cars&Vehicles 1, Furniture 2, Electronics 3, Real Estate 4
+        /// Category Id CarsVehicles 1, Furniture 2, Electronics 3, Real Estate 4
         /// </summary>
         [Required]
         public int CategoryId{ get; set; }

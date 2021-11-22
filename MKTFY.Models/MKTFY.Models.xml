@@ -11,7 +11,7 @@
         </member>
         <member name="P:MKTFY.Models.ViewModels.Listing.ListingCreateVM.CategoryId">
             <summary>
-            Category Id , Deals - Category 1, Real Estate - Category 5
+            Category Id CarsVehicles 1, Furniture 2, Electronics 3, Real Estate 4
             </summary>
         </member>
         <member name="T:MKTFY.Models.ViewModels.Upload.UploadResultVM">
