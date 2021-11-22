@@ -42,6 +42,7 @@ namespace MKTFY.API.Controllers
         /// Get all Listings
         /// </summary>
         /// <returns></returns>
+        //[Authorize(Roles = "Admin")]
         [HttpGet("listing")]
         public async Task<ActionResult<List<ListingVM>>> GetAll()
         {
@@ -77,6 +78,12 @@ namespace MKTFY.API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Hard Delete.  Removes Listing from database.  For admin users only.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpDelete("listing/{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
@@ -131,12 +138,18 @@ namespace MKTFY.API.Controllers
 
         /// <summary>
         /// Set Listing Transaction Status
-        /// valid status pending, cancelled, sold
+        /// valid status deleted, listed, pending, cancelled, sold
         /// </summary>
         [HttpPut("listing/{id}/{status}")]
         public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
         {
-            //TODO @@@jma validate status
+            //check that only valid Transaction Statuses 
+            string[] validStatus = { "listed", "deleted", "pending", "cancelled", "sold" };
+            if (!validStatus.Contains(status))
+            {
+                return BadRequest(new { message = "invalid status" });
+            }
+
             //TODO admin panel will need further logic to override buyerId if using this endpoint to override TransactionStatus
             string buyerId = "";
             

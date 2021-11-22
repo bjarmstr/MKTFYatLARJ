@@ -65,6 +65,13 @@
             </summary>
             <param name="data"></param>
         </member>
+        <member name="M:MKTFY.API.Controllers.ListingController.Delete(System.Guid)">
+            <summary>
+            Hard Delete.  Removes Listing from database.  For admin users only.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:MKTFY.API.Controllers.ListingController.GetByCategory(System.Int32,System.String)" -->
         <member name="M:MKTFY.API.Controllers.ListingController.GetDeals(System.String)">
             <summary>
@@ -76,7 +83,7 @@
         <member name="M:MKTFY.API.Controllers.ListingController.ChangeTransactionStatus(System.Guid,System.String)">
             <summary>
             Set Listing Transaction Status
-            valid status pending, cancelled, sold
+            valid status deleted, listed, pending, cancelled, sold
             </summary>
         </member>
         <member name="M:MKTFY.API.Controllers.ListingController.GetMyListings(System.String)">

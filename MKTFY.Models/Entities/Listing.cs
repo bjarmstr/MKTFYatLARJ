@@ -68,7 +68,7 @@ namespace MKTFY.Models.Entities
         [Required]
         public string Region { get; set; }
 
-        //allow DateTime to be null
+        //DateTime? can be be null
         public DateTime? DateSold { get; set; }
 
         public string? BuyerId { get; set; }
