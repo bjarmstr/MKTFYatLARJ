@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -45,6 +46,11 @@ namespace MKTFY.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+             .ConfigureAppConfiguration((builder) =>
+                    {
+                builder.AddSystemsManager(String.Format("/{0}/",
+                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")));
+            });
     }
 }
