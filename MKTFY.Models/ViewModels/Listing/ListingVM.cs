@@ -22,6 +22,7 @@ namespace MKTFY.Models.ViewModels.Listing
             CategoryId = src.CategoryId;
             UserId = src.UserId;
             Condition = src.Condition;
+            Address = src.Address;
             Region = src.Region;    
             //The following code was refactored into the one line below
             //Images = new List<UploadVM>();
@@ -56,6 +57,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public int CategoryId { get; set; }
 
         public string Condition { get; set; }
+
+        public string Address { get; set; }
 
         public string Region { get; set; }
 

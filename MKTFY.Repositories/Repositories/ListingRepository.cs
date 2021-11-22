@@ -100,6 +100,7 @@ namespace MKTFY.Repositories.Repositories
             result.Price = src.Price;
             result.CategoryId = src.CategoryId;
             result.Condition = src.Condition;
+            result.Address = src.Address;
             result.Region = src.Region;
            //result.ListingUploads is created above first removing images and then adding any additional images
             //doesn't update DateCreated or TransactionStatus

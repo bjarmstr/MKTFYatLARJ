@@ -22,6 +22,7 @@ namespace MKTFY.Models.Entities
             Price = src.Price;
             CategoryId = src.CategoryId;
             Condition = src.Condition;
+            Address = src.Address;
             Region = src.Region;
             UserId = userId;
             ListingUploads = src.UploadIds.Select(id => new ListingUpload { UploadId = id }).ToList();
@@ -36,6 +37,7 @@ namespace MKTFY.Models.Entities
             Price = src.Price;
             CategoryId = src.CategoryId;
             Condition = src.Condition;
+            Address = src.Address;
             Region = src.Region;
             ListingUploads = src.UploadIds.Select(id => new ListingUpload { UploadId = id }).ToList();
         }
@@ -64,6 +66,8 @@ namespace MKTFY.Models.Entities
         public string TransactionStatus { get; set; }
 
         public string Condition { get; set; }
+
+        public string Address { get; set; }
 
         [Required]
         public string Region { get; set; }
