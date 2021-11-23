@@ -17,6 +17,7 @@ namespace MKTFY.Models.ViewModels.Listing
             Id = src.Id;
             Product = src.Product;
             Price = src.Price;
+            TransactionStatus = src.TransactionStatus;
             DateSold = src.DateSold;
                    
         }
@@ -27,6 +28,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public string Product { get; set; }
 
         public decimal Price { get; set; }
+
+        public string TransactionStatus { get; set; }
 
         //TODO remove ?
         public DateTime? DateSold { get; set; }

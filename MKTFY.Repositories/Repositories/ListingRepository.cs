@@ -129,22 +129,24 @@ namespace MKTFY.Repositories.Repositories
             
         }
 
-        public async Task<List<Listing>> GetByCategory(int categoryId, string region)
+        public async Task<List<Listing>> GetByCategory(int categoryId, string region, string userId)
         {
             var results = await _context.Listings
                 .Where(listing => listing.CategoryId == categoryId &&
                     listing.Region == region &&
-                    listing.TransactionStatus== "listed")
+                    listing.TransactionStatus== "listed" &&
+                    listing.UserId != userId)
                 .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .ToListAsync();
             return results;
         }
 
-        public async Task<List<Listing>> GetBySearchTerm(string searchTermLowerCase, string region)
+        public async Task<List<Listing>> GetBySearchTerm(string searchTermLowerCase, string region, string userId)
         {
             var results = await _context.Listings
                 .Where(listing => listing.Region == region 
-                    && listing.TransactionStatus == "listed" &&
+                    && listing.TransactionStatus == "listed"
+                    && listing.UserId != userId &&
                    (listing.Details.ToLower().Contains(searchTermLowerCase) ||
                     listing.Product.ToLower().Contains(searchTermLowerCase) ||
                     (listing.Category.Name.ToLower().Contains(searchTermLowerCase))))

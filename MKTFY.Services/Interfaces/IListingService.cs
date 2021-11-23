@@ -20,11 +20,11 @@ namespace MKTFY.Services.Interfaces
 
         Task Delete(Guid id);  //Delete a Listing
 
-        Task<List<ListingVM>> GetByCategory(int categoryId, string region);
+        Task<List<ListingVM>> GetByCategory(int categoryId, string region, string userId);
 
         Task<List<ListingVM>> GetDeals(string userId, string region);
 
-        Task<List<ListingVM>> GetBySearchTerm(SearchCreateVM src, string userId);
+        Task<List<ListingVM>> GetBySearchTerm(SearchCreateVM src, string region);
 
         Task<ListingSellerVM> GetPickupInfo(Guid id);
 
