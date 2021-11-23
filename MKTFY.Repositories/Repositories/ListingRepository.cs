@@ -157,6 +157,7 @@ namespace MKTFY.Repositories.Repositories
         {
             var result = await _context.Listings
                 .Include(listing => listing.User)
+                .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");            
             return result;

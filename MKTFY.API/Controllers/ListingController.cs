@@ -71,7 +71,7 @@ namespace MKTFY.API.Controllers
         /// Update Listing
         /// </summary>
         /// <param name="data"></param>
-        [HttpPut]
+        [HttpPut("listing/{id}")]
         public async Task<ActionResult<ListingVM>> Update([FromBody] ListingUpdateVM data)
         {
             var result = await _listingService.Update(data);
