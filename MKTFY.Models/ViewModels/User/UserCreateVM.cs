@@ -31,6 +31,8 @@ namespace MKTFY.Models.ViewModels.User
         /// Enter Phone number as 10digits
         /// </summary>
         [Required]
+        [MinLength(10, ErrorMessage = "The property {0} should have a minimum of {1} digits")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "The property {0} should only contain numbers")]
         public string Phone { get; set; }
 
         [Required]
