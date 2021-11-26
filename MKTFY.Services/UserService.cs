@@ -28,10 +28,9 @@ namespace MKTFY.Services
         public async Task<UserVM> Create(UserCreateVM src, string userId)
         {
             var newEntity = new User(src);
-            //add admin ability to update user info @@@jma
             //check email matches Auth0 @@@jma
-            //write a simple inline exception@@@jma
-            if (newEntity.Id != userId) throw new NotFoundException("not a notfoundException, userId mismatch");
+            //TODO type of Exception
+            if (newEntity.Id != userId) throw new Exception("userId mismatch");
             newEntity.DateCreated = DateTime.UtcNow;
             var result = await _userRepository.Create(newEntity);
             var model = new UserVM(result);
@@ -39,18 +38,19 @@ namespace MKTFY.Services
 
         }
 
-        public async Task<UserVM>Get(string id)
+        public async Task<UserVM>Get(string id, string userId)
         {
+            ///TODO Exception --- Authorization Exception?
+            if (id != userId) throw new Exception("userId mismatch");
             var result = await _userRepository.Get(id);
+          
             var model = new UserVM(result);
             return model;
         }
 
         public async Task <UserVM>Update(UserUpdateVM src, string userId)
         {
-            //add admin ability to update user info @@@jma
-            //fix exception error @@@jma
-            if (src.Id != userId) throw new NotFoundException("not a notfoundException, userId mismatch");
+            if (src.Id != userId) throw new Exception("userId mismatch");
             var updateData = new User(src);
             var result = await _userRepository.Update(updateData);
             var model = new UserVM(result);
