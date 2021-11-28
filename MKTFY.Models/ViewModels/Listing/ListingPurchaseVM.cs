@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.ViewModels.Listing
 {
+    /// <summary>
+    /// Listing with the date purchased
+    /// </summary>
     public class ListingPurchaseVM
     {
         public ListingPurchaseVM() { }
