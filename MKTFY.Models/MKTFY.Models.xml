@@ -14,6 +14,11 @@
             Category Id CarsVehicles 1, Furniture 2, Electronics 3, Real Estate 4
             </summary>
         </member>
+        <member name="T:MKTFY.Models.ViewModels.Listing.ListingPurchaseVM">
+            <summary>
+            Listing with the date purchased
+            </summary>
+        </member>
         <member name="T:MKTFY.Models.ViewModels.Upload.UploadResultVM">
             <summary>
             Reference Id to get Url

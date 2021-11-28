@@ -4,6 +4,26 @@
         <name>MKTFY.API</name>
     </assembly>
     <members>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM,System.String)">
+            <summary>
+            Create a user profile, user must already exist in Auth0, phone number is a 10 digit string
+            </summary>  
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.Update(MKTFY.Models.ViewModels.User.UserUpdateVM,System.String)">
+            <summary>
+            Update a User's profile using Admin Role
+            </summary>
+            <param name="data"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.Get(System.String)">
+            <summary>
+            Get a User's profile info
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:MKTFY.API.Controllers.AuthController.Token(System.String)">
             <summary>
             Exchange an Auth Code for an Access Token

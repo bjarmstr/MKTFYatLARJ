@@ -11,7 +11,7 @@ namespace MKTFY.Services.Interfaces
     {
         Task<UserVM> Create(UserCreateVM data, string userId);
 
-        Task<UserVM> Get(string id);
+        Task<UserVM> Get(string id, string userId);
 
         Task<UserVM> Update(UserUpdateVM data, string userId);
     }

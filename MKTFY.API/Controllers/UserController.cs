@@ -57,7 +57,8 @@ namespace MKTFY.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserVM>> Get([FromRoute] String id)
         {
-            return Ok(await _userService.Get(id));
+            var userId = User.GetId();
+            return Ok(await _userService.Get(id,userId));
 
         }
     }

@@ -118,10 +118,12 @@ namespace MKTFY.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
 
         [HttpGet("listing/search")]
         public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm, string region)
         {
+           // User.IsInRole("Admin")
             var search = new SearchCreateVM();
             search.UserId = User.GetId();
             search.SearchTerm = searchTerm.ToLower();
