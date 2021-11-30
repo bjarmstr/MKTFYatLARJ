@@ -33,6 +33,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<List<Listing>> GetMyListings(string userId, string status);
 
+        Task<List<Listing>> GetAllMyListings(string userId);
+
 
 
     }

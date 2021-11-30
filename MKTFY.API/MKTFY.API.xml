@@ -113,6 +113,13 @@
             <param name="status"></param>
             <returns></returns>
         </member>
+        <member name="M:MKTFY.API.Controllers.ListingController.GetAllMyListings">
+            <summary>
+            List of User's Listings - listed, pending or sold
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
         <member name="M:MKTFY.API.Controllers.UploadController.UploadImage">
             <summary>
             Upload 1 or more files

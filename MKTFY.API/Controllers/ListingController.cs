@@ -98,6 +98,7 @@ namespace MKTFY.API.Controllers
         /// <param name="categoryId"></param>
         /// <remarks> Category 1 = Cars & Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
         [HttpGet("listing/category/{categoryId}")]
+        ///TODO  string region -- query or route?
         public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute] int categoryId, string region)
         {
             string userId = User.GetId();
@@ -188,6 +189,22 @@ namespace MKTFY.API.Controllers
             //get user id from the Http request
             string userId = User.GetId();
             var results = await _listingService.GetMyListings(userId, status);
+            return Ok(results);
+        }
+
+        /// <summary>
+        /// List of User's Listings - listed, pending or sold
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("mylisting")]
+        public async Task<ActionResult<List<ListingSummaryVM>>> GetAllMyListings()
+        {
+            //get user id from the Http request
+            string userId = User.GetId();
+            //"all" - listed, pending & sold (not deleted)
+            var results = await _listingService.GetMyListings(userId, "all");
             return Ok(results);
         }
     }

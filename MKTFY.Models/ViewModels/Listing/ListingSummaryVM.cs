@@ -17,13 +17,16 @@ namespace MKTFY.Models.ViewModels.Listing
             Id = src.Id;
             Product = src.Product;
             Price = src.Price;
-                   
+            ImageUrl = src.ListingUploads.Select(id => id.Upload.Url).First();
+
         }
 
 
         public Guid Id { get; set; }
 
         public string Product { get; set; }
+
+        public string ImageUrl { get; set; } 
 
         public decimal Price { get; set; }
 
