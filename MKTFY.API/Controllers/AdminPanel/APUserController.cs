@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace MKTFY.API.Controllers.AdminPanel
 {
+    /// <summary>
+    /// Endpoints for User Related Actions
+    /// </summary>
     [Route("api/admin/user")]
     [ApiController]
     [Authorize(Roles = "Admin")]
@@ -17,7 +20,10 @@ namespace MKTFY.API.Controllers.AdminPanel
     {
 
         private readonly IUserService _userService;
-
+        /// <summary>
+        /// internal service 
+        /// </summary>
+        /// <param name="userService"></param>
         public APUserController(IUserService userService)
         {
             _userService = userService;

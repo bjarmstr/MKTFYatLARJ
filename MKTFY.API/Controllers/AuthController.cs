@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 
 namespace MKTFY.API.Controllers
 {
-    
-       
+   /// <summary>
+   /// Controller for User Authorization Endpoint
+   /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
         
     {
         private readonly IAuthService _authService;
-
+        /// <summary>
+        /// internal service
+        /// </summary>
+        /// <param name="authService"></param>
         public AuthController(IAuthService authService) {
             _authService = authService;
         }

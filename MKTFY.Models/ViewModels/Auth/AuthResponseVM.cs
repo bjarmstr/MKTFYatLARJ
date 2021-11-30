@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.ViewModels.Auth
 {
+    /// <summary>
+    /// Access Token and Expiry for Authorization
+    /// </summary>
     public class AuthResponseVM
     {
         public string AccessToken { get; set; }

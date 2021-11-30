@@ -4,6 +4,17 @@
         <name>MKTFY.API</name>
     </assembly>
     <members>
+        <member name="T:MKTFY.API.Controllers.AdminPanel.APUserController">
+            <summary>
+            Endpoints for User Related Actions
+            </summary>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.#ctor(MKTFY.Services.Interfaces.IUserService)">
+            <summary>
+            internal service 
+            </summary>
+            <param name="userService"></param>
+        </member>
         <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.Create(MKTFY.Models.ViewModels.User.UserCreateVM,System.String)">
             <summary>
             Create a user profile, user must already exist in Auth0, phone number is a 10 digit string
@@ -23,6 +34,17 @@
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="T:MKTFY.API.Controllers.AuthController">
+            <summary>
+            Controller for User Authorization Endpoint
+            </summary>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AuthController.#ctor(MKTFY.Services.Interfaces.IAuthService)">
+            <summary>
+            internal service
+            </summary>
+            <param name="authService"></param>
         </member>
         <member name="M:MKTFY.API.Controllers.AuthController.Token(System.String)">
             <summary>

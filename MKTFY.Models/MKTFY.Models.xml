@@ -4,9 +4,112 @@
         <name>MKTFY.Models</name>
     </assembly>
     <members>
+        <member name="T:MKTFY.Models.Entities.Listing">
+            <summary>
+            entity for a Listing
+            </summary>
+        </member>
+        <member name="M:MKTFY.Models.Entities.Listing.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MKTFY.Models.Entities.Listing.#ctor(MKTFY.Models.ViewModels.Listing.ListingCreateVM,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="src"></param>
+            <param name="userId"></param>
+        </member>
+        <member name="M:MKTFY.Models.Entities.Listing.#ctor(MKTFY.Models.ViewModels.Listing.ListingUpdateVM)">
+            <summary>
+            
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Id">
+            <summary>
+            Key - unique generated Guid identifier for Listing
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Product">
+            <summary>
+            Name of the product being listing
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Details">
+            <summary>
+            Detailed description of the product
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Price">
+            <summary>
+            Asking Price
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.CategoryId">
+            <summary>
+            CategoryId - unique identifier for the category
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Category">
+            <summary>
+            Category contains an id and category name
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.DateCreated">
+            <summary>
+            generated value for date listing was created
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.TransactionStatus">
+            <summary>
+            transaction status can be deleted, listed, pending or sold
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Condition">
+            <summary>
+            condition is either new or used **not a validated field** 
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Address">
+            <summary>
+            pickup address for listing
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.Region">
+            <summary>
+            address should be in the region ***not a validated field**
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.DateSold">
+            <summary>
+            date listing is sold -only for listings in sold status
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.BuyerId">
+            <summary>
+            buyer if listing in pending or sold status
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.ListingUploads">
+            <summary>
+            navigation property to image URL
+            </summary>
+        </member>
         <member name="P:MKTFY.Models.Entities.Listing.UserId">
             <summary>
             User who created the listing
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.Entities.Listing.User">
+            <summary>
+            User is a navigation property, which allows access to User details
+            </summary>
+        </member>
+        <member name="T:MKTFY.Models.ViewModels.Auth.AuthResponseVM">
+            <summary>
+            Access Token and Expiry for Authorization
             </summary>
         </member>
         <member name="P:MKTFY.Models.ViewModels.Listing.ListingCreateVM.CategoryId">
