@@ -129,6 +129,13 @@ namespace MKTFY.Services
 
         public async Task ChangeTransactionStatus(Guid id, string status, string buyerId)
         {
+
+            if (status == "cancelled")
+            {
+                buyerId = null;
+                status = "listed";
+            }
+
             await _listingRepository.ChangeTransactionStatus(id,status,buyerId);
 
         }
@@ -142,6 +149,7 @@ namespace MKTFY.Services
 
         public async Task<List<ListingSummaryVM>> GetMyListings(string userId, string status)
         {
+
             var results = await _listingRepository.GetMyListings(userId, status);
             var models = results.Select(Listing => new ListingSummaryVM(Listing)).ToList();
             return models;

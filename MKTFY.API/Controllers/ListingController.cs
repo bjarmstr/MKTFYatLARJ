@@ -153,12 +153,16 @@ namespace MKTFY.API.Controllers
             {
                 return BadRequest(new { message = "invalid status" });
             }
-
-            //TODO admin panel will need further logic to override buyerId if using this endpoint to override TransactionStatus
-            string buyerId = "";
+                       
+            string buyerId = null;
             
             if (status == "pending")
             {
+                //TODO admin panel will need logic to override buyerId if using this endpoint to override TransactionStatus
+                if (User.IsInRole("Admin"))
+                {
+                    return BadRequest(new { message = "invalid user" });
+                }
                 buyerId = User.GetId();
             }
             await _listingService.ChangeTransactionStatus(id, status, buyerId);
@@ -178,7 +182,7 @@ namespace MKTFY.API.Controllers
 
 
         /// <summary>
-        /// List of User's Listings - listed, pending or sold
+        /// List of User's Listings - choose between listed, pending or sold
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
@@ -204,7 +208,7 @@ namespace MKTFY.API.Controllers
             //get user id from the Http request
             string userId = User.GetId();
             //"all" - listed, pending & sold (not deleted)
-            var results = await _listingService.GetMyListings(userId, "all");
+            var results = await _listingService.GetAllMyListings(userId);
             return Ok(results);
         }
     }

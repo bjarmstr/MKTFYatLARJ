@@ -170,6 +170,7 @@ namespace MKTFY.Repositories.Repositories
         {
             var results = await _context.Listings
                .Where(listing => listing.BuyerId == buyerId)
+               .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                .ToListAsync();
             return results;
         }
@@ -178,6 +179,7 @@ namespace MKTFY.Repositories.Repositories
         {
             var results = await _context.Listings
                .Where(listing => listing.UserId == userId && listing.TransactionStatus == status)
+               .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                .ToListAsync();
             return results;
         }
@@ -187,6 +189,7 @@ namespace MKTFY.Repositories.Repositories
             //does not return listings that are in deleted status
             var results = await _context.Listings
                .Where(listing => listing.UserId == userId && listing.TransactionStatus != "deleted")
+               .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                .ToListAsync();
             return results;
         }
@@ -200,18 +203,8 @@ namespace MKTFY.Repositories.Repositories
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (result == null) throw new NotFoundException("The requested listing could not be found");
 
-            if (status == "cancelled")
-            {
-                result.BuyerId = "";
-                status = "listed";
-            }
-           
-            //TODO @@@jma check for incorrect status changes --should not be able to change sold items
-            result.TransactionStatus = status;
-
-            //a pending/sold listing needs a buyer in addition to the seller
-            if (status == "pending")
-            {
+            if (status=="listed"| status=="pending")
+                {
                 result.BuyerId = buyerId;
             }
 
@@ -219,13 +212,16 @@ namespace MKTFY.Repositories.Repositories
             {
                 result.DateSold = DateTime.UtcNow;
             }
-            
+
+            //TODO @@@jma check for incorrect status changes --should not be able to change sold items
+            //how do you handle this error correctly?
+            if (result.TransactionStatus=="sold") throw new Exception("Unable to perform changes");
+            result.TransactionStatus = status;
+           
             await _context.SaveChangesAsync();
         }
 
-        
 
-
-
+   
     }
 }
