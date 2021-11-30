@@ -13,6 +13,7 @@ namespace MKTFY.Models.ViewModels.Listing
         {
             Id = src.Id;
             Product = src.Product;
+            Price = src.Price;
             SellerName = src.User.FullName;
             Address = src.Address;
             Phone = src.User.Phone;
@@ -24,6 +25,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public string Product { get; set; }
 
         public string  ImageUrl { get; set;}
+
+        public decimal Price { get; set; }
 
         public string SellerName { get; set; }
 

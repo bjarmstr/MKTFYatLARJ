@@ -108,7 +108,7 @@
         </member>
         <member name="M:MKTFY.API.Controllers.ListingController.GetMyListings(System.String)">
             <summary>
-            List of User's Listings - listed, pending or sold
+            List of User's Listings - choose between listed, pending or sold
             </summary>
             <param name="status"></param>
             <returns></returns>
