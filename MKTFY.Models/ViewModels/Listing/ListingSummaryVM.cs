@@ -18,6 +18,7 @@ namespace MKTFY.Models.ViewModels.Listing
             Product = src.Product;
             Price = src.Price;
             ImageUrl = src.ListingUploads.Select(id => id.Upload.Url).First();
+            TransactionStatus = src.TransactionStatus;
 
         }
 
@@ -29,6 +30,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public string ImageUrl { get; set; } 
 
         public decimal Price { get; set; }
+
+        public string TransactionStatus { get; set; }
 
     }
 }
