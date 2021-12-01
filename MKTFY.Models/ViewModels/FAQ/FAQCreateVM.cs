@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.ViewModels.FAQ
 {
+    /// <summary>
+    /// Create a FAQ --Administrator Role
+    /// </summary>
     public class FAQCreateVM
     {
+
         [Required]
         public string Question { get; set; }
+
 
         [Required]
         public string Answer { get; set; }

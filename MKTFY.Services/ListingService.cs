@@ -4,6 +4,7 @@ using MKTFY.Models.ViewModels.Listing;
 using MKTFY.Models.ViewModels.Upload;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services.Interfaces;
+using MKTFY.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace MKTFY.Services
         private readonly IUploadRepository _uploadRepository;
 
         public ListingService(
-            IListingRepository listingRepository, 
+            IListingRepository listingRepository,
             ISearchRepository searchRepository,
             IUploadRepository uploadRepository)
         {
@@ -29,11 +30,16 @@ namespace MKTFY.Services
         }
         public async Task<ListingVM> Create(ListingCreateVM src, string userId)
         {
+            //check string field for acceptable values
+            src.Condition = ValidateCondition(src.Condition);
+
             var newEntity = new Listing(src, userId);
             newEntity.DateCreated = DateTime.UtcNow;
             newEntity.TransactionStatus = "listed";
+
             var result = await _listingRepository.Create(newEntity);
             var resultIncludesUpload = await _listingRepository.Get(result.Id);
+            
             var model = new ListingVM(resultIncludesUpload);
             return model;
         }
@@ -64,7 +70,10 @@ namespace MKTFY.Services
         }
 
         public async Task<ListingVM> Update(ListingUpdateVM src)
-        { 
+        {
+            //condition either New or Used
+            src.Condition = ValidateCondition(src.Condition);
+
             var updateData = new Listing(src);
             var result = await _listingRepository.Update(updateData);
             var resultIncludesUpload = await _listingRepository.Get(result.Id);
@@ -76,7 +85,7 @@ namespace MKTFY.Services
         public async Task Delete(Guid id)
         {
             await _listingRepository.Delete(id);
-            
+
         }
 
         public async Task<List<ListingVM>> GetByCategory(int categoryId, string region, string userId)
@@ -98,7 +107,18 @@ namespace MKTFY.Services
                 var dealResults = await _listingRepository.GetBySearchTerm(search.SearchTerm, region, userId);
                 dealListings.AddRange(dealResults);
             }
+
+            if (dealListings.Count < 1)
+            {
+                //if no listings based on previous searches return the 10 newest listings
+                dealListings = await _listingRepository.GetMostRecent(region, userId);
+
+            }
+
+                //multiple searches may return the same listing more than once --- keep only distinct
             var distinctListings = dealListings.Distinct();
+ 
+
             var models = distinctListings.Select(listing => new ListingVM(listing)).ToList();
             return models;
         }
@@ -118,7 +138,7 @@ namespace MKTFY.Services
 
         public async Task<ListingSellerVM> GetPickupInfo(Guid id)
         {
-        
+
             var result = await _listingRepository.GetPickupInfo(id);
 
             var model = new ListingSellerVM(result);
@@ -136,11 +156,11 @@ namespace MKTFY.Services
                 status = "listed";
             }
 
-            await _listingRepository.ChangeTransactionStatus(id,status,buyerId);
+            await _listingRepository.ChangeTransactionStatus(id, status, buyerId);
 
         }
 
-        public async Task <List<ListingPurchaseVM>> GetMyPurchases(string userId)
+        public async Task<List<ListingPurchaseVM>> GetMyPurchases(string userId)
         {
             var results = await _listingRepository.GetMyPurchases(userId);
             var models = results.Select(Listing => new ListingPurchaseVM(Listing)).ToList();
@@ -165,7 +185,7 @@ namespace MKTFY.Services
 
 
 
-        private async Task<ListingVM >AddUploadDetails (Listing result)
+        private async Task<ListingVM> AddUploadDetails(Listing result)
         {
             var model = new ListingVM(result);
             //get the Upload Id
@@ -179,6 +199,19 @@ namespace MKTFY.Services
             //model.UploadIds = uploadIds;
 
             return model;
+        }
+
+        private string ValidateCondition(string condition)
+        {
+            //create consistent capitalization and check for correct terms
+            condition.ToLower();
+            condition = condition[0].ToString().ToUpper() + condition.Substring(1);
+            if (condition != "New" && condition != "Used")
+            {
+                //TODO create global exception -- input error
+                throw new NotFoundException("Incorrect Condition value");
+            }
+            return condition;
         }
 
 

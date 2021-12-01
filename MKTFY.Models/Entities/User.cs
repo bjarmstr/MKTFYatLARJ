@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Models.Entities
 {
+    /// <summary>
+    /// User related data - a general user can be the lister/seller or the buyer
+    /// </summary>
     public class User
     {
+
+        ///
         public User()
         {
 
         }
 
+        /// 
         public User(UserCreateVM src)
         {
             Id = src.Id;

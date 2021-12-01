@@ -25,6 +25,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<List<Listing>> GetBySearchTerm(string searchTerm, string region, string userId);
 
+        Task<List<Listing>> GetMostRecent(string region, string userId);
+
         Task<Listing> GetPickupInfo(Guid id);  //Get Seller Info for Listing
 
         Task ChangeTransactionStatus(Guid id, string status, string buyerId); //Change Transaction Status to Pending

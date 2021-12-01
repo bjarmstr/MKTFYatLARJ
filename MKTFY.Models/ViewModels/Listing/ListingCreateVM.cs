@@ -25,10 +25,15 @@ namespace MKTFY.Models.ViewModels.Listing
         [Required]
         public int CategoryId{ get; set; }
 
+        /// <summary>
+        /// Condition either new or used
+        /// </summary>
         public string Condition { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
+        [Required]
         public string Region { get; set; }
 
         public List<Guid> UploadIds { get; set; }

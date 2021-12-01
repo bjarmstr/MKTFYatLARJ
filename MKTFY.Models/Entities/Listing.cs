@@ -82,6 +82,7 @@ namespace MKTFY.Models.Entities
         
         /// <summary>
         /// CategoryId - unique identifier for the category
+        /// check category table for details
         /// </summary>
         [Required]
         public int CategoryId { get; set; }
@@ -128,7 +129,7 @@ namespace MKTFY.Models.Entities
         /// buyer if listing in pending or sold status
         /// </summary>
         public string? BuyerId { get; set; }
-
+        //TODO warning the annotation for nullable reference types should only be used in code within a #nullable annotations context
 
         /// <summary>
         /// navigation property to image URL

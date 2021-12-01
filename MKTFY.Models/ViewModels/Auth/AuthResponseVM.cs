@@ -11,7 +11,14 @@ namespace MKTFY.Models.ViewModels.Auth
     /// </summary>
     public class AuthResponseVM
     {
+        /// <summary>
+        /// Authorization JWT token
+        /// </summary>
         public string AccessToken { get; set; }
+
+        /// <summary>
+        /// Expiry
+        /// </summary>
         public int ExpiresIn { get; set; }
     }
 }

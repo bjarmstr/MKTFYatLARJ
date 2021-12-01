@@ -50,6 +50,7 @@
         <member name="P:MKTFY.Models.Entities.Listing.CategoryId">
             <summary>
             CategoryId - unique identifier for the category
+            check category table for details
             </summary>
         </member>
         <member name="P:MKTFY.Models.Entities.Listing.Category">
@@ -107,14 +108,45 @@
             User is a navigation property, which allows access to User details
             </summary>
         </member>
+        <member name="T:MKTFY.Models.Entities.User">
+            <summary>
+            User related data - a general user can be the lister/seller or the buyer
+            </summary>
+        </member>
+        <member name="M:MKTFY.Models.Entities.User.#ctor">
+            
+        </member>
+        <member name="M:MKTFY.Models.Entities.User.#ctor(MKTFY.Models.ViewModels.User.UserCreateVM)">
+            
+        </member>
         <member name="T:MKTFY.Models.ViewModels.Auth.AuthResponseVM">
             <summary>
             Access Token and Expiry for Authorization
             </summary>
         </member>
+        <member name="P:MKTFY.Models.ViewModels.Auth.AuthResponseVM.AccessToken">
+            <summary>
+            Authorization JWT token
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.ViewModels.Auth.AuthResponseVM.ExpiresIn">
+            <summary>
+            Expiry
+            </summary>
+        </member>
+        <member name="T:MKTFY.Models.ViewModels.FAQ.FAQCreateVM">
+            <summary>
+            Create a FAQ --Administrator Role
+            </summary>
+        </member>
         <member name="P:MKTFY.Models.ViewModels.Listing.ListingCreateVM.CategoryId">
             <summary>
             Category Id CarsVehicles 1, Furniture 2, Electronics 3, Real Estate 4
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.ViewModels.Listing.ListingCreateVM.Condition">
+            <summary>
+            Condition either new or used
             </summary>
         </member>
         <member name="T:MKTFY.Models.ViewModels.Listing.ListingPurchaseVM">

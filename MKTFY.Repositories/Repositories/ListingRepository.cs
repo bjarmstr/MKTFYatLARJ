@@ -155,6 +155,19 @@ namespace MKTFY.Repositories.Repositories
             return results;
         }
 
+
+        public async Task<List<Listing>> GetMostRecent(string region, string userId)
+        {
+            var results = await _context.Listings
+                .Where(listing => listing.UserId != userId  &&
+                listing.Region == region)
+                .OrderByDescending(listing => listing.DateCreated)
+                .Take(10)
+                .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
+                .ToListAsync();
+            return results;
+        }
+
         public async Task<Listing> GetPickupInfo(Guid id)
         {
             var result = await _context.Listings

@@ -33,7 +33,9 @@ namespace MKTFY.API.Controllers
         [HttpPost("listing")]
         public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
         {
+            
             var userId = User.GetId();
+
             var result = await _listingService.Create(data, userId);
             return Ok(result);
         }
@@ -93,14 +95,15 @@ namespace MKTFY.API.Controllers
         }
 
         /// <summary>
-        /// Get Listings from a given category
+        /// Get Listings from a given category, include a region in query string
         /// </summary>
         /// <param name="categoryId"></param>
         /// <remarks> Category 1 = Cars & Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
         [HttpGet("listing/category/{categoryId}")]
         ///TODO  string region -- query or route?
-        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute] int categoryId, string region)
+        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute] int categoryId, [FromQuery]string region)
         {
+            if (region==null) return BadRequest(new { message = "region required" });
             string userId = User.GetId();
             var result = await _listingService.GetByCategory(categoryId, region, userId);
             return Ok(result);
