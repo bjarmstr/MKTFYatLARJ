@@ -142,13 +142,13 @@ namespace MKTFY.API.Controllers
 
         /// <summary>
         /// Set Listing Transaction Status
-        /// valid status deleted, listed, pending, cancelled, sold
+        /// valid status deleted, pending, cancelled (which reverts the listing back to listed), sold
         /// </summary>
         [HttpPut("listing/{id}/{status}")]
         public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
         {
             //check that only valid Transaction Statuses 
-            string[] validStatus = { "listed", "deleted", "pending", "cancelled", "sold" };
+            string[] validStatus = {  "deleted", "pending", "cancelled", "sold" };
             if (!validStatus.Contains(status))
             {
                 return BadRequest(new { message = "invalid status" });
