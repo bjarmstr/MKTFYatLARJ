@@ -33,7 +33,7 @@ namespace MKTFY.API.Controllers
         [HttpPost("listing")]
         public async Task<ActionResult<ListingVM>> Create([FromBody] ListingCreateVM data)
         {
-            
+
             var userId = User.GetId();
 
             var result = await _listingService.Create(data, userId);
@@ -51,7 +51,7 @@ namespace MKTFY.API.Controllers
             return Ok(await _listingService.GetAll());
         }
 
-        
+
         [HttpGet("listing/{id}")]
         public async Task<ActionResult<ListingVM>> Get([FromRoute] Guid id)
         {
@@ -101,9 +101,9 @@ namespace MKTFY.API.Controllers
         /// <remarks> Category 1 = Cars & Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
         [HttpGet("listing/category/{categoryId}")]
         ///TODO  string region -- query or route?
-        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute] int categoryId, [FromQuery]string region)
+        public async Task<ActionResult<List<ListingVM>>> GetByCategory([FromRoute] int categoryId, [FromQuery] string region)
         {
-            if (region==null) return BadRequest(new { message = "region required" });
+            if (region == null) return BadRequest(new { message = "region required" });
             string userId = User.GetId();
             var result = await _listingService.GetByCategory(categoryId, region, userId);
             return Ok(result);
@@ -126,7 +126,7 @@ namespace MKTFY.API.Controllers
         [HttpGet("listing/search")]
         public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm, string region)
         {
-           // User.IsInRole("Admin")
+            // User.IsInRole("Admin")
             var search = new SearchCreateVM();
             search.UserId = User.GetId();
             search.SearchTerm = searchTerm.ToLower();
@@ -150,14 +150,14 @@ namespace MKTFY.API.Controllers
         public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
         {
             //check that only valid Transaction Statuses 
-            string[] validStatus = {  "deleted", "pending", "cancelled", "sold" };
+            string[] validStatus = { "deleted", "pending", "cancelled", "sold" };
             if (!validStatus.Contains(status))
             {
                 return BadRequest(new { message = "invalid status" });
             }
-                       
+
             string buyerId = null;
-            
+
             if (status == "pending")
             {
                 //TODO admin panel will need logic to override buyerId if using this endpoint to override TransactionStatus

@@ -4,6 +4,46 @@
         <name>MKTFY.API</name>
     </assembly>
     <members>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.Create(MKTFY.Models.ViewModels.Listing.ListingCreateVM,System.String)">
+            <summary>
+            Add a new Listing
+            </summary>
+            <remarks> Category Id 1 = Cars and Vehicles, Id 2 = Furniture, Id 3 = Electronics, Id 4 = Real Estate</remarks>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.GetAll">
+            <summary>
+            Get all Listings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.Update(MKTFY.Models.ViewModels.Listing.ListingUpdateVM,System.String)">
+            <summary>
+            Update Listing
+            </summary>
+            <param name="data"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.Delete(System.Guid)">
+            <summary>
+            Hard Delete.  Removes Listing from database.  For admin users only.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.ChangeTransactionStatus(System.Guid,System.String)">
+            <summary>
+            Set Listing Transaction Status
+            valid status deleted, listed, pending, cancelled, sold
+            </summary>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.GetMyListings(System.String)">
+            <summary>
+            List of User's Listings - listed, pending or sold
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
         <member name="T:MKTFY.API.Controllers.AdminPanel.APUserController">
             <summary>
             Endpoints for User Related Actions
@@ -125,7 +165,7 @@
         <member name="M:MKTFY.API.Controllers.ListingController.ChangeTransactionStatus(System.Guid,System.String)">
             <summary>
             Set Listing Transaction Status
-            valid status deleted, listed, pending, cancelled, sold
+            valid status deleted, pending, cancelled (which reverts the listing back to listed), sold
             </summary>
         </member>
         <member name="M:MKTFY.API.Controllers.ListingController.GetMyListings(System.String)">
