@@ -22,7 +22,7 @@ namespace MKTFY.Models.ViewModels.Listing
             Price = src.Price;
             TransactionStatus = src.TransactionStatus;
             DateSold = src.DateSold;
-                   
+            ImageUrl = src.ListingUploads.Select(id => id.Upload.Url).First();
         }
 
 
@@ -33,6 +33,8 @@ namespace MKTFY.Models.ViewModels.Listing
         public decimal Price { get; set; }
 
         public string TransactionStatus { get; set; }
+
+        public string ImageUrl { get; set; }
 
         //TODO remove ?
         public DateTime? DateSold { get; set; }
