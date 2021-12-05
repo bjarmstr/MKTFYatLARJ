@@ -37,6 +37,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
 
         Task<int> GetMyListingsCount(string userId, string status);
 
+        Task<int> GetMyPurchasesCount(string buyerId);
+
         Task<List<Listing>> GetAllMyListings(string userId);
 
 

@@ -78,10 +78,7 @@ namespace MKTFY.API.Controllers.AdminPanel
 
 
 
-        /// <summary>
-        /// Set Listing Transaction Status
-        /// valid status deleted, listed, pending, cancelled, sold
-        /// </summary>
+
         //[HttpPut("listing/{id}/{status}")]
         //public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
         //{
@@ -103,6 +100,15 @@ namespace MKTFY.API.Controllers.AdminPanel
 
         //}
 
+       
+
+        /// <summary>
+        /// pageIndex-start with pageIndex=1
+        /// pageSize-how many users to display on a page
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("listingStats")]
         public async Task<ActionResult<List<APListingStatsVM>>>UserListingStats([FromQuery] int pageIndex, int pageSize)

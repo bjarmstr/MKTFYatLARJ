@@ -31,6 +31,7 @@ namespace MKTFY.Services
             foreach (APListingStatsVM user in model)
             {
                 user.UserListingCount = await _listingRepository.GetMyListingsCount(user.UserId, "listed");
+                user.UserPurchaseCount = await _listingRepository.GetMyPurchasesCount(user.UserId);
             }
 
             return model;
