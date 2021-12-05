@@ -1,5 +1,6 @@
 ﻿using MKTFY.Models.Entities;
 using MKTFY.Models.ViewModels;
+using MKTFY.Models.ViewModels.AdminPanel;
 using MKTFY.Models.ViewModels.Listing;
 using MKTFY.Models.ViewModels.Upload;
 using MKTFY.Repositories.Repositories.Interfaces;
@@ -181,7 +182,6 @@ namespace MKTFY.Services
             var models = results.Select(Listing => new ListingSummaryVM(Listing)).ToList();
             return models;
         }
-
 
 
 

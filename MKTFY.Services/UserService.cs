@@ -31,6 +31,7 @@ namespace MKTFY.Services
             //check email matches Auth0 @@@jma
             //TODO type of Exception
             if (newEntity.Id != userId) throw new Exception("userId mismatch");
+            newEntity.Status = "active";
             newEntity.DateCreated = DateTime.UtcNow;
             var result = await _userRepository.Create(newEntity);
             var model = new UserVM(result);

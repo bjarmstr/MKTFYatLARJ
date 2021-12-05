@@ -46,12 +46,24 @@ namespace MKTFY.Repositories.Repositories
             result.City = src.City;
             result.Province = src.Province;
             result.Country = src.Country;
-            
+
             await _context.SaveChangesAsync();
             return result;
         }
 
-      
+        public async Task<List<User>> GetAllActiveUsers(int pageIndex, int pageSize)
+        {
+            var result = await _context.Users
+                .Where(user => user.Status != "blocked")
+                .OrderBy(user => user.DateCreated)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return result;
+
+        }
+
 
     }
 }

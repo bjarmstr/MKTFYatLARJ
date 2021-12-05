@@ -31,7 +31,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.ChangeTransactionStatus(System.Guid,System.String)">
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.UserListingStats(System.Int32,System.Int32)">
             <summary>
             Set Listing Transaction Status
             valid status deleted, listed, pending, cancelled, sold

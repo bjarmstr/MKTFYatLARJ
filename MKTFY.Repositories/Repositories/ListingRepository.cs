@@ -197,6 +197,15 @@ namespace MKTFY.Repositories.Repositories
             return results;
         }
 
+
+        public async Task<int> GetMyListingsCount(string userId, string status)
+        {
+            var results = await _context.Listings
+               .Where(listing => listing.UserId == userId && listing.TransactionStatus == status)
+               .CountAsync();
+            return results;
+        }
+
         public async Task<List<Listing>> GetAllMyListings(string userId)
         { 
             //does not return listings that are in deleted status
@@ -208,7 +217,7 @@ namespace MKTFY.Repositories.Repositories
         }
 
 
-
+   
         public async Task ChangeTransactionStatus(Guid id, string status, string buyerId)
         {
             var result = await _context.Listings

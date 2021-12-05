@@ -82,6 +82,9 @@ namespace MKTFY.Models.Entities
         [Required]
         public DateTime DateCreated { get; set; }
 
+       
+        public string Status { get; set; }
+
         [NotMapped]
         public string FullName
         {
@@ -98,6 +101,17 @@ namespace MKTFY.Models.Entities
                 return ($"{StreetAddress}, {City}, {Province}");
             }
           
+        }
+
+
+        [NotMapped]
+        public string Location
+        {
+            get
+            {
+                return ($"{City}, {Province}");
+            }
+
         }
 
         public ICollection<Listing>Listings { get; set; }

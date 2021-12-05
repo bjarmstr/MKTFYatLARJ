@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MKTFY.API.Helpers;
 using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.Listing;
+using MKTFY.Models.ViewModels.AdminPanel;
 using MKTFY.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,12 @@ namespace MKTFY.API.Controllers.AdminPanel
     public class APListingController : ControllerBase
     {
         private readonly IListingService _listingService;
+        private readonly IAPUserListingService _aPUserListingService;
 
-        public APListingController(IListingService listingService)
+        public APListingController(IListingService listingService, IAPUserListingService aPUserListingService)
         {
             _listingService = listingService;
+            _aPUserListingService = aPUserListingService;
         }
 
         /// <summary>
@@ -55,7 +58,7 @@ namespace MKTFY.API.Controllers.AdminPanel
         [HttpPut("listing/{userId}")]
         public async Task<ActionResult<ListingVM>> Update([FromBody] ListingUpdateVM data, [FromRoute] string userId)
         {
-            
+
             var result = await _listingService.Update(data);
             return Ok(result);
         }
@@ -72,59 +75,40 @@ namespace MKTFY.API.Controllers.AdminPanel
             // Return just the 200 response
             return Ok();
         }
-        
-        [HttpGet("listing/search")]
-        public async Task<ActionResult<List<ListingVM>>> GetBySearchTerm(string searchTerm, string region)
-        {
-           // User.IsInRole("Admin")
-            var search = new SearchCreateVM();
-            search.UserId = User.GetId();
-            search.SearchTerm = searchTerm.ToLower();
-            var result = await _listingService.GetBySearchTerm(search, region);
-            return Ok(result);
-        }
 
-        [HttpGet("listing/{id}/pickup")]
-        public async Task<ActionResult<ListingSellerVM>> GetPickupInfo(Guid id)
-        {
-            var result = await _listingService.GetPickupInfo(id);
-            return Ok(result);
-        }
 
 
         /// <summary>
         /// Set Listing Transaction Status
         /// valid status deleted, listed, pending, cancelled, sold
         /// </summary>
-        [HttpPut("listing/{id}/{status}")]
-        public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
-        {
-            //check that only valid Transaction Statuses 
-            string[] validStatus = { "listed", "deleted", "pending", "cancelled", "sold" };
-            if (!validStatus.Contains(status))
-            {
-                return BadRequest(new { message = "invalid status" });
-            }
+        //[HttpPut("listing/{id}/{status}")]
+        //public async Task<ActionResult> ChangeTransactionStatus([FromRoute] Guid id, string status)
+        //{
+        //    //check that only valid Transaction Statuses 
+        //    string[] validStatus = { "listed", "deleted", "pending", "cancelled", "sold" };
+        //    if (!validStatus.Contains(status))
+        //    {
+        //        return BadRequest(new { message = "invalid status" });
+        //    }
 
-            //TODO admin panel will need further logic to override buyerId if using this endpoint to override TransactionStatus
-            string buyerId = "";
-            
-            if (status == "pending")
-            {
-                buyerId = User.GetId();
-            }
-            await _listingService.ChangeTransactionStatus(id, status, buyerId);
-            return Ok();
+        //    //TODO admin panel will need further logic to override buyerId if using this endpoint to change status to pending
 
-        }
+        //    if (status == "pending")
+        //    {
+        //        buyerId = User.GetId();
+        //    }
+        //    await _listingService.ChangeTransactionStatus(id, status, buyerId);
+        //    return Ok();
+
+        //}
 
         [HttpGet]
-        [Route("mypurchases")]
-        public async Task<ActionResult<List<ListingPurchaseVM>>> GetMyPurchases()
+        [Route("listingStats")]
+        public async Task<ActionResult<List<APListingStatsVM>>>UserListingStats([FromQuery] int pageIndex, int pageSize)
         {
-            //get user id from the Http request
-            string userId = User.GetId();
-            var results = await _listingService.GetMyPurchases(userId);
+           
+            var results = await _aPUserListingService.APListingStats(pageIndex, pageSize);
             return Ok(results);
         }
 

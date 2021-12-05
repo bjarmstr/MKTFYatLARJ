@@ -1,5 +1,6 @@
 ﻿using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.Listing;
+using MKTFY.Models.ViewModels.AdminPanel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,8 @@ namespace MKTFY.Services.Interfaces
         Task<List<ListingSummaryVM>> GetMyListings(string userId, string status);
 
         Task<List<ListingSummaryVM>> GetAllMyListings(string userId);
+
+        
 
     }
 }
