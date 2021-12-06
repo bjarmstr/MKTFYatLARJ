@@ -129,6 +129,8 @@ namespace MKTFY.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseMiddleware<UserStatusValidatorMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
