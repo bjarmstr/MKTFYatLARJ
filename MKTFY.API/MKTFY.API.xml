@@ -33,9 +33,12 @@
         </member>
         <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.UserListingStats(System.Int32,System.Int32)">
             <summary>
-            Set Listing Transaction Status
-            valid status deleted, listed, pending, cancelled, sold
+            pageIndex-start with pageIndex=1
+            pageSize-how many users to display on a page
             </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
         </member>
         <member name="M:MKTFY.API.Controllers.AdminPanel.APListingController.GetMyListings(System.String)">
             <summary>
@@ -63,6 +66,14 @@
         <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.Update(MKTFY.Models.ViewModels.User.UserUpdateVM,System.String)">
             <summary>
             Update a User's profile using Admin Role
+            </summary>
+            <param name="data"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MKTFY.API.Controllers.AdminPanel.APUserController.UpdateStatus(System.String,System.String)">
+            <summary>
+            status options are "active" and "blocked"
             </summary>
             <param name="data"></param>
             <param name="userId"></param>

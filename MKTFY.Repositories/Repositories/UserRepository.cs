@@ -37,7 +37,7 @@ namespace MKTFY.Repositories.Repositories
         {
             var result = await _context.Users.FirstOrDefaultAsync(i => i.Id == src.Id);
             if (result == null) throw new NotFoundException("The requested user could not be found");
-            //update some of the user fields but not all --DateCreated & Email
+            //update some of the user fields but not all --DateCreated, Email and Status
             result.Id = src.Id;
             result.FirstName = src.FirstName;
             result.LastName = src.LastName;
@@ -46,6 +46,16 @@ namespace MKTFY.Repositories.Repositories
             result.City = src.City;
             result.Province = src.Province;
             result.Country = src.Country;
+
+            await _context.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<User> UpdateStatus(string userId, string status)
+        {
+            var result = await _context.Users.FirstOrDefaultAsync(i => i.Id == userId);
+            if (result == null) throw new NotFoundException("The requested user could not be found");
+            result.Status = status;
 
             await _context.SaveChangesAsync();
             return result;

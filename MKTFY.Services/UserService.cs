@@ -59,6 +59,14 @@ namespace MKTFY.Services
 
         }
 
+        public async Task<UserVM> UpdateStatus(string userId,  string status)
+        {
+            var result = await _userRepository.UpdateStatus(userId,status);
+            var model = new UserVM(result);
+            return model;
+
+        }
+
 
     }
 }

@@ -13,5 +13,6 @@ namespace MKTFY.Repositories.Repositories.Interfaces
         Task<User> Get(string id);
         Task<User> Update(User src);
         Task<List<User>> GetAllActiveUsers(int pageIndex, int pageSize);
+        Task<User> UpdateStatus(string userId, string status);
     }
 }

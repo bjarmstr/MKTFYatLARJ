@@ -48,26 +48,39 @@ namespace MKTFY.API.Controllers.AdminPanel
         /// <returns></returns>
 
         [HttpPut("{userId}")]
-            public async Task<ActionResult<UserVM>> Update([FromBody] UserUpdateVM data,[FromRoute] string userId)
-            {
-                //get user id from header
-                var result = await _userService.Update(data, userId);
-                return Ok(result);
-            }
-
-
-            /// <summary>
-            /// Get a User's profile info
-            /// </summary>
-            /// <param name="id"></param>
-            /// <returns></returns>
-            [HttpGet("{id}")]
-            public async Task<ActionResult<UserVM>> Get([FromRoute] String id) 
-            {
-                //set the userId
-                return Ok(await _userService.Get(id, id));
-
-            }
-
+        public async Task<ActionResult<UserVM>> Update([FromBody] UserUpdateVM data, [FromRoute] string userId)
+        {
+            //get user id from header
+            var result = await _userService.Update(data, userId);
+            return Ok(result);
         }
+
+        /// <summary>
+        /// status options are "active" and "blocked"
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpPut("status/{userId}")]
+        public async Task<ActionResult<UserVM>> UpdateStatus([FromRoute] string userId, [FromQuery]string status)
+        {
+            if (status != "active" && status !="blocked") return BadRequest(new { message = "incorrect status type" });
+            var result = await _userService.UpdateStatus(userId,status);
+            return Ok(result);
+        }
+
+
+        /// <summary>
+        /// Get a User's profile info
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserVM>> Get([FromRoute] String id)
+        {
+            //set the userId
+            return Ok(await _userService.Get(id, id));
+        }
+
+    }
 }
