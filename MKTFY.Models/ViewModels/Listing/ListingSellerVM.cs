@@ -17,6 +17,7 @@ namespace MKTFY.Models.ViewModels.Listing
             SellerName = src.User.FullName;
             Address = src.Address;
             Phone = src.User.Phone;
+            Email = src.User.Email;
             Region = src.Region;
             ImageUrl = src.ListingUploads.Select(id =>id.Upload.Url).First();
         }
@@ -34,8 +35,9 @@ namespace MKTFY.Models.ViewModels.Listing
 
         public string Phone { get; set; }
 
-        public string Region { get; set; }
+        public string Email { get; set; }
 
+        public string Region { get; set; }
 
     }
 }
