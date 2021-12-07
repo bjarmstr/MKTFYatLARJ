@@ -12,6 +12,7 @@ using MKTFY.Repositories.Repositories.Interfaces;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using MKTFY.API.Helpers;
 
 namespace MKTFY.API.Middleware
 {
@@ -26,44 +27,22 @@ namespace MKTFY.API.Middleware
 
         public async Task Invoke(HttpContext context, IUserRepository userRepository)
         {
-            //get the userId from the jwt token    
-            //var jwtToken = context.Request.Headers.TryGetValue("Authorization", out var jwt);
-            //var handler = new JwtSecurityTokenHandler();
-            //var token = handler.ReadJwtToken(jwt);
-            //var userId = token.Audiences.
+            //get the userId using the HttpContext &  UserHelpers GetId()  
+            var userId = context.User.GetId();
 
-            //var userId = context.User.Identity.Name;
-            //HttpContext.Items.TryGetValue("Username", out value);
-  
-
-            var jwtValid = context.Request.Headers.TryGetValue("HeaderAuthorization", out var jwt);
-
-            //string token = context.Request.Headers["Authorization"];
-            //if (!string.IsNullOrEmpty(token))
-            //{
-            //    var tok = token.Replace("Bearer ", "");
-            //    var jwttoken = new JwtSecurityTokenHandler().ReadJwtToken(tok);
-
-            //    var jti = jwttoken.Claims.First(claim => claim.Type == ClaimTypes.Name).Value;
-              
-            //}
-
-            // if (!context.Request.Headers.Keys.Contains("user-key")
-
-            //var validUser = await userRepository.CheckValidUser(userId);
-            //if (validUser == false)
-            //{
-            //    context.Response.StatusCode = 401; //UnAuthorized
-            //                                       //why did we change our global expection handler response to JSON/?
-            //    await context.Response.WriteAsync("Blocked User");
-            //    return;
-            //}
+            var validUser = await userRepository.CheckValidUser(userId);
+            if (validUser == "blocked")
+            {
+                context.Response.StatusCode = 401; //UnAuthorized
+                await context.Response.WriteAsync("Blocked User");
+                return;
+            }
 
             await _next.Invoke(context);
 
         }
 
-        
+
     }
 }
 

@@ -15,6 +15,6 @@ namespace MKTFY.Repositories.Repositories.Interfaces
         Task<List<User>> GetAllActiveUsers(int pageIndex, int pageSize);
         Task<User> UpdateStatus(string userId, string status);
 
-        Task<bool> CheckValidUser(string userId);
+        Task<string> CheckValidUser(string userId);
     }
 }

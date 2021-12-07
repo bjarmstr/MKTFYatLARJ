@@ -74,13 +74,14 @@ namespace MKTFY.Repositories.Repositories
 
         }
 
-        public async Task<bool>CheckValidUser(string userId)
+        public async Task<string>CheckValidUser(string userId)
         {
             var result = await _context.Users
                 .FirstOrDefaultAsync(i => i.Id == userId);
-            if (result == null) throw new NotFoundException("The requested user could not be found");
-            bool status = (result.Status == "blocked") ? false : true; 
-            return status;
+           //if id is not in db, user is new
+            if (result == null) return "new";
+
+            return result.Status;
         }
 
 
