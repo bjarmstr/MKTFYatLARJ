@@ -156,13 +156,14 @@ namespace MKTFY.Repositories.Repositories
         }
 
 
-        public async Task<List<Listing>> GetMostRecent(string region, string userId)
+        public async Task<List<Listing>> GetMostRecent(string region, string userId, int listingCount)
         {
             var results = await _context.Listings
                 .Where(listing => listing.UserId != userId  &&
-                listing.Region == region)
+                listing.Region == region &&
+                listing.TransactionStatus == "listed")
                 .OrderByDescending(listing => listing.DateCreated)
-                .Take(10)
+                .Take(listingCount)
                 .Include(e => e.ListingUploads).ThenInclude(e => e.Upload)
                 .ToListAsync();
             return results;

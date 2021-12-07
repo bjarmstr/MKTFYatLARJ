@@ -109,10 +109,15 @@ namespace MKTFY.Services
                 dealListings.AddRange(dealResults);
             }
 
-            if (dealListings.Count < 1)
+            /// minimum number of listings returned
+            int minNumDealsReturned = 14;
+            
+            if (dealListings.Count < minNumDealsReturned)
             {
-                //if no listings based on previous searches return the 10 newest listings
-                dealListings = await _listingRepository.GetMostRecent(region, userId);
+
+                int listingCount = minNumDealsReturned - dealListings.Count;
+                //if no listings based on previous searches return the newest listings so the minimum
+                dealListings = await _listingRepository.GetMostRecent(region, userId, listingCount);
 
             }
 
