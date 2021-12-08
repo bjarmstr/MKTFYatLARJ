@@ -111,18 +111,19 @@ namespace MKTFY.Services
 
             /// minimum number of listings returned
             int minNumDealsReturned = 14;
+
+           var newestListings = new List<Listing>();
             
             if (dealListings.Count < minNumDealsReturned)
             {
-
-                int listingCount = minNumDealsReturned - dealListings.Count;
-                //if no listings based on previous searches return the newest listings so the minimum
-                dealListings = await _listingRepository.GetMostRecent(region, userId, listingCount);
-
+                //if not the min # listings based on previous searches return the newest listings 
+                
+                newestListings.AddRange(await _listingRepository.GetMostRecent(region, userId, minNumDealsReturned));
             }
 
-                //multiple searches may return the same listing more than once --- keep only distinct
-            var distinctListings = dealListings.Distinct();
+            //multiple searches may return the same listing more than once --- keep only distinct
+
+            var distinctListings = dealListings.Distinct().Take(minNumDealsReturned);
  
 
             var models = distinctListings.Select(listing => new ListingVM(listing)).ToList();
