@@ -108,6 +108,11 @@
             User is a navigation property, which allows access to User details
             </summary>
         </member>
+        <member name="P:MKTFY.Models.Entities.Notification.Message">
+            <summary>
+            Message is a navigation property, which allows access to Message details
+            </summary>
+        </member>
         <member name="T:MKTFY.Models.Entities.User">
             <summary>
             User related data - a general user can be the lister/seller or the buyer

@@ -3,15 +3,17 @@ using System;
 using MKTFY.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MKTFY.Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211209174816_Message")]
+    partial class Message
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +161,6 @@ namespace MKTFY.Repositories.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DateCreated")
@@ -179,9 +180,6 @@ namespace MKTFY.Repositories.Migrations
                     b.Property<DateTime>("DateSent")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("MessageId")
-                        .HasColumnType("uuid");
-
                     b.Property<bool>("Unread")
                         .HasColumnType("boolean");
 
@@ -190,8 +188,6 @@ namespace MKTFY.Repositories.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MessageId");
 
                     b.HasIndex("UserId");
 
@@ -325,19 +321,11 @@ namespace MKTFY.Repositories.Migrations
 
             modelBuilder.Entity("MKTFY.Models.Entities.Notification", b =>
                 {
-                    b.HasOne("MKTFY.Models.Entities.Message", "Message")
-                        .WithMany()
-                        .HasForeignKey("MessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MKTFY.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Message");
 
                     b.Navigation("User");
                 });

@@ -17,6 +17,10 @@ namespace MKTFY.Repositories
 
         public DbSet<ListingUpload> ListingUploads { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
+        public DbSet<Notification>Notifications { get; set; }
+
         public virtual DbSet<FAQ> FAQs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
