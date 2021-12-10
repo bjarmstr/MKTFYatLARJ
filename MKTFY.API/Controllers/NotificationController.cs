@@ -22,10 +22,10 @@ namespace MKTFY.API.Controllers
         }
 
         [HttpPost("notification/{userId}")]
-        public async Task<ActionResult<NotificationVM>> Create([FromBody]NotificationCreateVM data)
+        public async Task<ActionResult> Create([FromBody]NotificationCreateVM data)
         {
-            var result = await _notificationService.Create(data);
-            return Ok(result);
+            await _notificationService.Create(data);
+            return Ok();
         }
 
         [HttpGet("notification/{userId}")]

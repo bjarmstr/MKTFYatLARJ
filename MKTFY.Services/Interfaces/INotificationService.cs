@@ -10,7 +10,7 @@ namespace MKTFY.Services.Interfaces
 {
     public interface INotificationService
     {
-        Task<NotificationVM> Create(NotificationCreateVM src);
+        Task Create(NotificationCreateVM src);
 
         Task<List<NotificationVM>> Get(string userId);
 

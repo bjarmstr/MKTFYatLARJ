@@ -20,6 +20,7 @@ namespace MKTFY.Models.ViewModels.Notifications
             Message = src.Message.Content;
             DateSent = src.DateSent;
             Unread = src.Unread;
+
         }
 
         public string Message { get; set; }

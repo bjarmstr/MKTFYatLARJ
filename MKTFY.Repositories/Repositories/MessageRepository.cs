@@ -11,9 +11,9 @@ namespace MKTFY.Repositories.Repositories
     public class MessageRepository: IMessageRepository
     {
         private readonly ApplicationDbContext _context;
-        public MessageRepository()
+        public MessageRepository(ApplicationDbContext context)
         {
-
+            _context = context;
         }
 
         public async Task<Message> CreateMessage(Message src)

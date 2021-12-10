@@ -20,14 +20,12 @@ namespace MKTFY.Services
             _notificationRepository = notificationRepository;
         }
 
-        public async Task<NotificationVM> Create (NotificationCreateVM src)
+        public async Task Create (NotificationCreateVM src)
         {
             var newEntity = new Notification(src);
             newEntity.DateSent = DateTime.UtcNow;
             newEntity.Unread = true;
-            var results = await _notificationRepository.Create(newEntity);
-            var models = new NotificationVM(results);
-            return models;
+            var result = await _notificationRepository.Create(newEntity);
         }
 
         public async Task<List<NotificationVM>> Get(string userId)
