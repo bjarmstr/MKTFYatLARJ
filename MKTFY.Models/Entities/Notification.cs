@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MKTFY.Models.ViewModels.Notifications;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,13 @@ namespace MKTFY.Models.Entities
     {
         public Notification()
         {
+
+        }
+
+        public Notification(NotificationCreateVM src )
+        {
+            UserId = src.UserId;
+            MessageId = src.MessageId;
 
         }
 

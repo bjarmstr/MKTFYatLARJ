@@ -41,6 +41,10 @@ namespace MKTFY.API
             services.AddScoped<IUploadRepository, UploadRepository>();
             services.AddScoped<IUploadService, UploadService>();
             services.AddScoped<IAPUserListingService, APUserListingService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

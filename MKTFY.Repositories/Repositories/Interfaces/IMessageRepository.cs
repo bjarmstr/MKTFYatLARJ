@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MKTFY.Repositories.Repositories.Interfaces
 {
-    public interface INotificationRepository
+    public interface IMessageRepository
     {
-        Task<Notification> Create(Notification src);
-        Task<List<Notification>> Get(string userId);
-        
+        Task<Message> CreateMessage(Message src);
     }
 }

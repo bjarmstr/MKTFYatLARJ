@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MKTFY.Models.ViewModels.Message;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace MKTFY.Models.Entities
     {
         public Message()
         {
+
+        }
+
+        public Message(MessageVM src)
+        {
+            Content = src.Message;
 
         }
 
