@@ -170,8 +170,8 @@ namespace MKTFY.Services
 
                 string message = "Your pending purchase of {product} has been cancelled";
 
-                await _messageService.CreateMessage(message);    
-                await _notificationService.Create(NotificationCreateVM src);
+             //   await _messageService.CreateMessage(message);    
+              //  await _notificationService.Create(NotificationCreateVM src);
 
 
             }

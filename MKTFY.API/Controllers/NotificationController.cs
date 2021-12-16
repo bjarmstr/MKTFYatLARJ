@@ -23,7 +23,7 @@ namespace MKTFY.API.Controllers
             _notificationService = notificationService;
         }
 
-        [HttpPost("notification/{userId}")]
+        [HttpPost("notification")]
         public async Task<ActionResult> Create([FromBody]NotificationCreateVM data)
         {
             await _notificationService.Create(data);

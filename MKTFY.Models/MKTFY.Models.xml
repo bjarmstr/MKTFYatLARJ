@@ -108,11 +108,6 @@
             User is a navigation property, which allows access to User details
             </summary>
         </member>
-        <member name="P:MKTFY.Models.Entities.Notification.Message">
-            <summary>
-            Message is a navigation property, which allows access to Message details
-            </summary>
-        </member>
         <member name="T:MKTFY.Models.Entities.User">
             <summary>
             User related data - a general user can be the lister/seller or the buyer
@@ -159,9 +154,9 @@
             Listing with the date purchased
             </summary>
         </member>
-        <member name="P:MKTFY.Models.ViewModels.Notifications.NotificationCreateVM.MessageId">
+        <member name="P:MKTFY.Models.ViewModels.Notifications.NotificationCreateVM.Message">
             <summary>
-            Id of Message -Created using Message Controller Endpoints
+            personalized message
             </summary>
         </member>
         <member name="P:MKTFY.Models.ViewModels.Notifications.NotificationCreateVM.UserId">

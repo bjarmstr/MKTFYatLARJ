@@ -17,7 +17,7 @@ namespace MKTFY.Models.ViewModels.Notifications
 
         public NotificationVM(Notification src)
         {
-            Message = src.Message.Content;
+            Message = src.Message;
             DateSent = src.DateSent;
             Unread = src.Unread;
 

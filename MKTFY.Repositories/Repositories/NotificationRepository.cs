@@ -32,13 +32,7 @@ namespace MKTFY.Repositories.Repositories
             var results = await _context.Notifications
                .Where(n => n.UserId == userId)
                .Include(n => n.User)
-               .Include(n => n.Message)
                .ToListAsync();
-
-            results.Select(n => n.Unread = false);
-            _context.Add(results);
-            await _context.SaveChangesAsync();
-
             return results;
         }
 
