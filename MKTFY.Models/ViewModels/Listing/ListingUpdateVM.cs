@@ -24,12 +24,16 @@ namespace MKTFY.Models.ViewModels.Listing
         //make sure this is a real category@@jma
         public int CategoryId { get; set; }
 
+        [Required]
         public string Condition { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
+        [Required]
         public string Region { get; set; }
 
+        [Required]
         public List<Guid> UploadIds { get; set; }
 
 

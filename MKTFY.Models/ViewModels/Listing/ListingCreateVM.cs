@@ -36,6 +36,7 @@ namespace MKTFY.Models.ViewModels.Listing
         [Required]
         public string Region { get; set; }
 
+        [Required]
         public List<Guid> UploadIds { get; set; }
 
 
