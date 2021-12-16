@@ -43,6 +43,13 @@ namespace MKTFY.Services
         }
 
 
+        public async Task<int> UnReadCount(string userId)
+        {
+            var results = await _notificationRepository.UnReadCount(userId);
+            return results;
+        }
+
+
 
 
     }

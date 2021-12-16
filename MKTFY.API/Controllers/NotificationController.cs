@@ -23,6 +23,11 @@ namespace MKTFY.API.Controllers
             _notificationService = notificationService;
         }
 
+        /// <summary>
+        /// create a notification -- use for testing
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost("notification")]
         public async Task<ActionResult> Create([FromBody]NotificationCreateVM data)
         {
@@ -42,12 +47,31 @@ namespace MKTFY.API.Controllers
             return Ok(results);
         }
 
-        [HttpGet("notification/markRead/{userId}")]
+        /// <summary>
+        /// after getting notifications, use this endpoint to mark the users notifications as read
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpPost("notification/markRead/{userId}")]
         public async Task<ActionResult> MarkRead(string userId)
         {
-            var results = await _notificationService.Get(userId);
+            await _notificationService.MarkRead(userId);
+            return Ok();
+        }
+
+        /// <summary>
+        /// count of users unread messages
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet("notification/count/{userId}")]
+        public async Task<ActionResult<int>> UnReadCount(string userId)
+        {
+            var results = await _notificationService.UnReadCount(userId);
             return Ok(results);
         }
+
+
 
 
 

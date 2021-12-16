@@ -38,17 +38,30 @@ namespace MKTFY.Repositories.Repositories
 
         public async Task MarkRead(string userId)
         {
-        
+
             var results = await _context.Notifications
                 .Where(n => n.UserId == userId)
                 .ToListAsync();
 
-            //sets all notifications for the user to read
-            results.Select(n => n.Unread = false);
-            _context.Add(results);
+            foreach (Notification notification in results)
+            {
+                notification.Unread = false;
+            }
+
             await _context.SaveChangesAsync();
 
             return;
+        }
+
+        public async Task<int> UnReadCount(string userId)
+        {
+            var results = await _context.Notifications
+               .Where(n => n.UserId == userId &&
+               n.Unread == true)
+               .CountAsync();
+               
+            return results;
+ 
         }
 
 

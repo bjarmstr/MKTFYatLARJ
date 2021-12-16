@@ -16,5 +16,6 @@ namespace MKTFY.Services.Interfaces
 
         Task MarkRead(string userId);
 
+        Task<int> UnReadCount(string userId);
     }
 }
