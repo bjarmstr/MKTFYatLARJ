@@ -11,6 +11,8 @@ namespace MKTFY.Repositories.Repositories.Interfaces
     {
         Task<Notification> Create(Notification src);
         Task<List<Notification>> Get(string userId);
-        
+        Task MarkRead(string userId);
+
+
     }
 }

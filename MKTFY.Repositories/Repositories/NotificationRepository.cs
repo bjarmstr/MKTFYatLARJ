@@ -34,10 +34,31 @@ namespace MKTFY.Repositories.Repositories
                .Include(n => n.User)
                .Include(n => n.Message)
                .ToListAsync();
+
+            results.Select(n => n.Unread = false);
+            _context.Add(results);
+            await _context.SaveChangesAsync();
+
             return results;
         }
 
+        public async Task MarkRead(string userId)
+        {
         
+            var results = await _context.Notifications
+                .Where(n => n.UserId == userId)
+                .ToListAsync();
+
+            //sets all notifications for the user to read
+            results.Select(n => n.Unread = false);
+            _context.Add(results);
+            await _context.SaveChangesAsync();
+
+            return;
+        }
+
+
+
 
     }
 }

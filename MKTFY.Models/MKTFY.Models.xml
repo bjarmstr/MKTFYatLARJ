@@ -159,6 +159,16 @@
             Listing with the date purchased
             </summary>
         </member>
+        <member name="P:MKTFY.Models.ViewModels.Notifications.NotificationCreateVM.MessageId">
+            <summary>
+            Id of Message -Created using Message Controller Endpoints
+            </summary>
+        </member>
+        <member name="P:MKTFY.Models.ViewModels.Notifications.NotificationCreateVM.UserId">
+            <summary>
+            recipient of message
+            </summary>
+        </member>
         <member name="T:MKTFY.Models.ViewModels.Upload.UploadResultVM">
             <summary>
             Reference Id to get Url

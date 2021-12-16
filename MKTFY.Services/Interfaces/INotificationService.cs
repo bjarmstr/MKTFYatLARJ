@@ -14,5 +14,7 @@ namespace MKTFY.Services.Interfaces
 
         Task<List<NotificationVM>> Get(string userId);
 
+        Task MarkRead(string userId);
+
     }
 }

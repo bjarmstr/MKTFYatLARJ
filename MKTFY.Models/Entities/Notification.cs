@@ -10,6 +10,7 @@ namespace MKTFY.Models.Entities
 {
     public class Notification
     {
+        
         public Notification()
         {
 
@@ -18,7 +19,7 @@ namespace MKTFY.Models.Entities
         public Notification(NotificationCreateVM src )
         {
             UserId = src.UserId;
-            MessageId = src.MessageId;
+            Message = src.Message;
 
         }
 
@@ -31,13 +32,9 @@ namespace MKTFY.Models.Entities
         public User User { get; set; }
 
         [Required]
-        public Guid MessageId { get; set; }
+        public string Message { get; set; }
 
-        /// <summary>
-        /// Message is a navigation property, which allows access to Message details
-        /// </summary>
-        public Message Message { get; set; }
-
+        
         [Required]
         public DateTime DateSent { get; set; }
 

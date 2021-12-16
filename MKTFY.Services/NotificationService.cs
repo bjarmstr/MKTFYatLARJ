@@ -35,7 +35,15 @@ namespace MKTFY.Services
             return models;
         }
 
-     
+        public async Task MarkRead(string userId)
+        {
+            await _notificationRepository.MarkRead(userId);
+            return;
+
+        }
+
+
+
 
     }
 }

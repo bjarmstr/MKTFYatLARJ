@@ -14,8 +14,13 @@ namespace MKTFY.Models.ViewModels.Notifications
 
         }
 
-        public Guid MessageId { get; set; }
-        
+        /// <summary>
+        /// personalized message
+        /// </summary>
+        public string Message { get; set; }
+        /// <summary>
+        /// recipient of message
+        /// </summary>
         public string UserId { get; set; }
 
     }

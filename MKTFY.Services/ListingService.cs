@@ -2,6 +2,7 @@
 using MKTFY.Models.ViewModels;
 using MKTFY.Models.ViewModels.AdminPanel;
 using MKTFY.Models.ViewModels.Listing;
+using MKTFY.Models.ViewModels.Notifications;
 using MKTFY.Models.ViewModels.Upload;
 using MKTFY.Repositories.Repositories.Interfaces;
 using MKTFY.Services.Interfaces;
@@ -161,9 +162,23 @@ namespace MKTFY.Services
             {
                 buyerId = null;
                 status = "listed";
+                //Create notificaiton to buyer that seller cancelled your listing
+
+                var result = await _listingRepository.Get(id);
+                var product = result.Product;
+               
+
+                string message = "Your pending purchase of {product} has been cancelled";
+
+                await _messageService.CreateMessage(message);    
+                await _notificationService.Create(NotificationCreateVM src);
+
+
             }
 
             await _listingRepository.ChangeTransactionStatus(id, status, buyerId);
+
+            
 
         }
 
